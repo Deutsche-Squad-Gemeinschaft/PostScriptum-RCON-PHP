@@ -19,12 +19,12 @@ class Team
     /**
      * @var Squad[]
      */
-    private $squads;
+    private $squads = array();
 
     /**
      * @var Player[]
      */
-    private $players;
+    private $players = array();
 
     /**
      * @return int

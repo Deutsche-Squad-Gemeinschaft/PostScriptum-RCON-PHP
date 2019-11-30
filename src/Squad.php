@@ -35,7 +35,7 @@ class Squad
     /**
      * @var Player[]
      */
-    private $players;
+    private $players = array();
 
     /**
      * @return int
