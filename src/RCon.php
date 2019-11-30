@@ -1,4 +1,7 @@
 <?php
+
+namespace SquadSlovenia;
+
 class RCon {
 
   const SERVERDATA_EXECCOMMAND = 2;

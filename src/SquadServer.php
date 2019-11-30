@@ -1,5 +1,6 @@
 <?php
-require_once('rcon.php');
+
+namespace SquadSlovenia;
 
 class SquadServer {
 
