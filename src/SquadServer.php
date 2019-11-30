@@ -60,7 +60,7 @@ class SquadServer
         $linesSquads = explode("\n", $resSquads);
         foreach ($linesSquads as $lineSquad) {
             $matches = array();
-            if (preg_match('/Team ID: ([1|2]) \(([.*])\)/', $lineSquad, $matches)) {
+            if (preg_match('/^Team ID: ([1|2]) \((.*)\)/', $lineSquad, $matches) > 0) {
                 $id = intval($matches[1]);
                 $name = $matches[2];
 
@@ -68,7 +68,7 @@ class SquadServer
                 static::propSet($team, 'id', $id);
                 static::propSet($team, 'name', $name);
                 $teams[$id] = $team;
-            } else if (preg_match('/ID: ([0-9]*) | Name: (.*) | Size: ([0-9]) | Locked: (True|False)/', $lineSquad, $matches)) {
+            } else if (preg_match('/^ID: (\d{1,}) \| Name: (.*?) \| Size: (\d) \| Locked: (True|False)/', $lineSquad, $matches) > 0) {
                 $id = intval($matches[1]);
                 $name = $matches[2];
                 $size = intval($matches[3]);
@@ -87,7 +87,7 @@ class SquadServer
         $linesPlayers = explode("\n", $resPlayers);
         foreach ($linesPlayers as $linePlayer) {
             $matches = array();
-            if (preg_match('/ID: ([0-9]*) | SteamID: ([0-9]{17}) | Name: (.*) | Team ID: (1|2|N/A) | Squad ID: ([0-9]*)/', $linePlayer, $matches)) {
+            if (preg_match('/^ID: (\d{1,}) \| SteamID: (\d{17}) \| Name: (.*?) \| Team ID: (1|2|N\/A) \| Squad ID: (\d{1,})/', $linePlayer, $matches)) {
                 $id = intval($matches[1]);
                 $steamId = $matches[2];
                 $name = $matches[3];
@@ -103,7 +103,7 @@ class SquadServer
                 static::propSet($player, 'team', $team);
                 static::propSet($player, 'squad', $squad);
                 $players[$id] = $player;
-            } else if (preg_match('----- Recently Disconnected Players', $linePlayer)) {
+            } else if (preg_match('/^[-]{5} Recently Disconnected Players/', $linePlayer)) {
                 break;
             }
         }
