@@ -30,11 +30,23 @@ class SquadServer
         $property->setValue($object, $currentArray);
     }
 
+    /**
+     * SquadServer constructor.
+     * @param $host
+     * @param $port
+     * @param $password
+     * @param float $timeout
+     * @throws RConException
+     */
     public function __construct($host, $port, $password, $timeout = SquadServer::SQUAD_SOCKET_TIMEOUT_SECONDS)
     {
         $this->rcon = new RCon($host, $port, $password, $timeout);
     }
 
+    /**
+     * @return Team[]
+     * @throws RConException
+     */
     public function serverPopulation()
     {
         /** @var Team[] $teams */
@@ -116,11 +128,12 @@ class SquadServer
     /**
      * @param array $ignored
      * @return array
+     * @throws RConException
      * @deprecated
      */
     public function currentPlayers($ignored = array())
     {
-        $res = $this->_rcon->execute("ListPlayers");
+        $res = $this->rcon->execute("ListPlayers");
         $ra = explode("\n", $res);
         $players = array();
         for ($i = 1; $i < count($ra); $i++) {
@@ -150,11 +163,19 @@ class SquadServer
         return $players;
     }
 
+    /**
+     * @return string
+     * @throws RConException
+     */
     public function currentMap()
     {
         return $this->currentMaps()['current'];
     }
 
+    /**
+     * @return string
+     * @throws RConException
+     */
     public function currentNext()
     {
         return $this->currentMaps()['next'];
@@ -162,6 +183,7 @@ class SquadServer
 
     /**
      * @return array
+     * @throws RConException
      * @deprecated
      */
     public function currentMaps()
@@ -181,21 +203,43 @@ class SquadServer
         return $maps;
     }
 
+    /**
+     * @param $msg
+     * @return bool
+     * @throws RConException
+     */
     public function broadcastMessage($msg)
     {
         return $this->_consoleCommand('AdminBroadcast', $msg, 'Message broadcasted');
     }
 
+    /**
+     * @param $map
+     * @return bool
+     * @throws RConException
+     */
     public function changeMap($map)
     {
         return $this->_consoleCommand('AdminChangeMap', $map, 'Changed map to');
     }
 
+    /**
+     * @param $map
+     * @return bool
+     * @throws RConException
+     */
     public function nextMap($map)
     {
         return $this->_consoleCommand('AdminSetNextMap', $map, 'Set next map to');
     }
 
+    /**
+     * @param $cmd
+     * @param $param
+     * @param $rtn
+     * @return bool
+     * @throws RConException
+     */
     private function _consoleCommand($cmd, $param, $rtn)
     {
         $ret = $this->_sendCommand($cmd . ' ' . $param);
@@ -204,6 +248,11 @@ class SquadServer
         return false;
     }
 
+    /**
+     * @param $cmd
+     * @return mixed
+     * @throws RConException
+     */
     private function _sendCommand($cmd)
     {
         $res = $this->rcon->execute($cmd);

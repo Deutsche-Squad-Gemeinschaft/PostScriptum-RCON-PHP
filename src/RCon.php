@@ -16,13 +16,23 @@ class RCon
     private $_id = 0;
     private $_authd = false;
 
+    /**
+     * RCon constructor.
+     * @param $host
+     * @param $port
+     * @param $password
+     * @param null $timeout
+     * @throws RConException
+     */
     public function __construct($host, $port, $password, $timeout = null)
     {
         $this->_password = $password;
         $this->_host = $host;
         $this->_port = $port;
-        $this->_socket = @fsockopen($this->_host, $this->_port, $errno, $errstr, 30) or
-        die("Unable to open socket: $errstr ($errno)\n");
+        $this->_socket = @fsockopen($this->_host, $this->_port, $errno, $errstr, 30);
+        if ($this->_socket === false) {
+            throw new RConException("Unable to open socket: $errstr ($errno)");
+        }
         if (!$timeout) {
             $timeout = RCon::SOCKET_TIMEOUT_SECONDS;
         }
@@ -31,13 +41,16 @@ class RCon
         stream_set_timeout($this->_socket, $secs, $milis);
     }
 
+    /**
+     * @throws RConException
+     */
     private function _authenticate()
     {
         if (!$this->_authd) {
-            $aid = $this->_write(RCon::SERVERDATA_AUTH, $this->_password);
+            $this->_write(RCon::SERVERDATA_AUTH, $this->_password);
             $ret = $this->_packetRead();
             if (isset($ret[1]['id']) && $ret[1]['id'] == -1) {
-                die("Authentication Failure\n");
+                throw new RConException("Authentication Failure");
             }
             $this->_authd = true;
         }
@@ -69,6 +82,7 @@ class RCon
 
     private function _read()
     {
+        /** @var array $ret */
         $packets = $this->_packetRead();
         foreach ($packets as $pack) {
             if (isset($ret[$pack['ID']])) {
@@ -82,10 +96,17 @@ class RCon
                 );
             }
         }
-        if (isset($ret))
+        if (isset($ret)) {
             return $ret;
+        }
+        return null;
     }
 
+    /**
+     * @param $command
+     * @param bool $sanitize
+     * @throws RConException
+     */
     private function _sendCommand($command, $sanitize = false)
     {
         $this->_authenticate();
@@ -94,10 +115,18 @@ class RCon
         $this->_write(RCon::SERVERDATA_EXECCOMMAND, $command, '');
     }
 
+    /**
+     * @param $command
+     * @return mixed
+     * @throws RConException
+     */
     public function execute($command)
     {
         $this->_sendCommand($command);
         $ret = $this->_read();
+        if ($ret === null) {
+            throw new RConException("Bad response from server");
+        }
         return $ret[$this->_id]['S1'];
     }
 }
