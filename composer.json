@@ -1,0 +1,12 @@
+{
+    "name": "brozowski/squad-rcon-php",
+    "description": "Squad Server RCon library",
+    "type": "library",
+    "license": "MIT",
+    "require": {},
+    "autoload": {
+        "psr-0": {
+            "SquadSlovenia\\" : "src/"
+        }
+    }
+}
