@@ -3,7 +3,9 @@
     "description": "Squad Server RCon library",
     "type": "library",
     "license": "MIT",
-    "require": {},
+    "require": {
+        "ext-json": "*"
+    },
     "autoload": {
         "psr-0": {
             "SquadSlovenia\\" : "src/"
