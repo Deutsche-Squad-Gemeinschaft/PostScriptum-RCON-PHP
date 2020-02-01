@@ -1,5 +1,5 @@
 {
-    "name": "brozowski/squad-rcon-php",
+    "name": "dsg/squad-rcon-php",
     "description": "Squad Server RCon library",
     "type": "library",
     "license": "MIT",
