@@ -16,6 +16,41 @@
     </a>
 </div>
 
+## Installation
+
+You can install this package by using composer and the following command:
+```
+composer require dsg/squad-rcon-php
+```
+
+The code will then be available under the `DSG\SquadRCON` namespace.
+
+## Commands
+
+* [x] ListPlayers
+* [x] ShowNextMap
+* [x] AdminKick "\<NameOrSteamId\>" \<KickReason\>
+* [x] AdminKickById \<PlayerId\> \<KickReason\>
+* [x] AdminBan "\<NameOrSteamId\>" "\<BanLength\>" \<BanReason\>
+* [x] AdminBanById \<PlayerId\> "\<BanLength\>" \<BanReason\>
+* [x] AdminBroadcast \<Message\>
+* [x] ChatToAdmin \<Message\>
+* [x] AdminRestartMatch
+* [x] AdminEndMatch
+* [x] AdminPauseMatch
+* [x] AdminUnpauseMatch
+* [x] AdminKillServer \<Force [0|1]\>
+* [x] AdminChangeMap \<MapName\>
+* [x] AdminSetNextMap \<MapName\>
+* [x] AdminSetMaxNumPlayers \<NumPlayers\>
+* [x] AdminSetNumReservedSlots \<NumReserved\>
+* [x] AdminSetServerPassword \<Password\>
+* [x] AdminAddCameraman \<NameOrId\>
+* [x] AdminDemoRec \<FileName\>
+* [x] AdminDemoStop
+* [x] AdminListDisconnectedPlayers
+* [x] AdminForceNetUpdateOnClientSaturation \<Enabled [0|1]\>
+
 ## USAGE
 
 ### Create instance
@@ -35,30 +70,3 @@ $server->changeMap('Sumari AAS v1');
 
 ### Set next map
 $server->nextMap('Gorodok');
-
-
-## AVAILABLE COMMANDS (NOV 2016)
-
-* ListPlayers
-* ShowNextMap
-* AdminKick "\<NameOrSteamId\>" \<KickReason\>
-* AdminKickById \<PlayerId\> \<KickReason\>
-* AdminBan "\<NameOrSteamId\>" "\<BanLength\>" \<BanReason\>
-* AdminBanById \<PlayerId\> "\<BanLength\>" \<BanReason\>
-* AdminBroadcast \<Message\>
-* ChatToAdmin \<Message\>
-* AdminRestartMatch
-* AdminEndMatch
-* AdminPauseMatch
-* AdminUnpauseMatch
-* AdminKillServer \<Force [0|1]\>
-* AdminChangeMap \<MapName\>
-* AdminSetNextMap \<MapName\>
-* AdminSetMaxNumPlayers \<NumPlayers\>
-* AdminSetNumReservedSlots \<NumReserved\>
-* AdminSetServerPassword \<Password\>
-* AdminAddCameraman \<NameOrId\>
-* AdminDemoRec \<FileName\>
-* AdminDemoStop
-* AdminListDisconnectedPlayers
-* AdminForceNetUpdateOnClientSaturation \<Enabled [0|1]\>
