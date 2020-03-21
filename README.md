@@ -1,9 +1,20 @@
-# RCON PHP wrapper for Squad server management
-
-[![Total Downloads](https://poser.pugx.org/dsg/squad-rcon-php/downloads.png)](https://packagist.org/dsg/squad-rcon-php/shoppingcart)
-[![Latest Stable Version](https://poser.pugx.org/dsg/squad-rcon-php/v/stable)](https://packagist.org/packages/dsg/squad-rcon-php)
-[![Latest Unstable Version](https://poser.pugx.org/dsg/squad-rcon-php/v/unstable)](https://packagist.org/packages/dsg/squad-rcon-php)
-[![License](https://poser.pugx.org/dsg/squad-rcon-php/license)](https://packagist.org/packages/dsg/squad-rcon-php)
+<div align="center">
+    <h1>Squad RCON PHP</h1>
+    <b>RCON PHP wrapper for Squad server management</b>
+    <hr>
+    <a href="https://packagist.org/dsg/squad-rcon-php/shoppingcart">
+        <img alt="Total Downloads" src="https://poser.pugx.org/dsg/squad-rcon-php/downloads.png">
+    </a>
+    <a href="https://packagist.org/packages/dsg/squad-rcon-php">
+        <img alt="Latest Stable Version" src="https://poser.pugx.org/dsg/squad-rcon-php/v/stable">
+    </a>
+    <a href="https://packagist.org/packages/dsg/squad-rcon-php">
+        <img alt="Latest Unstable Version" src="https://poser.pugx.org/dsg/squad-rcon-php/v/unstable">
+    </a>
+    <a href="https://packagist.org/packages/dsg/squad-rcon-php">
+        <img alt="License" src="https://poser.pugx.org/dsg/squad-rcon-php/license">
+    </a>
+</div>
 
 ## USAGE
 
