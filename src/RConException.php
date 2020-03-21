@@ -1,10 +1,8 @@
 <?php
 
-
-namespace SquadSlovenia;
-
+namespace DSG\SquadRCON;
 
 class RConException extends \Exception
 {
-
+    //
 }

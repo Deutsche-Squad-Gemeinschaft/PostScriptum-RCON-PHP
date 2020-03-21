@@ -1,8 +1,6 @@
 <?php
 
-
-namespace SquadSlovenia;
-
+namespace DSG\SquadRCON;
 
 class Team
 {

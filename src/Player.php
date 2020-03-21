@@ -1,12 +1,9 @@
 <?php
 
-
-namespace SquadSlovenia;
-
+namespace DSG\SquadRCON;
 
 class Player
 {
-
     /**
      * @var int
      */

@@ -1,10 +1,9 @@
 <?php
 
-namespace SquadSlovenia;
+namespace DSG\SquadRCON;
 
 class RCon
 {
-
     const SERVERDATA_EXECCOMMAND = 2;
     const SERVERDATA_AUTH = 3;
     const SOCKET_TIMEOUT_SECONDS = 2.5;

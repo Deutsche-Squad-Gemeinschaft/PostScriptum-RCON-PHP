@@ -1,15 +1,15 @@
 <?php
 
-namespace SquadSlovenia;
+namespace DSG\SquadRCON;
 
 class SquadServer
 {
-
     const SQUAD_SOCKET_TIMEOUT_SECONDS = 0.5;
 
+    /** @var RCon */
     private $rcon;
 
-    private static function propSet($object, $prop, $value)
+    private static function propSet($object, $prop, $value) : void
     {
         $objClass = new \ReflectionClass($object);
         $property = $objClass->getProperty($prop);
@@ -17,14 +17,14 @@ class SquadServer
         $property->setValue($object, $value);
     }
 
-    private static function propAdd($object, $prop, $value)
+    private static function propAdd($object, $prop, $value) : void
     {
         $objClass = new \ReflectionClass($object);
         $property = $objClass->getProperty($prop);
         $property->setAccessible(true);
         $currentArray = $property->getValue($object);
         if (!is_array($currentArray)) {
-            $currentArray = array();
+            $currentArray = [];
         }
         $currentArray[] = $value;
         $property->setValue($object, $currentArray);
@@ -47,19 +47,19 @@ class SquadServer
      * @return Team[]
      * @throws RConException
      */
-    public function serverPopulation()
+    public function serverPopulation() : array
     {
         /** @var Team[] $teams */
-        $teams = array();
+        $teams = [];
         /** @var Squad[] $squads */
-        $squads = array();
+        $squads = [];
         /** @var Player[] $players */
-        $players = array();
+        $players = [];
 
         $resSquads = $this->rcon->execute("ListSquads");
         $linesSquads = explode("\n", $resSquads);
         foreach ($linesSquads as $lineSquad) {
-            $matches = array();
+            $matches = [];
             if (preg_match('/^Team ID: ([1|2]) \((.*)\)/', $lineSquad, $matches) > 0) {
                 $id = intval($matches[1]);
                 $name = $matches[2];
@@ -86,7 +86,7 @@ class SquadServer
         $resPlayers = $this->rcon->execute("ListPlayers");
         $linesPlayers = explode("\n", $resPlayers);
         foreach ($linesPlayers as $linePlayer) {
-            $matches = array();
+            $matches = [];
             if (preg_match('/^ID: (\d{1,}) \| SteamID: (\d{17}) \| Name: (.*?) \| Team ID: (1|2|N\/A) \| Squad ID: (\d{1,})/', $linePlayer, $matches)) {
                 $id = intval($matches[1]);
                 $steamId = $matches[2];
@@ -131,23 +131,25 @@ class SquadServer
      * @throws RConException
      * @deprecated
      */
-    public function currentPlayers($ignored = array())
+    public function currentPlayers($ignored = []) : array
     {
         $res = $this->rcon->execute("ListPlayers");
         $ra = explode("\n", $res);
-        $players = array();
+        $players = [];
         for ($i = 1; $i < count($ra); $i++) {
+            /* Get the current line */
             $l = trim($ra[$i]);
-            if (
-                $l == '----- Recently Disconnected Players [Max of 15] -----'
-            ) {
+
+            /* Check if we already reached the end */
+            if ($l == '----- Recently Disconnected Players [Max of 15] -----') {
                 break;
             }
-            if (
-            empty($l)
-            ) {
+
+            /* Skip empty or malformed results */
+            if (empty($l) || !preg_match('/ID:\s\d*\s\|\sSteamID:\s\d*\s\|\sName:\s.*\|\sTeam\sID:\s\d\s\|\sSquad\sID:\s\d*/', $l)) {
                 continue;
             }
+
             $pla = explode(' | ', $l);
             $pli = substr($pla[0], 4);
             $pls = substr($pla[1], 9);
@@ -167,7 +169,7 @@ class SquadServer
      * @return string
      * @throws RConException
      */
-    public function currentMap()
+    public function currentMap() : string
     {
         return $this->currentMaps()['current'];
     }
@@ -176,7 +178,7 @@ class SquadServer
      * @return string
      * @throws RConException
      */
-    public function currentNext()
+    public function currentNext() : string
     {
         return $this->currentMaps()['next'];
     }
@@ -186,12 +188,12 @@ class SquadServer
      * @throws RConException
      * @deprecated
      */
-    public function currentMaps()
+    public function currentMaps() : array
     {
-        $maps = array(
+        $maps = [
             'current' => null,
             'next' => null
-        );
+        ];
         $res = $this->_sendCommand("ShowNextMap");
         $arr = explode(', Next map is ', $res);
         if (count($arr) > 1) {
@@ -208,7 +210,7 @@ class SquadServer
      * @return bool
      * @throws RConException
      */
-    public function broadcastMessage($msg)
+    public function broadcastMessage($msg) : bool
     {
         return $this->_consoleCommand('AdminBroadcast', $msg, 'Message broadcasted');
     }
@@ -218,7 +220,7 @@ class SquadServer
      * @return bool
      * @throws RConException
      */
-    public function changeMap($map)
+    public function changeMap($map) : bool
     {
         return $this->_consoleCommand('AdminChangeMap', $map, 'Changed map to');
     }
@@ -228,7 +230,7 @@ class SquadServer
      * @return bool
      * @throws RConException
      */
-    public function nextMap($map)
+    public function nextMap($map) : bool
     {
         return $this->_consoleCommand('AdminSetNextMap', $map, 'Set next map to');
     }
@@ -240,12 +242,10 @@ class SquadServer
      * @return bool
      * @throws RConException
      */
-    private function _consoleCommand($cmd, $param, $rtn)
+    private function _consoleCommand($cmd, $param, $rtn) : bool
     {
         $ret = $this->_sendCommand($cmd . ' ' . $param);
-        if (substr($ret, 0, strlen($rtn)) == $rtn)
-            return true;
-        return false;
+        return substr($ret, 0, strlen($rtn)) == $rtn;
     }
 
     /**
@@ -258,5 +258,4 @@ class SquadServer
         $res = $this->rcon->execute($cmd);
         return $res;
     }
-
 }
