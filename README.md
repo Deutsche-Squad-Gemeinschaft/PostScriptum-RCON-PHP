@@ -1,5 +1,10 @@
 # RCON PHP wrapper for Squad server management
 
+[![Total Downloads](https://poser.pugx.org/dsg/squad-rcon-php/downloads.png)](https://packagist.org/dsg/squad-rcon-php/shoppingcart)
+[![Latest Stable Version](https://poser.pugx.org/dsg/squad-rcon-php/v/stable)](https://packagist.org/packages/dsg/squad-rcon-php)
+[![Latest Unstable Version](https://poser.pugx.org/dsg/squad-rcon-php/v/unstable)](https://packagist.org/packages/dsg/squad-rcon-php)
+[![License](https://poser.pugx.org/dsg/squad-rcon-php/license)](https://packagist.org/packages/dsg/squad-rcon-php)
+
 ## USAGE
 
 ### Create instance
