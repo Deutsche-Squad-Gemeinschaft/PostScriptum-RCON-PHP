@@ -54,19 +54,31 @@ The code will then be available under the `DSG\SquadRCON` namespace.
 ## USAGE
 
 ### Create instance
+```php
 $server = new SquadServer('server.squad-slovenia.com', 21114, 'verySecretPassword');
+```
 
 ### Get currently active players
+```php
 $players = $server->currentPlayers();
+```
 
 ### Get next and current map
+```php
 $maps = $server->currentMaps();
+```
 
 ### Broadcast message to all players on the server
+```php
 $server->broadcastMessage('Hello from the other side');
+```
 
 ### Change map (end current game)
+```php
 $server->changeMap('Sumari AAS v1');
+```
 
 ### Set next map
+```php
 $server->nextMap('Gorodok');
+```
