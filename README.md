@@ -2,6 +2,9 @@
     <h1>Squad RCON PHP</h1>
     <b>RCON PHP wrapper for Squad server management</b>
     <hr>
+    <a href="https://dsg-gaming.de">
+        <img alt="Deutsche Squad Gemeinschaft" src="https://raw.githubusercontent.com/Deutsche-Squad-Gemeinschaft/battlemetrics-php/master/dsg-badge.svg">
+    </a>
     <a href="https://packagist.org/dsg/squad-rcon-php/shoppingcart">
         <img alt="Total Downloads" src="https://poser.pugx.org/dsg/squad-rcon-php/downloads.png">
     </a>
