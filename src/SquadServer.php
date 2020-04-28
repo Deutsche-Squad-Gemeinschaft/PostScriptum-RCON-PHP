@@ -116,7 +116,8 @@ class SquadServer
 
             $squad = $player->getSquad();
             if ($squad->getTeam() === null) {
-                static::propSet($squad, 'team', $player->getTeam());;
+                static::propSet($squad, 'team', $player->getTeam());
+                static::propAdd($player->getTeam(), 'squads', $squad);
             }
 
             static::propAdd($squad, 'players', $player);
