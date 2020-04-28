@@ -51,13 +51,13 @@ class SquadServer
     {
         /** @var Team[] $teams */
         $teams = [];
+
         /** @var Squad[] $squads */
         $squads = [];
-        /** @var Player[] $players */
-        $players = [];
 
         $resSquads = $this->rcon->execute("ListSquads");
         $linesSquads = explode("\n", $resSquads);
+        $currentTeam = null;
         foreach ($linesSquads as $lineSquad) {
             $matches = [];
             if (preg_match('/^Team ID: ([1|2]) \((.*)\)/', $lineSquad, $matches) > 0) {
@@ -68,6 +68,8 @@ class SquadServer
                 static::propSet($team, 'id', $id);
                 static::propSet($team, 'name', $name);
                 $teams[$id] = $team;
+                $currentTeam = $team;
+                $squads[$id] = [];
             } else if (preg_match('/^ID: (\d{1,}) \| Name: (.*?) \| Size: (\d) \| Locked: (True|False)/', $lineSquad, $matches) > 0) {
                 $id = intval($matches[1]);
                 $name = $matches[2];
@@ -79,7 +81,12 @@ class SquadServer
                 static::propSet($squad, 'name', $name);
                 static::propSet($squad, 'size', $size);
                 static::propSet($squad, 'locked', $locked);
-                $squads[$id] = $squad;
+                
+                /* Reference Team */
+                static::propSet($squad, 'team', $currentTeam);
+                static::propAdd($currentTeam, 'squads', $squad);
+
+                $squads[$currentTeam->getId()][$id] = $squad;
             }
         }
 
@@ -87,40 +94,43 @@ class SquadServer
         $linesPlayers = explode("\n", $resPlayers);
         foreach ($linesPlayers as $linePlayer) {
             $matches = [];
-            if (preg_match('/^ID: (\d{1,}) \| SteamID: (\d{17}) \| Name: (.*?) \| Team ID: (1|2|N\/A) \| Squad ID: (\d{1,})/', $linePlayer, $matches)) {
+            if (preg_match('/^ID: (\d{1,}) \| SteamID: (\d{17}) \| Name: (.*?) \| Team ID: (1|2|N\/A) \| Squad ID: (\d{1,}|N\/A)/', $linePlayer, $matches)) {
                 $id = intval($matches[1]);
                 $steamId = $matches[2];
                 $name = $matches[3];
                 $teamId = $matches[4];
                 $squadId = $matches[5];
-                $team = array_key_exists($teamId, $teams) ? $teams[$teamId] : null;
-                $squad = array_key_exists($squadId, $squads) ? $squads[$squadId] : null;
 
                 $player = new Player();
                 static::propSet($player, 'id', $id);
                 static::propSet($player, 'steamId', $steamId);
                 static::propSet($player, 'name', $name);
-                static::propSet($player, 'team', $team);
-                static::propSet($player, 'squad', $squad);
-                $players[$id] = $player;
+
+                /* Get the players team and reference */
+                if (array_key_exists($teamId, $teams)) {
+                    static::propSet($player, 'team', $teams[$teamId]);
+                } else {
+                    static::propSet($player, 'team', null);
+                }
+
+                /* Get and add to squad, else add to team */
+                if ($player->getTeam()) {
+                    if ($squadId !== 'N/A' && array_key_exists($squadId, $squads[$player->getTeam()->getId()])) {
+                        $squad = $squads[$player->getTeam()->getId()][$squadId];
+                        static::propSet($player, 'squad', $squad);
+
+                        /* Add to the squad */
+                        static::propAdd($squad, 'players', $player);
+                    } else {
+                        static::propSet($player, 'squad', null);
+
+                        /* Add to the team */
+                        static::propAdd($player->getTeam(), 'players', $player);
+                    }
+                }
             } else if (preg_match('/^[-]{5} Recently Disconnected Players/', $linePlayer)) {
                 break;
             }
-        }
-
-        foreach ($players as $player) {
-            if ($player->getSquad() === null) {
-                static::propAdd($player->getTeam(), 'players', $player);
-                continue;
-            }
-
-            $squad = $player->getSquad();
-            if ($squad->getTeam() === null) {
-                static::propSet($squad, 'team', $player->getTeam());
-                static::propAdd($player->getTeam(), 'squads', $squad);
-            }
-
-            static::propAdd($squad, 'players', $player);
         }
 
         return $teams;
