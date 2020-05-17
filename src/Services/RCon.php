@@ -1,6 +1,8 @@
 <?php
 
-namespace DSG\SquadRCON;
+namespace DSG\SquadRCON\Services;
+
+use DSG\SquadRCON\Exceptions\RConException;
 
 class RCon
 {
@@ -109,8 +111,11 @@ class RCon
     private function _sendCommand($command, $sanitize = false)
     {
         $this->_authenticate();
-        if ($sanitize)
+
+        if ($sanitize) {
             $command = '"' . trim(str_replace(' ', '" "', $command)) . '"';
+        }
+
         $this->_write(RCon::SERVERDATA_EXECCOMMAND, $command, '');
     }
 
@@ -122,10 +127,12 @@ class RCon
     public function execute($command)
     {
         $this->_sendCommand($command);
+
         $ret = $this->_read();
         if ($ret === null) {
             throw new RConException("Bad response from server");
         }
+
         return $ret[$this->_id]['S1'];
     }
 }

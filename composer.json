@@ -6,9 +6,17 @@
     "require": {
         "ext-json": "*"
     },
+    "require-dev": {
+        "phpunit/phpunit": "~5.0||~6.0||~7.0||~8.0"
+    },
     "autoload": {
-        "psr-0": {
+        "psr-4": {
             "DSG\\SquadRCON\\" : "src/"
+        }
+    },
+    "autoload-dev": {
+        "psr-4": {
+            "DSG\\SquadRCON\\Tests\\": "tests/"
         }
     }
 }
