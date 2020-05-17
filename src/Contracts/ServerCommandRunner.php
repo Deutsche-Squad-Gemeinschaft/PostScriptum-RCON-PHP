@@ -12,7 +12,7 @@ interface ServerCommandRunner {
      * @return Team[]
      * @throws \DSG\SquadRCON\Exceptions\RConException
      */
-    public function listSquads() : string;
+    function listSquads() : string;
 
     /**
      * ListPlayers command, returns an array
@@ -24,7 +24,7 @@ interface ServerCommandRunner {
      * @return Player[]
      * @throws \DSG\SquadRCON\Exceptions\RConException
      */
-    public function listPlayers() : string;
+    function listPlayers() : string;
 
     /**
      * ShowNextMap command.
@@ -33,7 +33,7 @@ interface ServerCommandRunner {
      * @return array
      * @throws \DSG\SquadRCON\Exceptions\RConException
      */
-    private function showNextMap() : string;
+    function showNextMap() : string;
 
     /**
      * AdminBroadcast command.
@@ -43,7 +43,7 @@ interface ServerCommandRunner {
      * @return bool
      * @throws \DSG\SquadRCON\Exceptions\RConException
      */
-    public function adminBroadcast(string $msg) : bool;
+    function adminBroadcast(string $msg) : bool;
 
     /**
      * AdminChangeMap command
@@ -52,7 +52,7 @@ interface ServerCommandRunner {
      * @return bool
      * @throws \DSG\SquadRCON\Exceptions\RConException
      */
-    public function adminChangeMap(string $map) : bool;
+    function adminChangeMap(string $map) : bool;
 
     /**
      * AdminSetNextMap command.
@@ -63,25 +63,5 @@ interface ServerCommandRunner {
      * @return bool
      * @throws \DSG\SquadRCON\Exceptions\RConException
      */
-    public function adminSetNextMap(string $map) : bool;
-
-    /**
-     * Helper method to run Console commands with an expected response.
-     * 
-     * @param string $cmd
-     * @param string $param
-     * @param string $expected
-     * @return bool
-     * @throws \DSG\SquadRCON\Exceptions\RConException
-     */
-    private function _consoleCommand(string $cmd, string $param, string $expected) : bool;
-
-    /**
-     * Helper method to send a command to the Server over
-     * RCon. Reads and returns the response.
-     * @param $cmd
-     * @return mixed
-     * @throws \DSG\SquadRCON\Exceptions\RConException
-     */
-    private function _sendCommand($cmd);
+    function adminSetNextMap(string $map) : bool;
 }

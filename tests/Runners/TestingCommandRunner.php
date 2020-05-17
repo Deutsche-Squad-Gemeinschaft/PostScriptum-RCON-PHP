@@ -44,7 +44,7 @@ class TestingCommandRunner implements ServerCommandRunner {
      * @return array
      * @throws \DSG\SquadRCON\Exceptions\RConException
      */
-    private function showNextMap() : string
+    public function showNextMap() : string
     {
         return ShowNextMapResponse::get();
     }
