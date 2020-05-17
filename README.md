@@ -11,7 +11,7 @@
     <a href="https://codecov.io/gh/Deutsche-Squad-Gemeinschaft/squad-rcon-php">
         <img alt="Deutsche Squad Gemeinschaft" src="https://codecov.io/gh/Deutsche-Squad-Gemeinschaft/squad-rcon-php/branch/master/graph/badge.svg">
     </a>
-    <a href="https://packagist.org/dsg/squad-rcon-php/shoppingcart">
+    <a href="https://packagist.org/packages/dsg/squad-rcon-php">
         <img alt="Total Downloads" src="https://poser.pugx.org/dsg/squad-rcon-php/downloads.png">
     </a>
     <a href="https://packagist.org/packages/dsg/squad-rcon-php">
