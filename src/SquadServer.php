@@ -59,8 +59,9 @@ class SquadServer
         /** @var Squad[] $squads */
         $squads = [];
 
-        $resSquads = $this->rcon->execute("ListSquads");
-        $linesSquads = explode("\n", $resSquads);
+        $response = $this->rcon->execute("ListSquads");
+
+        $linesSquads = explode("\n", $response);
 
         /** @var Team The current team */
         $currentTeam = null;
@@ -74,7 +75,7 @@ class SquadServer
                 $teams[$team->getId()] = $team;
                 
                 /* Initialize squad lookup array */
-                $squads[$team] = [];
+                $squads[$team->getId()] = [];
 
                 /* Set as current team */
                 $currentTeam = $team;
@@ -136,7 +137,7 @@ class SquadServer
                 $player = new Player(intval($matches[1]), $matches[2], $matches[3]);
 
                 /* Set Team and Squad references if ListSquads output is provided */
-                if ($teams && count($teams) && $matches[4] !== 'N/A' && array_key_exists($teams, $matches[4])) {
+                if ($teams && count($teams) && $matches[4] !== 'N/A' && array_key_exists($matches[4], $teams)) {
                     /* Get the Team */
                     $player->setTeam($teams[$matches[4]]);
 
