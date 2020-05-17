@@ -2,17 +2,20 @@
 
 namespace DSG\SquadRCON;
 
+use DSG\SquadRCON\Contracts\ServerCommandRunner;
 use DSG\SquadRCON\Data\Team;
 use DSG\SquadRCON\Data\Squad;
 use DSG\SquadRCON\Data\Player;
+use DSG\SquadRCON\Data\ServerConnectionInfo;
+use DSG\SquadRCON\Runners\SquadCommandRunner;
 use DSG\SquadRCON\Services\RCon;
 
 class SquadServer
 {
     const SQUAD_SOCKET_TIMEOUT_SECONDS = 0.5;
 
-    /** @var RCon */
-    private $rcon;
+    /** @var Ser */
+    private ServerCommandRunner $runner;
 
     /**
      * SquadServer constructor.
@@ -22,9 +25,14 @@ class SquadServer
      * @param float $timeout
      * @throws \DSG\SquadRCON\Exceptions\RConException
      */
-    public function __construct($host, $port, $password, $timeout = SquadServer::SQUAD_SOCKET_TIMEOUT_SECONDS)
+    public function __construct(ServerConnectionInfo $serverConnectionInfo, ServerCommandRunner $runner = null)
     {
-        $this->rcon = new RCon($host, $port, $password, $timeout);
+        /* Initialize the default Runner if none is specified */
+        if (!$runner) {
+            $runner = new SquadCommandRunner($serverConnectionInfo);
+        }
+
+        $this->runner = $runner;
     }
 
     /**
@@ -59,13 +67,12 @@ class SquadServer
         /** @var Squad[] $squads */
         $squads = [];
 
-        $response = $this->rcon->execute("ListSquads");
-
-        $linesSquads = explode("\n", $response);
+        /* Get the SquadList from the Server */
+        $response = $this->runner->listSquads();
 
         /** @var Team The current team */
         $currentTeam = null;
-        foreach ($linesSquads as $lineSquad) {
+        foreach (explode("\n", $response) as $lineSquad) {
             $matches = [];
             if (preg_match('/^Team ID: ([1|2]) \((.*)\)/', $lineSquad, $matches) > 0) {
                 /* Initialize a new Team */
@@ -126,7 +133,7 @@ class SquadServer
         $players = [];
 
         /* Execute the ListPlayers command and get the response */
-        $response = $this->rcon->execute("ListPlayers");
+        $response = $this->runner->listPlayers();
 
         /* Process each individual line */
         foreach (explode("\n", $response) as $line) {
@@ -195,18 +202,24 @@ class SquadServer
      */
     private function currentMaps() : array
     {
+        /* Initialize the output */
         $maps = [
             'current' => null,
             'next' => null
         ];
-        $res = $this->_sendCommand("ShowNextMap");
-        $arr = explode(', Next map is ', $res);
+
+        /* Run the ShowNextMap Command and get response */
+        $response = $this->runner->showNextMap("ShowNextMap");
+
+        /* Parse response */
+        $arr = explode(', Next map is ', $response);
         if (count($arr) > 1) {
             $next = trim($arr[1]);
             $curr = substr($arr[0], strlen('Current map is '));
             $maps['current'] = $curr;
             $maps['next'] = $next;
         }
+
         return $maps;
     }
 
@@ -220,7 +233,7 @@ class SquadServer
      */
     public function adminBroadcast(string $msg) : bool
     {
-        return $this->_consoleCommand('AdminBroadcast', $msg, 'Message broadcasted');
+        return $this->runner->adminBroadcast($msg);
     }
 
     /**
@@ -232,7 +245,7 @@ class SquadServer
      */
     public function adminChangeMap(string $map) : bool
     {
-        return $this->_consoleCommand('AdminChangeMap', $map, 'Changed map to');
+        return $this->runner->adminChangeMap($map);
     }
 
     /**
@@ -246,34 +259,6 @@ class SquadServer
      */
     public function adminSetNextMap(string $map) : bool
     {
-        return $this->_consoleCommand('AdminSetNextMap', $map, 'Set next map to');
-    }
-
-    /**
-     * Helper method to run Console commands.
-     * 
-     * @param string $cmd
-     * @param string $param
-     * @param string $rtn
-     * @return bool
-     * @throws \DSG\SquadRCON\Exceptions\RConException
-     */
-    private function _consoleCommand(string $cmd, string $param, string $expected) : bool
-    {
-        $ret = $this->_sendCommand($cmd . ' ' . $param);
-        return substr($ret, 0, strlen($expected)) == $expected;
-    }
-
-    /**
-     * Helper method to send a command to the Server over
-     * RCon. Reads and returns the response.
-     * @param $cmd
-     * @return mixed
-     * @throws \DSG\SquadRCON\Exceptions\RConException
-     */
-    private function _sendCommand($cmd)
-    {
-        $res = $this->rcon->execute($cmd);
-        return $res;
+        return $this->runner->adminSetNextMap($map);
     }
 }
