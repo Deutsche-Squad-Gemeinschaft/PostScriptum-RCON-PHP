@@ -37,39 +37,50 @@ The code will then be available under the `DSG\SquadRCON` namespace.
 ## Commands
 
 * [x] ListPlayers
+* [x] ListSquads
 * [x] ShowNextMap
-* [x] AdminKick "\<NameOrSteamId\>" \<KickReason\>
-* [x] AdminKickById \<PlayerId\> \<KickReason\>
-* [x] AdminBan "\<NameOrSteamId\>" "\<BanLength\>" \<BanReason\>
-* [x] AdminBanById \<PlayerId\> "\<BanLength\>" \<BanReason\>
+* [ ] AdminKick "\<NameOrSteamId\>" \<KickReason\>
+* [ ] AdminKickById \<PlayerId\> \<KickReason\>
+* [ ] AdminBan "\<NameOrSteamId\>" "\<BanLength\>" \<BanReason\>
+* [ ] AdminBanById \<PlayerId\> "\<BanLength\>" \<BanReason\>
 * [x] AdminBroadcast \<Message\>
-* [x] ChatToAdmin \<Message\>
-* [x] AdminRestartMatch
-* [x] AdminEndMatch
-* [x] AdminPauseMatch
-* [x] AdminUnpauseMatch
-* [x] AdminKillServer \<Force [0|1]\>
+* [ ] ChatToAdmin \<Message\>
+* [ ] AdminRestartMatch
+* [ ] AdminEndMatch
+* [ ] AdminPauseMatch
+* [ ] AdminUnpauseMatch
+* [ ] AdminKillServer \<Force [0|1]\>
 * [x] AdminChangeMap \<MapName\>
 * [x] AdminSetNextMap \<MapName\>
-* [x] AdminSetMaxNumPlayers \<NumPlayers\>
-* [x] AdminSetNumReservedSlots \<NumReserved\>
-* [x] AdminSetServerPassword \<Password\>
-* [x] AdminAddCameraman \<NameOrId\>
-* [x] AdminDemoRec \<FileName\>
-* [x] AdminDemoStop
-* [x] AdminListDisconnectedPlayers
-* [x] AdminForceNetUpdateOnClientSaturation \<Enabled [0|1]\>
+* [ ] AdminSetMaxNumPlayers \<NumPlayers\>
+* [ ] AdminSetNumReservedSlots \<NumReserved\>
+* [ ] AdminSetServerPassword \<Password\>
+* [ ] AdminAddCameraman \<NameOrId\>
+* [ ] AdminDemoRec \<FileName\>
+* [ ] AdminDemoStop
+* [ ] AdminListDisconnectedPlayers
+* [ ] AdminForceNetUpdateOnClientSaturation \<Enabled [0|1]\>
 
 ## USAGE
 
 ### Create instance
 ```php
-$server = new SquadServer('server.squad-slovenia.com', 21114, 'verySecretPassword');
+$server = new SquadServer(new ServerConnectionInfo('server.squad-slovenia.com', 21114, 'verySecretPassword'));
+```
+
+### Get current server population (Teams, Squads, Players)
+```php
+$players = $server->serverPopulation();
 ```
 
 ### Get currently active players
 ```php
-$players = $server->currentPlayers();
+$players = $server->listPlayers();
+```
+
+### Get currently active squads (and teams)
+```php
+$players = $server->listSquads();
 ```
 
 ### Get next and current map
@@ -89,5 +100,5 @@ $server->changeMap('Sumari AAS v1');
 
 ### Set next map
 ```php
-$server->nextMap('Gorodok');
+$server->nextMap('Sumari AAS v1');
 ```
