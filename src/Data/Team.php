@@ -1,8 +1,8 @@
 <?php
 
-namespace DSG\SquadRCON;
+namespace DSG\SquadRCON\Data;
 
-class Squad
+class Team
 {
     /**
      * @var int
@@ -15,19 +15,9 @@ class Squad
     private $name;
 
     /**
-     * @var int
+     * @var Squad[]
      */
-    private $size;
-
-    /**
-     * @var bool
-     */
-    private $locked;
-
-    /**
-     * @var Team
-     */
-    private $team;
+    private $squads = array();
 
     /**
      * @var Player[]
@@ -51,27 +41,11 @@ class Squad
     }
 
     /**
-     * @return int
+     * @return Squad[]
      */
-    public function getSize()
+    public function getSquads()
     {
-        return $this->size;
-    }
-
-    /**
-     * @return bool
-     */
-    public function isLocked()
-    {
-        return $this->locked;
-    }
-
-    /**
-     * @return Team
-     */
-    public function getTeam()
-    {
-        return $this->team;
+        return $this->squads;
     }
 
     /**

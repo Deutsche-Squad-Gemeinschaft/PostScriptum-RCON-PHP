@@ -1,6 +1,8 @@
 <?php
 
-namespace DSG\SquadRCON;
+namespace DSG\SquadRCON\Services;
+
+use DSG\SquadRCON\Exceptions\RConException;
 
 class RCon
 {

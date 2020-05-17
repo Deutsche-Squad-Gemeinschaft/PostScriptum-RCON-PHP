@@ -2,6 +2,11 @@
 
 namespace DSG\SquadRCON;
 
+use DSG\SquadRCON\Data\Team;
+use DSG\SquadRCON\Data\Squad;
+use DSG\SquadRCON\Data\Player;
+use DSG\SquadRCON\Services\RCon;
+
 class SquadServer
 {
     const SQUAD_SOCKET_TIMEOUT_SECONDS = 0.5;
@@ -36,7 +41,7 @@ class SquadServer
      * @param $port
      * @param $password
      * @param float $timeout
-     * @throws RConException
+     * @throws \DSG\SquadRCON\Exceptions\RConException
      */
     public function __construct($host, $port, $password, $timeout = SquadServer::SQUAD_SOCKET_TIMEOUT_SECONDS)
     {
@@ -45,7 +50,7 @@ class SquadServer
 
     /**
      * @return Team[]
-     * @throws RConException
+     * @throws \DSG\SquadRCON\Exceptions\RConException
      */
     public function serverPopulation() : array
     {
@@ -139,7 +144,7 @@ class SquadServer
     /**
      * @param array $ignored
      * @return array
-     * @throws RConException
+     * @throws \DSG\SquadRCON\Exceptions\RConException
      * @deprecated
      */
     public function currentPlayers($ignored = []) : array
@@ -178,7 +183,7 @@ class SquadServer
 
     /**
      * @return string
-     * @throws RConException
+     * @throws \DSG\SquadRCON\Exceptions\RConException
      */
     public function currentMap() : string
     {
@@ -187,7 +192,7 @@ class SquadServer
 
     /**
      * @return string
-     * @throws RConException
+     * @throws \DSG\SquadRCON\Exceptions\RConException
      */
     public function currentNext() : string
     {
@@ -196,7 +201,7 @@ class SquadServer
 
     /**
      * @return array
-     * @throws RConException
+     * @throws \DSG\SquadRCON\Exceptions\RConException
      * @deprecated
      */
     public function currentMaps() : array
@@ -219,7 +224,7 @@ class SquadServer
     /**
      * @param $msg
      * @return bool
-     * @throws RConException
+     * @throws \DSG\SquadRCON\Exceptions\RConException
      */
     public function broadcastMessage($msg) : bool
     {
@@ -229,7 +234,7 @@ class SquadServer
     /**
      * @param $map
      * @return bool
-     * @throws RConException
+     * @throws \DSG\SquadRCON\Exceptions\RConException
      */
     public function changeMap($map) : bool
     {
@@ -239,7 +244,7 @@ class SquadServer
     /**
      * @param $map
      * @return bool
-     * @throws RConException
+     * @throws \DSG\SquadRCON\Exceptions\RConException
      */
     public function nextMap($map) : bool
     {
@@ -251,7 +256,7 @@ class SquadServer
      * @param $param
      * @param $rtn
      * @return bool
-     * @throws RConException
+     * @throws \DSG\SquadRCON\Exceptions\RConException
      */
     private function _consoleCommand($cmd, $param, $rtn) : bool
     {
@@ -262,7 +267,7 @@ class SquadServer
     /**
      * @param $cmd
      * @return mixed
-     * @throws RConException
+     * @throws \DSG\SquadRCON\Exceptions\RConException
      */
     private function _sendCommand($cmd)
     {

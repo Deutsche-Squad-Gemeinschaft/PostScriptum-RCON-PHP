@@ -1,6 +1,6 @@
 <?php
 
-namespace DSG\SquadRCON;
+namespace DSG\SquadRCON\Data;
 
 class Player
 {
