@@ -112,4 +112,34 @@ class SquadServerTest extends \DSG\SquadRCON\Tests\TestCase {
         $this->assertSame(18, $squadCount);
         $this->assertSame(77, $playerCount);
     }
+
+    /**
+     * Verifies the broadcast command does work properly
+     * 
+     * @return void
+     */
+    public function test_admin_Broadcast()
+    {
+        $this->assertTrue($this->squadServer->adminBroadcast('Hello World!'));
+    }
+
+    /**
+     * Verifies the change map command does work properly
+     * 
+     * @return void
+     */
+    public function test_admin_change_map()
+    {
+        $this->assertTrue($this->squadServer->adminChangeMap('Al Basrah AAS v1'));
+    }
+
+    /**
+     * Verifies the set next map command does work properly
+     * 
+     * @return void
+     */
+    public function test_admin_set_next_map()
+    {
+        $this->assertTrue($this->squadServer->adminSetNextMap('Al Basrah AAS v1'));
+    }
 }
