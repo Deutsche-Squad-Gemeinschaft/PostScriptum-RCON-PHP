@@ -66,6 +66,26 @@ class SquadServerTest extends \DSG\SquadRCON\Tests\TestCase {
             if ($team->getId() === 1) {
                 $this->assertSame('United States Army', $team->getName());
                 $this->assertCount(8, $team->getSquads());
+
+                foreach ($team->getSquads() as $squad) {
+                    if ($squad->getId() === 1) {
+                        $this->assertSame('HELI', $squad->getName());
+                    } else if ($squad->getId() === 2) {
+                        $this->assertSame('HELI', $squad->getName());
+                    } else if ($squad->getId() === 3) {
+                        $this->assertSame('CMD Squad', $squad->getName());
+                    } else if ($squad->getId() === 4) {
+                        $this->assertSame('MBT', $squad->getName());
+                    } else if ($squad->getId() === 5) {
+                        $this->assertSame('BRADLEY', $squad->getName());
+                    } else if ($squad->getId() === 6) {
+                        $this->assertSame('STRYKER', $squad->getName());
+                    } else if ($squad->getId() === 7) {
+                        $this->assertSame('BOS SACHEN MACHEN', $squad->getName());
+                    } else if ($squad->getId() === 8) {
+                        $this->assertSame('RUNNING SQUAD', $squad->getName());
+                    }
+                }
             } else {
                 $this->assertSame('Russian Ground Forces', $team->getName());
                 $this->assertCount(10, $team->getSquads());

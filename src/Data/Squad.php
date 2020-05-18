@@ -36,11 +36,11 @@ class Squad
 
     function __construct(int $id, string $name, int $size, bool $locked, Team $team)
     {
-        $this->id       = $id;
-        $this->$name    = $name;
-        $this->size     = $size;
-        $this->locked   = $locked;
-        $this->team     = $team;
+        $this->id     = $id;
+        $this->name   = $name;
+        $this->size   = $size;
+        $this->locked = $locked;
+        $this->team   = $team;
     }
 
     /**
