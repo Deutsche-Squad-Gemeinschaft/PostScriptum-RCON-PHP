@@ -46,6 +46,22 @@ interface ServerCommandRunner {
     function adminBroadcast(string $msg) : bool;
 
     /**
+     * AdminRestartMatch command.
+     * Broadcasts the given message on the server.
+     *
+     * @return boolean
+     */
+    function adminRestartMatch() : bool;
+
+    /**
+     * AdminEndMatch command.
+     * Broadcasts the given message on the server.
+     *
+     * @return boolean
+     */
+    function adminEndMatch() : bool;
+
+    /**
      * AdminChangeMap command
      * Immediately changes the current map to the given map.
      * @param string $map

@@ -162,4 +162,19 @@ class SquadServerTest extends \DSG\SquadRCON\Tests\TestCase {
     {
         $this->assertTrue($this->squadServer->adminSetNextMap('Al Basrah AAS v1'));
     }
+
+    /**
+     * Verifies the set restart match command does work properly
+     * 
+     * @return void
+     */
+    public function test_admin_restart_match()
+    {
+        $this->assertTrue($this->squadServer->restartMatch());
+    }
+
+    public function test_admin_end_match()
+    {
+        $this->assertTrue($this->squadServer->endMatch());
+    }
 }

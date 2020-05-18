@@ -237,6 +237,28 @@ class SquadServer
     }
 
     /**
+     * ChatToAdmin command.
+     * Broadcasts the given message on the server.
+     *
+     * @return boolean
+     */
+    public function restartMatch() : bool
+    {
+        return $this->runner->adminRestartMatch();
+    }
+
+    /**
+     * AdminEndMatch command.
+     * Broadcasts the given message on the server.
+     *
+     * @return boolean
+     */
+    public function endMatch() : bool
+    {
+        return $this->runner->adminEndMatch();
+    }
+
+    /**
      * AdminChangeMap command
      * Immediately changes the current map to the given map.
      * @param string $map

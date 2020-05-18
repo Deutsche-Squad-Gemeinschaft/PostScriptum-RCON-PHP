@@ -79,6 +79,28 @@ class SquadCommandRunner implements ServerCommandRunner {
     }
 
     /**
+     * AdminRestartMatch command.
+     * Broadcasts the given message on the server.
+     *
+     * @return boolean
+     */
+    function adminRestartMatch() : bool
+    {
+        return $this->_consoleCommand('AdminRestartMatch', '', 'Game restarted');
+    }
+
+    /**
+     * AdminRestartMatch command.
+     * Broadcasts the given message on the server.
+     *
+     * @return boolean
+     */
+    function adminEndMatch() : bool
+    {
+        return $this->_consoleCommand('AdminEndMatch', '', 'Match ended');
+    }
+
+    /**
      * AdminChangeMap command
      * Immediately changes the current map to the given map.
      * @param string $map

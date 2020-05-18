@@ -45,8 +45,8 @@ The code will then be available under the `DSG\SquadRCON` namespace.
 * [ ] AdminBanById \<PlayerId\> "\<BanLength\>" \<BanReason\>
 * [x] AdminBroadcast \<Message\>
 * [ ] ChatToAdmin \<Message\>
-* [ ] AdminRestartMatch
-* [ ] AdminEndMatch
+* [x] AdminRestartMatch
+* [x] AdminEndMatch
 * [ ] AdminPauseMatch
 * [ ] AdminUnpauseMatch
 * [ ] AdminKillServer \<Force [0|1]\>
@@ -83,9 +83,24 @@ $players = $server->listPlayers();
 $players = $server->listSquads();
 ```
 
-### Get next and current map
+### Get the current map
 ```php
-$maps = $server->currentMaps();
+$map = $server->currentMap();
+```
+
+### Get the next map
+```php
+$map = $server->nextMap();
+```
+
+### Restart the current match
+```php
+$map = $server->restartMatch();
+```
+
+### End the current match
+```php
+$map = $server->endMatch();
 ```
 
 ### Broadcast message to all players on the server
