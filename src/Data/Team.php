@@ -68,7 +68,7 @@ class Team
      */
     public function addSquad(Squad $squad) : void
     {
-        $this->squads[] = $squad;
+        $this->squads[$squad->getId()] = $squad;
     }
 
     /**

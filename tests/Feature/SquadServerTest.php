@@ -130,13 +130,8 @@ class SquadServerTest extends \DSG\SquadRCON\Tests\TestCase {
 
         $squadCount = 0;
         $playerCount = 0;
-
-        $players = [];
-
         foreach ($teams as $team) {
             $squadCount += count($team->getSquads());
-
-            $players = array_merge($players, $team->getPlayers());
             $teamPlayerCount = count($team->getPlayers());
             foreach ($team->getSquads() as $squad) {
                 $teamPlayerCount += count($squad->getPlayers());
@@ -149,32 +144,30 @@ class SquadServerTest extends \DSG\SquadRCON\Tests\TestCase {
                 $this->assertSame(38, $teamPlayerCount);
 
                 foreach ($team->getSquads() as $squad) {
-                    $players = array_merge($players, $squad->getPlayers());
-
                     if ($squad->getId() === 3) {
                         $this->assertSame('CMD Squad', $squad->getName());
                         $this->assertSame(9, $squad->getSize());
                         $this->assertFalse(false, $squad->isLocked());
                         $this->assertSame($team->getId(), $squad->getTeam()->getId());
 
+                        $p = null;
                         /** @var \DSG\SquadRCON\Data\Player $player */
                         foreach ($squad->getPlayers() as $player) {
                             if ($player->getId() === 53) {
                                 $this->assertSame('76561198202943394', $player->getSteamId());
                                 $this->assertSame('[1JGKP]Bud-Muecke (YT)', $player->getName());
                                 $this->assertSame($squad->getId(), $player->getSquad()->getId());
+                                $p = $player;
                             }
                         }
+
+                        $this->assertNotNull($p);
                     }
                 }
             } else {
                 $this->assertSame('Russian Ground Forces', $team->getName());
                 $this->assertCount(10, $team->getSquads());
                 $this->assertSame(39, $teamPlayerCount);
-
-                foreach ($team->getSquads() as $squad) {
-                    $players = array_merge($players, $squad->getPlayers());
-                }
             }
         }
         
