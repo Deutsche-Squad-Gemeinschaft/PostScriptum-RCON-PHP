@@ -50,14 +50,25 @@ class SquadCommandRunner implements ServerCommandRunner {
      * ListSquads can be piped into it to
      * assign the Players to their Team/Squad.
      *
-     * @param array $teams
-     * @return Player[]
+     * @return string
      * @throws \DSG\SquadRCON\Exceptions\RConException
      */
     public function listPlayers() : string
     {
         /* Execute the ListPlayers command and get the response */
         return $this->sourceQuery->Rcon("ListPlayers");
+    }
+
+    /**
+     * ListDisconnectedPlayers command, returns an array
+     * of disconnected Player instances.
+     *
+     * @return string
+     * @throws \DSG\SquadRCON\Exceptions\RConException
+     */
+    public function listDisconnectedPlayers() : string
+    {
+        return $this->sourceQuery->Rcon("AdminListDisconnectedPlayers");
     }
 
     /**
@@ -105,6 +116,32 @@ class SquadCommandRunner implements ServerCommandRunner {
     function adminEndMatch() : bool
     {
         return $this->_consoleCommand('AdminEndMatch', '', 'Match ended');
+    }
+
+    /**
+     * AdminSetMaxNumPlayers command.
+     * Sets the max amount of players (public).
+     *
+     * @param int $slots How many public slots ther should be.
+     * @return boolean
+     * @throws \DSG\SquadRCON\Exceptions\RConException
+     */
+    function adminSetMaxNumPlayers(int $slots) : bool
+    {
+        return $this->_consoleCommand('AdminSetMaxNumPlayers', $slots, 'Set MaxNumPlayers to ' . $slots);
+    }
+
+    /**
+     * AdminSetServerPassword command.
+     * Sets the password of the server.
+     *
+     * @param string $password
+     * @return boolean
+     * @throws \DSG\SquadRCON\Exceptions\RConException
+     */
+    function adminSetServerPassword(string $password) : bool
+    {
+        return $this->_consoleCommand('AdminSetServerPassword', $password, 'Set server password to ' . $password);
     }
 
     /**

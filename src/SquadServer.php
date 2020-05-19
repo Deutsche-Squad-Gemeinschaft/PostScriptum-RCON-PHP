@@ -162,9 +162,43 @@ class SquadServer
 
                 /* Add to the output */
                 $players[] = $player;
-            } else if (preg_match('/^[-]{5} Recently Disconnected Players/', $line)) {
+            } else if (preg_match('/^-{5} Recently Disconnected Players \[Max of 15\] -{5}/', $line)) {
                 /* Notihing of interest, break the loop */
                 break;
+            }
+        }
+
+        return $players;
+    }
+
+    /**
+     * ListDisconnectedPlayers command, returns an array
+     * of disconnected Player instances.
+     *
+     * @return Player[]
+     * @throws \DSG\SquadRCON\Exceptions\RConException
+     */
+    public function listDisconnectedPlayers() : array
+    {
+        /* Initialize an empty output array */
+        $players = [];
+
+        /* Execute the ListPlayers command and get the response */
+        $response = $this->runner->listPlayers();
+
+        /* Process each individual line */
+        foreach (explode("\n", $response) as $line) {
+            /* Initialize an empty array and try to get info form line */
+            $matches = [];
+            if (preg_match('/^ID: (\d{1,}) \| SteamID: (\d{17}) \| Since Disconnect: (\d{2,})m.(\d{2})s \| Name: (.*?)$/', $line, $matches)) {
+                /* Initialize new Player instance */
+                $player = new Player(intval($matches[1]), $matches[2], $matches[5]);
+
+                /* Set the disconnected since time */
+                $player->setDisconnectedSince(intval($matches[3]) * 60 + intval($matches[4]));
+
+                /* Add to the output */
+                $players[] = $player;
             }
         }
 
@@ -238,7 +272,7 @@ class SquadServer
 
     /**
      * ChatToAdmin command.
-     * Broadcasts the given message on the server.
+     * Restarts the current match.
      *
      * @return boolean
      */
@@ -249,13 +283,39 @@ class SquadServer
 
     /**
      * AdminEndMatch command.
-     * Broadcasts the given message on the server.
+     * Ends the current Match.
      *
      * @return boolean
      */
     public function endMatch() : bool
     {
         return $this->runner->adminEndMatch();
+    }
+
+    /**
+     * AdminSetMaxNumPlayers command.
+     * Sets the max amount of players (public).
+     *
+     * @param int $slots How many public slots ther should be.
+     * @return boolean
+     * @throws \DSG\SquadRCON\Exceptions\RConException
+     */
+    public function setSlots(int $slots = 78) : bool
+    {
+        return $this->runner->adminSetMaxNumPlayers($slots);
+    }
+
+    /**
+     * AdminSetServerPassword command.
+     * Sets the password of the server.
+     *
+     * @param string $password
+     * @return boolean
+     * @throws \DSG\SquadRCON\Exceptions\RConException
+     */
+    public function setPassword(string $password) : bool
+    {
+        return $this->runner->adminSetServerPassword($password);
     }
 
     /**

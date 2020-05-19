@@ -7,32 +7,32 @@ class Squad
     /**
      * @var int
      */
-    private $id;
+    private int $id;
 
     /**
      * @var string
      */
-    private $name;
+    private string $name;
 
     /**
      * @var int
      */
-    private $size;
+    private int $size;
 
     /**
      * @var bool
      */
-    private $locked;
+    private bool $locked;
 
     /**
      * @var Team
      */
-    private $team;
+    private Team $team;
 
     /**
      * @var Player[]
      */
-    private $players = [];
+    private array $players = [];
 
     function __construct(int $id, string $name, int $size, bool $locked, Team $team)
     {

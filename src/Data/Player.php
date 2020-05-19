@@ -7,27 +7,32 @@ class Player
     /**
      * @var int
      */
-    private $id;
+    private int $id;
 
     /**
      * @var string
      */
-    private $steamId;
+    private string $steamId;
 
     /**
      * @var string
      */
-    private $name;
+    private string $name;
 
     /**
      * @var Team
      */
-    private $team = null;
+    private ?Team $team = null;
 
     /**
      * @var Squad
      */
-    private $squad = null;
+    private ?Squad $squad = null;
+
+    /**
+     * @var int|null
+     */
+    private ?int $disconnectedSince = null;
 
     function __construct(int $id, string $steamId, string $name)
     {
@@ -71,7 +76,7 @@ class Player
      * 
      * @return Team|null
      */
-    public function getTeam()
+    public function getTeam() : ?Team
     {
         return $this->team;
     }
@@ -92,7 +97,7 @@ class Player
      * 
      * @return Squad|null
      */
-    public function getSquad()
+    public function getSquad() : ?Squad
     {
         return $this->squad;
     }
@@ -106,5 +111,26 @@ class Player
     public function setSquad(Squad $squad) : void
     {
         $this->squad = $squad;
+    }
+
+    /**
+     * Gets the disconnected since attribute of this Player instance.
+     *
+     * @return int|null
+     */
+    public function getDisconnectedSince() : ?int
+    {
+        return $this->disconnectedSince;
+    }
+
+    /**
+     * Sets the disconnected since attribute of this Player instance.
+     *
+     * @param int $disconnectedSince Seconds since disconnect
+     * @return void
+     */
+    public function setDisconnectedSince(int $disconnectedSince) : void
+    {
+        $this->disconnectedSince = $disconnectedSince;
     }
 }

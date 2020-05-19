@@ -7,22 +7,22 @@ class Team
     /**
      * @var int
      */
-    private $id;
+    private int $id;
 
     /**
      * @var string
      */
-    private $name;
+    private string $name;
 
     /**
      * @var Squad[]
      */
-    private $squads = [];
+    private array $squads = [];
 
     /**
      * @var Player[]
      */
-    private $players = [];
+    private array $players = [];
 
     function __construct(int $id, string $name)
     {

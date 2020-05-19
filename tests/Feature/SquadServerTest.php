@@ -52,6 +52,28 @@ class SquadServerTest extends \DSG\SquadRCON\Tests\TestCase {
     }
 
     /**
+     * Verifies the disconnected player list can properly be retrieved.
+     *
+     * @return void
+     */
+    public function test_list_disconnected_players()
+    {
+        $playerList = $this->squadServer->listDisconnectedPlayers();
+
+        $this->assertCount(3, $playerList);
+
+        foreach ($playerList as $player) {
+            if ($player->getId() === 88) {
+                $this->assertSame(195, $player->getDisconnectedSince());
+            } else if ($player->getId() === 84) {
+                $this->assertSame(108, $player->getDisconnectedSince());
+            } else if ($player->getId() === 42) {
+                $this->assertSame(3, $player->getDisconnectedSince());
+            }
+        }
+    }
+
+    /**
      * Verifies the team/squad list can properly be retrieved.
      *
      * @return void
@@ -181,5 +203,15 @@ class SquadServerTest extends \DSG\SquadRCON\Tests\TestCase {
     public function test_admin_end_match()
     {
         $this->assertTrue($this->squadServer->endMatch());
+    }
+
+    /**
+     * Verifies the admin set max num players command does work properly
+     * 
+     * @return void
+     */
+    public function test_admin_set_max_num_players()
+    {
+        $this->assertTrue($this->squadServer->setSlots(78));
     }
 }

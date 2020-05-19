@@ -14,7 +14,7 @@ class TestingCommandRunner implements ServerCommandRunner {
      * can be given to the listPlayers method
      * to add and reference the Player instances.
      *
-     * @return Team[]
+     * @return string
      * @throws \DSG\SquadRCON\Exceptions\RConException
      */
     public function listSquads() : string
@@ -28,8 +28,7 @@ class TestingCommandRunner implements ServerCommandRunner {
      * ListSquads can be piped into it to
      * assign the Players to their Team/Squad.
      *
-     * @param array $teams
-     * @return Player[]
+     * @return string
      * @throws \DSG\SquadRCON\Exceptions\RConException
      */
     public function listPlayers() : string
@@ -38,10 +37,22 @@ class TestingCommandRunner implements ServerCommandRunner {
     }
 
     /**
+     * ListDisconnectedPlayers command, returns an array
+     * of disconnected Player instances.
+     *
+     * @return string
+     * @throws \DSG\SquadRCON\Exceptions\RConException
+     */
+    public function listDisconnectedPlayers() : string
+    {
+        return ListPlayersResponse::get();
+    }
+
+    /**
      * ShowNextMap command.
      * Gets the current and next map.
      * 
-     * @return array
+     * @return string
      * @throws \DSG\SquadRCON\Exceptions\RConException
      */
     public function showNextMap() : string
@@ -80,6 +91,32 @@ class TestingCommandRunner implements ServerCommandRunner {
      * @return boolean
      */
     function adminEndMatch() : bool
+    {
+        return true;
+    }
+
+    /**
+     * AdminSetMaxNumPlayers command.
+     * Sets the max amount of players (public).
+     *
+     * @param int $slots How many public slots ther should be.
+     * @return boolean
+     * @throws \DSG\SquadRCON\Exceptions\RConException
+     */
+    function adminSetMaxNumPlayers(int $slots) : bool
+    {
+        return true;
+    }
+
+    /**
+     * AdminSetServerPassword command.
+     * Sets the password of the server.
+     *
+     * @param string $password
+     * @return boolean
+     * @throws \DSG\SquadRCON\Exceptions\RConException
+     */
+    function adminSetServerPassword(string $password) : bool
     {
         return true;
     }

@@ -27,6 +27,15 @@ interface ServerCommandRunner {
     function listPlayers() : string;
 
     /**
+     * ListDisconnectedPlayers command, returns an array
+     * of disconnected Player instances.
+     *
+     * @return Player[]
+     * @throws \DSG\SquadRCON\Exceptions\RConException
+     */
+    public function listDisconnectedPlayers() : string;
+
+    /**
      * ShowNextMap command.
      * Gets the current and next map.
      * 
@@ -46,8 +55,8 @@ interface ServerCommandRunner {
     function adminBroadcast(string $msg) : bool;
 
     /**
-     * AdminRestartMatch command.
-     * Broadcasts the given message on the server.
+     * ChatToAdmin command.
+     * Restarts the current match.
      *
      * @return boolean
      */
@@ -55,11 +64,31 @@ interface ServerCommandRunner {
 
     /**
      * AdminEndMatch command.
-     * Broadcasts the given message on the server.
+     * Ends the current Match.
      *
      * @return boolean
      */
     function adminEndMatch() : bool;
+
+    /**
+     * AdminSetMaxNumPlayers command.
+     * Sets the max amount of players (public).
+     *
+     * @param int $slots How many public slots ther should be.
+     * @return boolean
+     * @throws \DSG\SquadRCON\Exceptions\RConException
+     */
+    function adminSetMaxNumPlayers(int $slots) : bool;
+
+    /**
+     * AdminSetServerPassword command.
+     * Sets the password of the server.
+     *
+     * @param string $password
+     * @return boolean
+     * @throws \DSG\SquadRCON\Exceptions\RConException
+     */
+    function adminSetServerPassword(string $password) : bool;
 
     /**
      * AdminChangeMap command

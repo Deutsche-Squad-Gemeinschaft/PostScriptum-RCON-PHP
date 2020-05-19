@@ -44,22 +44,13 @@ The code will then be available under the `DSG\SquadRCON` namespace.
 * [ ] AdminBan "\<NameOrSteamId\>" "\<BanLength\>" \<BanReason\>
 * [ ] AdminBanById \<PlayerId\> "\<BanLength\>" \<BanReason\>
 * [x] AdminBroadcast \<Message\>
-* [ ] ChatToAdmin \<Message\>
 * [x] AdminRestartMatch
 * [x] AdminEndMatch
-* [ ] AdminPauseMatch
-* [ ] AdminUnpauseMatch
-* [ ] AdminKillServer \<Force [0|1]\>
 * [x] AdminChangeMap \<MapName\>
 * [x] AdminSetNextMap \<MapName\>
-* [ ] AdminSetMaxNumPlayers \<NumPlayers\>
-* [ ] AdminSetNumReservedSlots \<NumReserved\>
-* [ ] AdminSetServerPassword \<Password\>
-* [ ] AdminAddCameraman \<NameOrId\>
-* [ ] AdminDemoRec \<FileName\>
-* [ ] AdminDemoStop
-* [ ] AdminListDisconnectedPlayers
-* [ ] AdminForceNetUpdateOnClientSaturation \<Enabled [0|1]\>
+* [x] AdminSetMaxNumPlayers \<NumPlayers\>
+* [x] AdminSetServerPassword \<Password\>
+* [x] AdminListDisconnectedPlayers
 
 ## USAGE
 
