@@ -4,11 +4,11 @@ namespace DSG\SquadRCON\Runners;
 
 use DSG\SquadRCON\Contracts\ServerCommandRunner;
 use DSG\SquadRCON\Data\ServerConnectionInfo;
-use DSG\SquadRCON\Services\RCon;
+use xPaw\SourceQuery\SourceQuery;
 
 class SquadCommandRunner implements ServerCommandRunner {
-    /** @var RCon */
-    private $rcon;
+    /** @var SourceQuery */
+    private $sourceQuery;
 
     /**
      * SquadServer constructor.
@@ -18,9 +18,16 @@ class SquadCommandRunner implements ServerCommandRunner {
      * @param float $timeout
      * @throws \DSG\SquadRCON\Exceptions\RConException
      */
-    public function __construct(ServerConnectionInfo $serverConnectionInfo)
+    public function __construct(ServerConnectionInfo $info)
     {
-        $this->rcon = new RCon($serverConnectionInfo->host, $serverConnectionInfo->port, $serverConnectionInfo->password, $serverConnectionInfo->timeout);
+        /* Initialize the Query class */
+        $this->sourceQuery = new SourceQuery();
+
+        /* Connect to the Server */
+        $this->sourceQuery->Connect($info->host, $info->port, $info->timeout);
+
+        /* Set the RCON password */
+        $this->sourceQuery->SetRconPassword($info->password);
     }
     
     /**
@@ -34,7 +41,7 @@ class SquadCommandRunner implements ServerCommandRunner {
      */
     public function listSquads() : string
     {
-        return $this->rcon->execute("ListSquads");
+        return $this->sourceQuery->Rcon("ListSquads");
     }
 
     /**
@@ -50,7 +57,7 @@ class SquadCommandRunner implements ServerCommandRunner {
     public function listPlayers() : string
     {
         /* Execute the ListPlayers command and get the response */
-        return $this->rcon->execute("ListPlayers");
+        return $this->sourceQuery->Rcon("ListPlayers");
     }
 
     /**
@@ -62,7 +69,7 @@ class SquadCommandRunner implements ServerCommandRunner {
      */
     public function showNextMap() : string
     {
-        return $this->_sendCommand("ShowNextMap");
+        return $this->sourceQuery->Rcon("ShowNextMap");
     }
 
     /**
@@ -137,19 +144,7 @@ class SquadCommandRunner implements ServerCommandRunner {
      */
     private function _consoleCommand(string $cmd, string $param, string $expected) : bool
     {
-        $ret = $this->_sendCommand($cmd . ' ' . $param);
-        return substr($ret, 0, strlen($expected)) == $expected;
-    }
-
-    /**
-     * Helper method to send a command to the Server over
-     * RCon. Reads and returns the response.
-     * @param $cmd
-     * @return mixed
-     * @throws \DSG\SquadRCON\Exceptions\RConException
-     */
-    private function _sendCommand($cmd)
-    {
-        return $this->rcon->execute($cmd);
+        $response = $this->sourceQuery->Rcon($cmd . ' ' . $param);
+        return substr($response, 0, strlen($expected)) == $expected;
     }
 }

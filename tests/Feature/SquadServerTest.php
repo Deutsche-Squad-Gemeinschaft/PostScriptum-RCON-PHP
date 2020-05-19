@@ -164,7 +164,7 @@ class SquadServerTest extends \DSG\SquadRCON\Tests\TestCase {
     }
 
     /**
-     * Verifies the set restart match command does work properly
+     * Verifies the restart match command does work properly
      * 
      * @return void
      */
@@ -173,6 +173,11 @@ class SquadServerTest extends \DSG\SquadRCON\Tests\TestCase {
         $this->assertTrue($this->squadServer->restartMatch());
     }
 
+    /**
+     * Verifies the end match command does work properly
+     * 
+     * @return void
+     */
     public function test_admin_end_match()
     {
         $this->assertTrue($this->squadServer->endMatch());

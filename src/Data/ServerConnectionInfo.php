@@ -3,7 +3,7 @@
 namespace DSG\SquadRCON\Data;
 
 class ServerConnectionInfo {
-    const SQUAD_SOCKET_TIMEOUT_SECONDS = 0.5;
+    const SQUAD_SOCKET_TIMEOUT_SECONDS = 3;
 
     /**
      * Host of the Server.
@@ -38,6 +38,10 @@ class ServerConnectionInfo {
         $this->host     = $host;
         $this->port     = $port;
         $this->password = $password;
+
+        if ($timeout <= 0) {
+            throw new \InvalidArgumentException('Timeout must be greater or equal to 1');
+        }
         $this->timeout  = $timeout;
     }
 }
