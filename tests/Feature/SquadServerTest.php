@@ -46,9 +46,9 @@ class SquadServerTest extends \DSG\SquadRCON\Tests\TestCase {
      */
     public function test_list_players()
     {
-        $playerList = $this->squadServer->listPlayers();
+        $players = $this->squadServer->listPlayers();
 
-        $this->assertCount(77, $playerList);
+        $this->assertCount(77, $players);
     }
 
     /**
@@ -131,9 +131,12 @@ class SquadServerTest extends \DSG\SquadRCON\Tests\TestCase {
         $squadCount = 0;
         $playerCount = 0;
 
+        $players = [];
+
         foreach ($teams as $team) {
             $squadCount += count($team->getSquads());
 
+            $players = array_merge($players, $team->getPlayers());
             $teamPlayerCount = count($team->getPlayers());
             foreach ($team->getSquads() as $squad) {
                 $teamPlayerCount += count($squad->getPlayers());
@@ -144,10 +147,34 @@ class SquadServerTest extends \DSG\SquadRCON\Tests\TestCase {
                 $this->assertSame('United States Army', $team->getName());
                 $this->assertCount(8, $team->getSquads());
                 $this->assertSame(38, $teamPlayerCount);
+
+                foreach ($team->getSquads() as $squad) {
+                    $players = array_merge($players, $squad->getPlayers());
+
+                    if ($squad->getId() === 3) {
+                        $this->assertSame('CMD Squad', $squad->getName());
+                        $this->assertSame(9, $squad->getSize());
+                        $this->assertFalse(false, $squad->isLocked());
+                        $this->assertSame($team->getId(), $squad->getTeam()->getId());
+
+                        /** @var \DSG\SquadRCON\Data\Player $player */
+                        foreach ($squad->getPlayers() as $player) {
+                            if ($player->getId() === 53) {
+                                $this->assertSame('76561198202943394', $player->getSteamId());
+                                $this->assertSame('[1JGKP]Bud-Muecke (YT)', $player->getName());
+                                $this->assertSame($squad->getId(), $player->getSquad()->getId());
+                            }
+                        }
+                    }
+                }
             } else {
                 $this->assertSame('Russian Ground Forces', $team->getName());
                 $this->assertCount(10, $team->getSquads());
                 $this->assertSame(39, $teamPlayerCount);
+
+                foreach ($team->getSquads() as $squad) {
+                    $players = array_merge($players, $squad->getPlayers());
+                }
             }
         }
         
@@ -216,6 +243,16 @@ class SquadServerTest extends \DSG\SquadRCON\Tests\TestCase {
     }
 
     /**
+     * Verifies the admin set max num players command does work properly
+     * 
+     * @return void
+     */
+    public function test_admin_set_password()
+    {
+        $this->assertTrue($this->squadServer->setPassword('secret'));
+    }
+
+    /**
      * Verifies the kick command does work properly
      * 
      * @return void
@@ -252,6 +289,6 @@ class SquadServerTest extends \DSG\SquadRCON\Tests\TestCase {
      */
     public function test_admin_ban_by_id()
     {
-        $this->assertTrue($this->squadServer->ban(1, '1h', 'Test'));
+        $this->assertTrue($this->squadServer->banById(1, '1h', 'Test'));
     }
 }
