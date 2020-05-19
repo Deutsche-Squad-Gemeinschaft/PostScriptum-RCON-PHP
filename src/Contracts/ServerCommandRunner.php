@@ -36,6 +36,50 @@ interface ServerCommandRunner {
     public function listDisconnectedPlayers() : string;
 
     /**
+     * AdmiNkick command.
+     * Kick a Player by Name or Steam64ID
+     * 
+     * @param string $nameOrSteamId
+     * @param string $reason
+     * @return bool
+     * @throws \DSG\SquadRCON\Exceptions\RConException
+     */
+    function adminKick(string $nameOrSteamId, string $reason = '') : bool;
+
+    /**
+     * AdminKickById command.
+     * Broadcasts the given message on the server.
+     * 
+     * @param int $id
+     * @param string $reason
+     * @return bool
+     * @throws \DSG\SquadRCON\Exceptions\RConException
+     */
+    public function adminKickById(int $id, string $reason = '') : bool;
+
+    /**
+     * AdminBan command.
+     * Bans the given Player from the Server.
+     * 
+     * @param string $msg
+     * @param string $reason
+     * @return bool
+     * @throws \DSG\SquadRCON\Exceptions\RConException
+     */
+    public function adminBan(string $nameOrSteamId, string $duration = '1d', string $reason = '') : bool;
+
+    /**
+     * AdminBanById command.
+     * Bans the given Player from the Server.
+     * 
+     * @param int $id
+     * @param string $reason
+     * @return bool
+     * @throws \DSG\SquadRCON\Exceptions\RConException
+     */
+    public function adminBanById(int $id, string $duration = '1d', string $reason = '') : bool;
+
+    /**
      * ShowNextMap command.
      * Gets the current and next map.
      * 

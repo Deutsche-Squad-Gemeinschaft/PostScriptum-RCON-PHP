@@ -41,7 +41,7 @@ class SquadCommandRunner implements ServerCommandRunner {
      */
     public function listSquads() : string
     {
-        return $this->sourceQuery->Rcon("ListSquads");
+        return $this->sourceQuery->Rcon('ListSquads');
     }
 
     /**
@@ -56,7 +56,7 @@ class SquadCommandRunner implements ServerCommandRunner {
     public function listPlayers() : string
     {
         /* Execute the ListPlayers command and get the response */
-        return $this->sourceQuery->Rcon("ListPlayers");
+        return $this->sourceQuery->Rcon('ListPlayers');
     }
 
     /**
@@ -68,7 +68,63 @@ class SquadCommandRunner implements ServerCommandRunner {
      */
     public function listDisconnectedPlayers() : string
     {
-        return $this->sourceQuery->Rcon("AdminListDisconnectedPlayers");
+        return $this->sourceQuery->Rcon('AdminListDisconnectedPlayers');
+    }
+
+    /**
+     * AdmiNkick command.
+     * Kick a Player by Name or Steam64ID
+     * 
+     * @param string $nameOrSteamId
+     * @param string $reason
+     * @return bool
+     * @throws \DSG\SquadRCON\Exceptions\RConException
+     */
+    function adminKick(string $nameOrSteamId, string $reason = '') : bool
+    {
+        return $this->_consoleCommand('AdminKick', $nameOrSteamId . ' ' . $reason, 'Kicked player ');
+    }
+
+    /**
+     * AdminKickById command.
+     * Broadcasts the given message on the server.
+     * 
+     * @param int $id
+     * @param string $reason
+     * @return bool
+     * @throws \DSG\SquadRCON\Exceptions\RConException
+     */
+    public function adminKickById(int $id, string $reason = '') : bool
+    {
+        return $this->_consoleCommand('AdminKickById', $id . ' ' . $reason, 'Kicked player ');
+    }
+
+    /**
+     * AdminBan command.
+     * Bans the given Player from the Server.
+     * 
+     * @param string $msg
+     * @param string $reason
+     * @return bool
+     * @throws \DSG\SquadRCON\Exceptions\RConException
+     */
+    public function adminBan(string $nameOrSteamId, string $duration = '1d', string $reason = '') : bool
+    {
+        return $this->_consoleCommand('AdminBan', $nameOrSteamId . ' ' . $duration . ' ' . $reason, 'Banned player ');
+    }
+
+    /**
+     * AdminBanById command.
+     * Bans the given Player from the Server.
+     * 
+     * @param int $id
+     * @param string $reason
+     * @return bool
+     * @throws \DSG\SquadRCON\Exceptions\RConException
+     */
+    public function adminBanById(int $id, string $duration = '1d', string $reason = '') : bool
+    {
+        return $this->_consoleCommand('AdminBanById', $id . ' ' . $duration . ' ' . $reason, 'Banned player ');
     }
 
     /**
@@ -80,7 +136,7 @@ class SquadCommandRunner implements ServerCommandRunner {
      */
     public function showNextMap() : string
     {
-        return $this->sourceQuery->Rcon("ShowNextMap");
+        return $this->sourceQuery->Rcon('ShowNextMap');
     }
 
     /**

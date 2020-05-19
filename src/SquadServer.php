@@ -206,6 +206,62 @@ class SquadServer
     }
 
     /**
+     * AdminBroadcast command.
+     * Broadcasts the given message on the server.
+     * 
+     * @param string $msg
+     * @param string $reason
+     * @return bool
+     * @throws \DSG\SquadRCON\Exceptions\RConException
+     */
+    public function kick(string $nameOrSteamId, string $reason = '') : bool
+    {
+        return $this->runner->adminKick($nameOrSteamId, $reason);
+    }
+
+    /**
+     * AdminKickById command.
+     * Broadcasts the given message on the server.
+     * 
+     * @param int $id
+     * @param string $reason
+     * @return bool
+     * @throws \DSG\SquadRCON\Exceptions\RConException
+     */
+    public function kickById(int $id, string $reason = '') : bool
+    {
+        return $this->runner->adminKickById($id, $reason);
+    }
+
+    /**
+     * AdminBan command.
+     * Bans the given Player from the Server.
+     * 
+     * @param string $msg
+     * @param string $reason
+     * @return bool
+     * @throws \DSG\SquadRCON\Exceptions\RConException
+     */
+    public function ban(string $nameOrSteamId, string $duration = '1d', string $reason = '') : bool
+    {
+        return $this->runner->adminBan($nameOrSteamId, $duration, $reason);
+    }
+
+    /**
+     * AdminBanById command.
+     * Bans the given Player from the Server.
+     * 
+     * @param int $id
+     * @param string $reason
+     * @return bool
+     * @throws \DSG\SquadRCON\Exceptions\RConException
+     */
+    public function banById(int $id, string $duration = '1d', string $reason = '') : bool
+    {
+        return $this->runner->adminBanById($id, $duration, $reason);
+    }
+
+    /**
      * Gets the current map using the ShowNextMap command.
      * 
      * @return string

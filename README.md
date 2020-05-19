@@ -38,11 +38,12 @@ The code will then be available under the `DSG\SquadRCON` namespace.
 
 * [x] ListPlayers
 * [x] ListSquads
+* [x] AdminListDisconnectedPlayers
 * [x] ShowNextMap
-* [ ] AdminKick "\<NameOrSteamId\>" \<KickReason\>
-* [ ] AdminKickById \<PlayerId\> \<KickReason\>
-* [ ] AdminBan "\<NameOrSteamId\>" "\<BanLength\>" \<BanReason\>
-* [ ] AdminBanById \<PlayerId\> "\<BanLength\>" \<BanReason\>
+* [x] AdminKick "\<NameOrSteamId\>" \<KickReason\>
+* [x] AdminKickById \<PlayerId\> \<KickReason\>
+* [x] AdminBan "\<NameOrSteamId\>" "\<BanLength\>" \<BanReason\>
+* [x] AdminBanById \<PlayerId\> "\<BanLength\>" \<BanReason\>
 * [x] AdminBroadcast \<Message\>
 * [x] AdminRestartMatch
 * [x] AdminEndMatch
@@ -50,13 +51,12 @@ The code will then be available under the `DSG\SquadRCON` namespace.
 * [x] AdminSetNextMap \<MapName\>
 * [x] AdminSetMaxNumPlayers \<NumPlayers\>
 * [x] AdminSetServerPassword \<Password\>
-* [x] AdminListDisconnectedPlayers
 
 ## USAGE
 
-### Create instance
+### Create an instance
 ```php
-$server = new SquadServer(new ServerConnectionInfo('server.squad-slovenia.com', 21114, 'verySecretPassword'));
+$server = new SquadServer(new ServerConnectionInfo('127.0.0.1', 21114, 'YourRconPassword'));
 ```
 
 ### Get current server population (Teams, Squads, Players)
@@ -69,9 +69,26 @@ $players = $server->serverPopulation();
 $players = $server->listPlayers();
 ```
 
+### Get disconnected players
+```php
+$players = $server->listDisconnectedPlayers();
+```
+
 ### Get currently active squads (and teams)
 ```php
 $players = $server->listSquads();
+```
+
+### Kick a player
+```php
+$success = $server->kick('76561197960287930', '1h', 'Reason');
+$success = $server->kickById($player->getId()', '1h', 'Reason');
+```
+
+### Ban a player
+```php
+$success = $server->ban('76561197960287930', '1h', 'Reason');
+$success = $server->banById($player->getId()', '1h', 'Reason');
 ```
 
 ### Get the current map
@@ -86,25 +103,35 @@ $map = $server->nextMap();
 
 ### Restart the current match
 ```php
-$map = $server->restartMatch();
+$success = $server->restartMatch();
 ```
 
 ### End the current match
 ```php
-$map = $server->endMatch();
+$success = $server->endMatch();
 ```
 
 ### Broadcast message to all players on the server
 ```php
-$server->broadcastMessage('Hello from the other side');
+$success = $server->broadcastMessage('Hello from the other side');
 ```
 
 ### Change map (end current game)
 ```php
-$server->changeMap('Sumari AAS v1');
+$success = $server->changeMap('Sumari AAS v1');
 ```
 
 ### Set next map
 ```php
-$server->nextMap('Sumari AAS v1');
+$success = $server->nextMap('Sumari AAS v1');
+```
+
+### Set the maximum amount of players / slots
+```php
+$success = $server->setSlots(80);
+```
+
+### Set the server password
+```php
+$success = $server->setPassword('secret');
 ```

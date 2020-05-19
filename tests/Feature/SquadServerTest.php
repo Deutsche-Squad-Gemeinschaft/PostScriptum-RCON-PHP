@@ -214,4 +214,44 @@ class SquadServerTest extends \DSG\SquadRCON\Tests\TestCase {
     {
         $this->assertTrue($this->squadServer->setSlots(78));
     }
+
+    /**
+     * Verifies the kick command does work properly
+     * 
+     * @return void
+     */
+    public function test_admin_kick()
+    {
+        $this->assertTrue($this->squadServer->kick('Marcel', 'Test'));
+    }
+
+    /**
+     * Verifies the kick by id command does work properly
+     * 
+     * @return void
+     */
+    public function test_admin_kick_by_id()
+    {
+        $this->assertTrue($this->squadServer->kickById(1, 'Test'));
+    }
+
+    /**
+     * Verifies the ban command does work properly
+     * 
+     * @return void
+     */
+    public function test_admin_ban()
+    {
+        $this->assertTrue($this->squadServer->ban('Marcel', '1h', 'Test'));
+    }
+
+    /**
+     * Verifies the ban by id command does work properly
+     * 
+     * @return void
+     */
+    public function test_admin_ban_by_id()
+    {
+        $this->assertTrue($this->squadServer->ban(1, '1h', 'Test'));
+    }
 }
