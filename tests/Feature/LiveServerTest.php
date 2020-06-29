@@ -5,7 +5,7 @@ namespace DSG\SquadRCON\Tests\Feature;
 use DSG\SquadRCON\Data\ServerConnectionInfo;
 use DSG\SquadRCON\SquadServer;
 
-class LiveServerTestXPaw extends \DSG\SquadRCON\Tests\TestCase {
+class LiveServerTest extends \DSG\SquadRCON\Tests\TestCase {
     private SquadServer $squadServer;
 
     /**
