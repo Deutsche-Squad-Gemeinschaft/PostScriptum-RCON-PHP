@@ -5,6 +5,7 @@ namespace DSG\SquadRCON\Runners;
 use DSG\SquadRCON\BrozowskiSquadRcon;
 use DSG\SquadRCON\Contracts\ServerCommandRunner;
 use DSG\SquadRCON\Data\ServerConnectionInfo;
+use DSG\SquadRCON\RCon\BrozowskiSquadRcon as RConBrozowskiSquadRcon;
 
 class BrozowskiRconRunner implements ServerCommandRunner {
     /** @var BrozowskiSquadRcon */
@@ -21,7 +22,7 @@ class BrozowskiRconRunner implements ServerCommandRunner {
     public function __construct(ServerConnectionInfo $info)
     {
         /* Initialize the Query class */
-        $this->rcon = new BrozowskiSquadRcon($info->host, $info->port, $info->password, $info->timeout);
+        $this->rcon = new RConBrozowskiSquadRcon($info->host, $info->port, $info->password, $info->timeout);
     }
     
     /**
