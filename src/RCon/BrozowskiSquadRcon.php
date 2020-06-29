@@ -148,7 +148,7 @@ class BrozowskiSquadRcon
     /**
      * Reads received packages from the server.
      */
-    private function read() : ?string
+    private function read() : ?array
     {
         /** @var array $ret */
         $ret = [];

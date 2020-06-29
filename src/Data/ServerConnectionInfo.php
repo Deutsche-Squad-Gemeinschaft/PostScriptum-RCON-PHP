@@ -33,7 +33,7 @@ class ServerConnectionInfo {
      */
     public int $timeout;
 
-    function __construct(string $host, int $port, string $password, int $timeout = ServerConnectionInfo::SQUAD_SOCKET_TIMEOUT_SECONDS)
+    function __construct(string $host, int $port, string $password, int $timeout = self::SQUAD_SOCKET_TIMEOUT_SECONDS)
     {
         $this->host     = $host;
         $this->port     = $port;
