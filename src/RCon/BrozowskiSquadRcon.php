@@ -70,6 +70,11 @@ class BrozowskiSquadRcon
         $this->disconnect();
     }
 
+    /**
+     * Closes and disconnects the current socket.
+     *
+     * @return void
+     */
     public function disconnect() : void
     {
         if ($this->socket) {

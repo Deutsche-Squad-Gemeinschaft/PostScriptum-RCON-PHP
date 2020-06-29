@@ -7,8 +7,7 @@ use DSG\SquadRCON\Data\ServerConnectionInfo;
 use xPaw\SourceQuery\SourceQuery;
 
 class xPawRconRunner implements ServerCommandRunner {
-    /** @var SourceQuery */
-    private $sourceQuery;
+    private SourceQuery $sourceQuery;
 
     /**
      * SquadServer constructor.
