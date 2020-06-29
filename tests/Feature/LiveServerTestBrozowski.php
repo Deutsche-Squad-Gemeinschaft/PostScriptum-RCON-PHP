@@ -3,10 +3,10 @@
 namespace DSG\SquadRCON\Tests\Feature;
 
 use DSG\SquadRCON\Data\ServerConnectionInfo;
+use DSG\SquadRCON\Runners\BrozowskiRconRunner;
 use DSG\SquadRCON\SquadServer;
-use DSG\SquadRCON\Tests\Runners\TestingCommandRunner;
 
-class LiveSquadServerTest extends \DSG\SquadRCON\Tests\TestCase {
+class LiveServerTestBrozowski extends \DSG\SquadRCON\Tests\TestCase {
     private SquadServer $squadServer;
 
     /**
@@ -16,7 +16,9 @@ class LiveSquadServerTest extends \DSG\SquadRCON\Tests\TestCase {
     {
         parent::setUp();
 
-        $this->squadServer = new SquadServer(new ServerConnectionInfo('squad-server', 21114, 'secret'));
+        $info = new ServerConnectionInfo('squad-server', 21114, 'secret');
+
+        $this->squadServer = new SquadServer(new ServerConnectionInfo('squad-server', 21114, 'secret'), new BrozowskiRconRunner($info));
     }
 
     /**

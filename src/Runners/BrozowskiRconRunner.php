@@ -2,13 +2,13 @@
 
 namespace DSG\SquadRCON\Runners;
 
+use DSG\SquadRCON\BrozowskiSquadRcon;
 use DSG\SquadRCON\Contracts\ServerCommandRunner;
 use DSG\SquadRCON\Data\ServerConnectionInfo;
-use xPaw\SourceQuery\SourceQuery;
 
-class SquadCommandRunner implements ServerCommandRunner {
-    /** @var SourceQuery */
-    private $sourceQuery;
+class BrozowskiRconRunner implements ServerCommandRunner {
+    /** @var BrozowskiSquadRcon */
+    private $rcon;
 
     /**
      * SquadServer constructor.
@@ -21,13 +21,7 @@ class SquadCommandRunner implements ServerCommandRunner {
     public function __construct(ServerConnectionInfo $info)
     {
         /* Initialize the Query class */
-        $this->sourceQuery = new SourceQuery();
-
-        /* Connect to the Server */
-        $this->sourceQuery->Connect($info->host, $info->port, $info->timeout);
-
-        /* Set the RCON password */
-        $this->sourceQuery->SetRconPassword($info->password);
+        $this->rcon = new BrozowskiSquadRcon($info->host, $info->port, $info->password, $info->timeout);
     }
     
     /**
@@ -41,7 +35,7 @@ class SquadCommandRunner implements ServerCommandRunner {
      */
     public function listSquads() : string
     {
-        return $this->sourceQuery->Rcon('ListSquads');
+        return $this->rcon->rcon('ListSquads');
     }
 
     /**
@@ -56,7 +50,7 @@ class SquadCommandRunner implements ServerCommandRunner {
     public function listPlayers() : string
     {
         /* Execute the ListPlayers command and get the response */
-        return $this->sourceQuery->Rcon('ListPlayers');
+        return $this->rcon->rcon('ListPlayers');
     }
 
     /**
@@ -68,7 +62,7 @@ class SquadCommandRunner implements ServerCommandRunner {
      */
     public function listDisconnectedPlayers() : string
     {
-        return $this->sourceQuery->Rcon('AdminListDisconnectedPlayers');
+        return $this->rcon->rcon('AdminListDisconnectedPlayers');
     }
 
     /**
@@ -136,7 +130,7 @@ class SquadCommandRunner implements ServerCommandRunner {
      */
     public function showNextMap() : string
     {
-        return $this->sourceQuery->Rcon('ShowNextMap');
+        return $this->rcon->rcon('ShowNextMap');
     }
 
     /**
@@ -237,7 +231,7 @@ class SquadCommandRunner implements ServerCommandRunner {
      */
     private function _consoleCommand(string $cmd, string $param, string $expected) : bool
     {
-        $response = $this->sourceQuery->Rcon($cmd . ' ' . $param);
+        $response = $this->rcon->rcon($cmd . ' ' . $param);
         return substr($response, 0, strlen($expected)) == $expected;
     }
 
@@ -248,8 +242,8 @@ class SquadCommandRunner implements ServerCommandRunner {
      */
     function disconnect() : void
     {
-        if ($this->sourceQuery) {
-            $this->sourceQuery->Disconnect();
+        if ($this->rcon) {
+            $this->rcon->Disconnect();
         }
     }
 }

@@ -7,8 +7,7 @@ use DSG\SquadRCON\Data\Team;
 use DSG\SquadRCON\Data\Squad;
 use DSG\SquadRCON\Data\Player;
 use DSG\SquadRCON\Data\ServerConnectionInfo;
-use DSG\SquadRCON\Runners\SquadCommandRunner;
-use DSG\SquadRCON\Services\RCon;
+use DSG\SquadRCON\Runners\xPawRconRunner;
 
 class SquadServer
 {
@@ -29,7 +28,7 @@ class SquadServer
     {
         /* Initialize the default Runner if none is specified */
         if (!$runner) {
-            $runner = new SquadCommandRunner($serverConnectionInfo);
+            $runner = new xPawRconRunner($serverConnectionInfo);
         }
 
         $this->runner = $runner;
