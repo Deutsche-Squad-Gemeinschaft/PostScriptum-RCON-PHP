@@ -12,7 +12,6 @@ class SQSloveniaSquadRcon
 {
     const SERVERDATA_EXECCOMMAND = 2;
     const SERVERDATA_AUTH = 3;
-    const SOCKET_TIMEOUT_SECONDS = 2.5;
 
     /**
      * The password for the RCon connection.
@@ -39,20 +38,18 @@ class SQSloveniaSquadRcon
     /**
      * @throws RConException
      */
-    public function __construct(string $host, int $port, string $password, float $timeout = self::SOCKET_TIMEOUT_SECONDS)
+    public function __construct(string $host, int $port, string $password, int $timeout = 3)
     {
         $this->passsword = $password;
 
         /* Connect to the Server */
-        $this->socket = @fsockopen($host, $port, $errno, $errstr, 30);
-        if ($this->socket === false) {
+        $this->socket = @fsockopen($host, $port, $errno, $errstr, $timeout);
+        if ($errno || !$this->socket) {
             throw new RConException("Unable to open socket: $errstr ($errno)");
         }
 
-        /* Set the timeout */
-        $secs = intval($timeout);
-        $milis = is_float($timeout) ? ($timeout - $secs) * 1000000 : 0;
-        stream_set_timeout($this->socket, $secs, $milis);
+        stream_set_timeout($this->socket, $timeout);
+        stream_Set_Blocking($this->socket, true);
     }
 
     public function __destruct()

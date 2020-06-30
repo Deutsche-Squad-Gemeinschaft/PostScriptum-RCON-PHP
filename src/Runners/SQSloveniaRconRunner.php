@@ -11,10 +11,7 @@ class SQSloveniaRconRunner implements ServerCommandRunner {
 
     /**
      * SquadServer constructor.
-     * @param $host
-     * @param $port
-     * @param $password
-     * @param float $timeout
+     * @param ServerConnectionInfo $info
      * @throws \DSG\SquadRCON\Exceptions\RConException
      */
     public function __construct(ServerConnectionInfo $info)
