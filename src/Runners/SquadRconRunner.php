@@ -4,10 +4,10 @@ namespace DSG\SquadRCON\Runners;
 
 use DSG\SquadRCON\Contracts\ServerCommandRunner;
 use DSG\SquadRCON\Data\ServerConnectionInfo;
-use DSG\SquadRCON\RCon\SQSloveniaSquadRcon;
+use xPaw\SourceQuery\SourceQuery;
 
-class SQSloveniaRconRunner implements ServerCommandRunner {
-    private SQSloveniaSquadRcon $rcon;
+class SquadRconRunner implements ServerCommandRunner {
+    private SourceQuery $sourceQuery;
 
     /**
      * SquadServer constructor.
@@ -17,7 +17,13 @@ class SQSloveniaRconRunner implements ServerCommandRunner {
     public function __construct(ServerConnectionInfo $info)
     {
         /* Initialize the Query class */
-        $this->rcon = new SQSloveniaSquadRcon($info->host, $info->port, $info->password, $info->timeout);
+        $this->sourceQuery = new SourceQuery();
+
+        /* Connect to the server */
+        $this->sourceQuery->Connect($info->host, $info->port, $info->timeout, SourceQuery::SQUAD);
+
+        /* Authenticated with rcon password */
+        $this->sourceQuery->SetRconPassword($info->password);
     }
     
     /**
@@ -31,7 +37,7 @@ class SQSloveniaRconRunner implements ServerCommandRunner {
      */
     public function listSquads() : string
     {
-        return $this->rcon->rcon('ListSquads');
+        return $this->sourceQuery->Rcon('ListSquads');
     }
 
     /**
@@ -46,7 +52,7 @@ class SQSloveniaRconRunner implements ServerCommandRunner {
     public function listPlayers() : string
     {
         /* Execute the ListPlayers command and get the response */
-        return $this->rcon->rcon('ListPlayers');
+        return $this->sourceQuery->Rcon('ListPlayers');
     }
 
     /**
@@ -58,7 +64,7 @@ class SQSloveniaRconRunner implements ServerCommandRunner {
      */
     public function listDisconnectedPlayers() : string
     {
-        return $this->rcon->rcon('AdminListDisconnectedPlayers');
+        return $this->sourceQuery->Rcon('AdminListDisconnectedPlayers');
     }
 
     /**
@@ -70,7 +76,7 @@ class SQSloveniaRconRunner implements ServerCommandRunner {
      * @return bool
      * @throws \DSG\SquadRCON\Exceptions\RConException
      */
-    function adminKick(string $nameOrSteamId, string $reason = '') : bool
+    public function adminKick(string $nameOrSteamId, string $reason = '') : bool
     {
         return $this->_consoleCommand('AdminKick', $nameOrSteamId . ' ' . $reason, 'Kicked player ');
     }
@@ -126,7 +132,7 @@ class SQSloveniaRconRunner implements ServerCommandRunner {
      */
     public function showNextMap() : string
     {
-        return $this->rcon->rcon('ShowNextMap');
+        return $this->sourceQuery->Rcon('ShowNextMap');
     }
 
     /**
@@ -148,7 +154,7 @@ class SQSloveniaRconRunner implements ServerCommandRunner {
      *
      * @return boolean
      */
-    function adminRestartMatch() : bool
+    public function adminRestartMatch() : bool
     {
         return $this->_consoleCommand('AdminRestartMatch', '', 'Game restarted');
     }
@@ -159,7 +165,7 @@ class SQSloveniaRconRunner implements ServerCommandRunner {
      *
      * @return boolean
      */
-    function adminEndMatch() : bool
+    public function adminEndMatch() : bool
     {
         return $this->_consoleCommand('AdminEndMatch', '', 'Match ended');
     }
@@ -172,7 +178,7 @@ class SQSloveniaRconRunner implements ServerCommandRunner {
      * @return boolean
      * @throws \DSG\SquadRCON\Exceptions\RConException
      */
-    function adminSetMaxNumPlayers(int $slots) : bool
+    public function adminSetMaxNumPlayers(int $slots) : bool
     {
         return $this->_consoleCommand('AdminSetMaxNumPlayers', $slots, 'Set MaxNumPlayers to ' . $slots);
     }
@@ -185,7 +191,7 @@ class SQSloveniaRconRunner implements ServerCommandRunner {
      * @return boolean
      * @throws \DSG\SquadRCON\Exceptions\RConException
      */
-    function adminSetServerPassword(string $password) : bool
+    public function adminSetServerPassword(string $password) : bool
     {
         return $this->_consoleCommand('AdminSetServerPassword', $password, 'Set server password to ' . $password);
     }
@@ -227,7 +233,7 @@ class SQSloveniaRconRunner implements ServerCommandRunner {
      */
     private function _consoleCommand(string $cmd, string $param, string $expected) : bool
     {
-        $response = $this->rcon->rcon($cmd . ' ' . $param);
+        $response = $this->sourceQuery->Rcon($cmd . ' ' . $param);
         return substr($response, 0, strlen($expected)) == $expected;
     }
 
@@ -236,10 +242,10 @@ class SQSloveniaRconRunner implements ServerCommandRunner {
      *
      * @return void
      */
-    function disconnect() : void
+    public function disconnect() : void
     {
-        if ($this->rcon) {
-            $this->rcon->disconnect();
+        if ($this->sourceQuery) {
+            $this->sourceQuery->disconnect();
         }
     }
 }

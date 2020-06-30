@@ -12,7 +12,7 @@ interface ServerCommandRunner {
      * @return Team[]
      * @throws \DSG\SquadRCON\Exceptions\RConException
      */
-    function listSquads() : string;
+    public function listSquads() : string;
 
     /**
      * ListPlayers command, returns an array
@@ -24,7 +24,7 @@ interface ServerCommandRunner {
      * @return Player[]
      * @throws \DSG\SquadRCON\Exceptions\RConException
      */
-    function listPlayers() : string;
+    public function listPlayers() : string;
 
     /**
      * ListDisconnectedPlayers command, returns an array
@@ -44,7 +44,7 @@ interface ServerCommandRunner {
      * @return bool
      * @throws \DSG\SquadRCON\Exceptions\RConException
      */
-    function adminKick(string $nameOrSteamId, string $reason = '') : bool;
+    public function adminKick(string $nameOrSteamId, string $reason = '') : bool;
 
     /**
      * AdminKickById command.
@@ -86,7 +86,7 @@ interface ServerCommandRunner {
      * @return array
      * @throws \DSG\SquadRCON\Exceptions\RConException
      */
-    function showNextMap() : string;
+    public function showNextMap() : string;
 
     /**
      * AdminBroadcast command.
@@ -96,7 +96,7 @@ interface ServerCommandRunner {
      * @return bool
      * @throws \DSG\SquadRCON\Exceptions\RConException
      */
-    function adminBroadcast(string $msg) : bool;
+    public function adminBroadcast(string $msg) : bool;
 
     /**
      * ChatToAdmin command.
@@ -104,7 +104,7 @@ interface ServerCommandRunner {
      *
      * @return boolean
      */
-    function adminRestartMatch() : bool;
+    public function adminRestartMatch() : bool;
 
     /**
      * AdminEndMatch command.
@@ -112,7 +112,7 @@ interface ServerCommandRunner {
      *
      * @return boolean
      */
-    function adminEndMatch() : bool;
+    public function adminEndMatch() : bool;
 
     /**
      * AdminSetMaxNumPlayers command.
@@ -122,7 +122,7 @@ interface ServerCommandRunner {
      * @return boolean
      * @throws \DSG\SquadRCON\Exceptions\RConException
      */
-    function adminSetMaxNumPlayers(int $slots) : bool;
+    public function adminSetMaxNumPlayers(int $slots) : bool;
 
     /**
      * AdminSetServerPassword command.
@@ -132,7 +132,7 @@ interface ServerCommandRunner {
      * @return boolean
      * @throws \DSG\SquadRCON\Exceptions\RConException
      */
-    function adminSetServerPassword(string $password) : bool;
+    public function adminSetServerPassword(string $password) : bool;
 
     /**
      * AdminChangeMap command
@@ -141,7 +141,7 @@ interface ServerCommandRunner {
      * @return bool
      * @throws \DSG\SquadRCON\Exceptions\RConException
      */
-    function adminChangeMap(string $map) : bool;
+    public function adminChangeMap(string $map) : bool;
 
     /**
      * AdminSetNextMap command.
@@ -152,12 +152,12 @@ interface ServerCommandRunner {
      * @return bool
      * @throws \DSG\SquadRCON\Exceptions\RConException
      */
-    function adminSetNextMap(string $map) : bool;
+    public function adminSetNextMap(string $map) : bool;
 
     /**
      * Disconnects the runner from any squad server instance.
      *
      * @return void
      */
-    function disconnect() : void;
+    public function disconnect() : void;
 }
