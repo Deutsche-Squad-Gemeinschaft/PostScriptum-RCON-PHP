@@ -68,6 +68,8 @@ class SQSloveniaSquadRcon
             fclose($this->socket);
             unset($this->socket);
         }
+
+        $this->id = 0;
     }
 
     /**
