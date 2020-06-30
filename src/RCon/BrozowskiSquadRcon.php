@@ -15,16 +15,6 @@ class BrozowskiSquadRcon
     const SOCKET_TIMEOUT_SECONDS = 2.5;
 
     /**
-     * Host of the RCon endpoint.
-     */
-    private string $host;
-
-    /**
-     * Port of the RCon endpoint.
-     */
-    private int $port = 27015;
-
-    /**
      * The password for the RCon connection.
      */
     private string $passsword;
