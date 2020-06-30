@@ -78,10 +78,8 @@ class BrozowskiSquadRcon
     public function disconnect() : void
     {
         if ($this->socket) {
-            if (is_resource($this->socket)) {
-                fclose($this->socket);
-            }
-            $this->socket = null;
+            fclose($this->socket);
+            unset($this->socket);
         }
     }
 
