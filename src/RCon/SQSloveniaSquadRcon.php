@@ -6,9 +6,9 @@ use DSG\SquadRCON\Exceptions\RConException;
 
 /**
  * Squad RCon implementation by 
- * https://github.com/Brozowski
+ * https://github.com/SquadSlovenia/squad-rcon-php
  */
-class BrozowskiSquadRcon
+class SQSloveniaSquadRcon
 {
     const SERVERDATA_EXECCOMMAND = 2;
     const SERVERDATA_AUTH = 3;

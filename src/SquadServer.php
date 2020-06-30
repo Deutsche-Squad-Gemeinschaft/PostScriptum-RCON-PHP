@@ -7,7 +7,7 @@ use DSG\SquadRCON\Data\Team;
 use DSG\SquadRCON\Data\Squad;
 use DSG\SquadRCON\Data\Player;
 use DSG\SquadRCON\Data\ServerConnectionInfo;
-use DSG\SquadRCON\Runners\BrozowskiRconRunner;
+use DSG\SquadRCON\Runners\SQSloveniaRconRunner;
 
 class SquadServer
 {
@@ -28,7 +28,7 @@ class SquadServer
     {
         /* Initialize the default Runner if none is specified */
         if (!$runner) {
-            $runner = new BrozowskiRconRunner($serverConnectionInfo);
+            $runner = new SQSloveniaRconRunner($serverConnectionInfo);
         }
 
         $this->runner = $runner;
