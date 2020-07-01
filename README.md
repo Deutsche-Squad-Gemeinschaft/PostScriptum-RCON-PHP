@@ -135,3 +135,17 @@ $success = $server->setSlots(80);
 ```php
 $success = $server->setPassword('secret');
 ```
+
+## Important Note
+Make sure to always close the connection manually or trigger a disconnect by destructing the object to preventt blocking the RCON server by using up it'S available connections.
+```php
+$server->disconnect();
+// Or
+unset($server);
+```
+
+## Special Thanks
+* [SquadSlovenia](https://github.com/SquadSlovenia) (Intial creators)
+* [Brozowski](https://github.com/Brozowski) (Major contributor)
+* [ToG] subtlerod (Major contributions to the used SquadRcon implementation)
+* [Thomas Smyth](https://github.com/Thomas-Smyth/SquadJS) (Creator of SquadJS, a great resource for Squad RCON).
