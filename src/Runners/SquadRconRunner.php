@@ -6,16 +6,12 @@ use DSG\SquadRCON\Contracts\ServerCommandRunner;
 use DSG\SquadRCON\Data\ServerConnectionInfo;
 use xPaw\SourceQuery\SourceQuery;
 
-class SquadCommandRunner implements ServerCommandRunner {
-    /** @var SourceQuery */
-    private $sourceQuery;
+class SquadRconRunner implements ServerCommandRunner {
+    private SourceQuery $sourceQuery;
 
     /**
      * SquadServer constructor.
-     * @param $host
-     * @param $port
-     * @param $password
-     * @param float $timeout
+     * @param ServerConnectionInfo $info
      * @throws \DSG\SquadRCON\Exceptions\RConException
      */
     public function __construct(ServerConnectionInfo $info)
@@ -23,10 +19,10 @@ class SquadCommandRunner implements ServerCommandRunner {
         /* Initialize the Query class */
         $this->sourceQuery = new SourceQuery();
 
-        /* Connect to the Server */
-        $this->sourceQuery->Connect($info->host, $info->port, $info->timeout);
+        /* Connect to the server */
+        $this->sourceQuery->Connect($info->host, $info->port, $info->timeout, SourceQuery::SQUAD);
 
-        /* Set the RCON password */
+        /* Authenticated with rcon password */
         $this->sourceQuery->SetRconPassword($info->password);
     }
     
@@ -80,7 +76,7 @@ class SquadCommandRunner implements ServerCommandRunner {
      * @return bool
      * @throws \DSG\SquadRCON\Exceptions\RConException
      */
-    function adminKick(string $nameOrSteamId, string $reason = '') : bool
+    public function adminKick(string $nameOrSteamId, string $reason = '') : bool
     {
         return $this->_consoleCommand('AdminKick', $nameOrSteamId . ' ' . $reason, 'Kicked player ');
     }
@@ -158,7 +154,7 @@ class SquadCommandRunner implements ServerCommandRunner {
      *
      * @return boolean
      */
-    function adminRestartMatch() : bool
+    public function adminRestartMatch() : bool
     {
         return $this->_consoleCommand('AdminRestartMatch', '', 'Game restarted');
     }
@@ -169,7 +165,7 @@ class SquadCommandRunner implements ServerCommandRunner {
      *
      * @return boolean
      */
-    function adminEndMatch() : bool
+    public function adminEndMatch() : bool
     {
         return $this->_consoleCommand('AdminEndMatch', '', 'Match ended');
     }
@@ -182,7 +178,7 @@ class SquadCommandRunner implements ServerCommandRunner {
      * @return boolean
      * @throws \DSG\SquadRCON\Exceptions\RConException
      */
-    function adminSetMaxNumPlayers(int $slots) : bool
+    public function adminSetMaxNumPlayers(int $slots) : bool
     {
         return $this->_consoleCommand('AdminSetMaxNumPlayers', $slots, 'Set MaxNumPlayers to ' . $slots);
     }
@@ -195,7 +191,7 @@ class SquadCommandRunner implements ServerCommandRunner {
      * @return boolean
      * @throws \DSG\SquadRCON\Exceptions\RConException
      */
-    function adminSetServerPassword(string $password) : bool
+    public function adminSetServerPassword(string $password) : bool
     {
         return $this->_consoleCommand('AdminSetServerPassword', $password, 'Set server password to ' . $password);
     }
@@ -246,10 +242,10 @@ class SquadCommandRunner implements ServerCommandRunner {
      *
      * @return void
      */
-    function disconnect() : void
+    public function disconnect() : void
     {
         if ($this->sourceQuery) {
-            $this->sourceQuery->Disconnect();
+            $this->sourceQuery->disconnect();
         }
     }
 }

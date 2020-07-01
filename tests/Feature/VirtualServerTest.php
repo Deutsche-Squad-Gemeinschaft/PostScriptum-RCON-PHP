@@ -6,7 +6,7 @@ use DSG\SquadRCON\Data\ServerConnectionInfo;
 use DSG\SquadRCON\SquadServer;
 use DSG\SquadRCON\Tests\Runners\TestingCommandRunner;
 
-class SquadServerTest extends \DSG\SquadRCON\Tests\TestCase {
+class VirtualServerTest extends \DSG\SquadRCON\Tests\TestCase {
     private SquadServer $squadServer;
 
     /**
