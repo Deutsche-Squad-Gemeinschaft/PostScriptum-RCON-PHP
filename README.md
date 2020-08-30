@@ -1,6 +1,11 @@
+<p align="center">
+    <img align="center" alt="Squad RCON PHP Logo" src="https://raw.githubusercontent.com/Deutsche-Squad-Gemeinschaft/squad-rcon-php/master/logo.svg">
+</p>
 <div align="center">
-    <h1>Squad RCON PHP</h1>
-    <b>RCON PHP wrapper for Squad server management</b>
+    <h1 align="center">Squad RCON PHP</h1>
+    <p align="center">
+        <b>RCON PHP wrapper for Squad server management</b>
+    </p>
     <hr>
     <a href="https://dsg-gaming.de">
         <img alt="Deutsche Squad Gemeinschaft" src="https://raw.githubusercontent.com/Deutsche-Squad-Gemeinschaft/battlemetrics-php/master/dsg-badge.svg">
