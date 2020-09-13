@@ -123,7 +123,7 @@ $success = $server->broadcastMessage('Hello from the other side');
 
 ### Change map (end current game)
 ```php
-$success = $server->changeMap('Sumari AAS v1');
+$success = $server->adminChangeMap('Sumari AAS v1');
 ```
 
 ### Set next map
