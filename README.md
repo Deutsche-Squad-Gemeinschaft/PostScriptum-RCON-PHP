@@ -118,7 +118,7 @@ $success = $server->endMatch();
 
 ### Broadcast message to all players on the server
 ```php
-$success = $server->broadcastMessage('Hello from the other side');
+$success = $server->adminBroadcast('Hello from the other side');
 ```
 
 ### Change map (end current game)
@@ -128,7 +128,7 @@ $success = $server->adminChangeMap('Sumari AAS v1');
 
 ### Set next map
 ```php
-$success = $server->nextMap('Sumari AAS v1');
+$success = $server->adminSetNextMap('Sumari AAS v1');
 ```
 
 ### Set the maximum amount of players / slots
