@@ -290,6 +290,86 @@ class VirtualServerTest extends \DSG\SquadRCON\Tests\TestCase {
      * 
      * @return void
      */
+    public function test_squad_server_admin_slomo()
+    {
+        $this->assertTrue($this->squadServer->adminSlomo(2));
+    }
+
+    /**
+     * Verifies the disconnect method works without any exception
+     * 
+     * @return void
+     */
+    public function test_squad_server_admin_force_team_change()
+    {
+        $this->assertTrue($this->squadServer->adminForceTeamChange('Test'));
+    }
+
+    /**
+     * Verifies the disconnect method works without any exception
+     * 
+     * @return void
+     */
+    public function test_squad_server_admin_force_team_change_by_id()
+    {
+        $this->assertTrue($this->squadServer->adminForceTeamChange(0));
+    }
+
+    /**
+     * Verifies the disconnect method works without any exception
+     * 
+     * @return void
+     */
+    public function test_squad_server_admin_disband_squad()
+    {
+        $this->assertTrue($this->squadServer->adminForceTeamChange(1, 1));
+    }
+
+    /**
+     * Verifies the disconnect method works without any exception
+     * 
+     * @return void
+     */
+    public function test_squad_server_admin_remove_player_from_squad()
+    {
+        $this->assertTrue($this->squadServer->adminRemovePlayerFromSquad('Test'));
+    }
+
+    /**
+     * Verifies the disconnect method works without any exception
+     * 
+     * @return void
+     */
+    public function test_squad_server_admin_remove_player_from_squad_by_id()
+    {
+        $this->assertTrue($this->squadServer->adminRemovePlayerFromSquadById(0));
+    }
+
+    /**
+     * Verifies the disconnect method works without any exception
+     * 
+     * @return void
+     */
+    public function test_squad_server_admin_warn()
+    {
+        $this->assertTrue($this->squadServer->adminWarn('Test', 'Hello World!'));
+    }
+
+    /**
+     * Verifies the disconnect method works without any exception
+     * 
+     * @return void
+     */
+    public function test_squad_server_admin_warn_by_id()
+    {
+        $this->assertTrue($this->squadServer->adminWarnById(0, 'Hello World!'));
+    }
+
+    /**
+     * Verifies the disconnect method works without any exception
+     * 
+     * @return void
+     */
     public function test_squad_server_disconnect()
     {
         $this->assertNull($this->squadServer->disconnect());

@@ -204,6 +204,140 @@ class TestingCommandRunner implements ServerCommandRunner {
     }
 
     /**
+     * AdminSlomo command.
+     * Sets the game speed with the AdminSlomo
+     * command. Providing no parameter will set
+     * the speed to default.
+     *
+     * @param float $timeDilation
+     * @return boolean
+     * @throws \DSG\SquadRCON\Exceptions\RConException
+     */
+    public function adminSlomo(float $timeDilation = 1.0) : bool
+    {
+        return true;
+    }
+
+    /**
+     * AdminForceTeamChange command.
+     * Forces a player to the opposite team
+     * by providing the name or steamid.
+     *
+     * @param string $nameOrSteamId
+     * @return boolean
+     */
+    public function adminForceTeamChange(string $nameOrSteamId) : bool
+    {
+        return true;
+    }
+
+    /**
+     * AdminForceTeamChangeById command.
+     * Forces a player to the opposite team
+     * by providing the ingame Player id.
+     *
+     * @param integer $playerId
+     * @return boolean
+     */
+    public function adminForceTeamChangeById(int $playerId) : bool
+    {
+        return true;
+    }
+
+    /**
+     * AdminDemoteCommander command.
+     * Demotes a player from the commander slot
+     * by providing the name or steamid.
+     *
+     * @param string $playerName
+     * @return boolean
+     */
+    public function adminDemoteCommander(string $playerName) : bool
+    {
+        return true;
+    }
+
+    /**
+     * AdminDemoteCommanderById command.
+     * Demotes a player from the commander slot
+     * by providing the ingame Player id.
+     *
+     * @param integer $playerId
+     * @return boolean
+     */
+    public function adminDemoteCommanderById(int $playerId) : bool
+    {
+        return true;
+    }
+
+    /**
+     * AdminDisbandSquad command.
+     * Disbands a Squad by providing the Team id  / index & Squad id / index.
+     *
+     * @param integer $teamId
+     * @param integer $squadId
+     * @return boolean
+     */
+    public function adminDisbandSquad(int $teamId, int $squadId) : bool
+    {
+        return true;
+    }
+
+    /**
+     * AdminRemovePlayerFromSquad command.
+     * Removes a Player from his Squad by providing
+     * the Player name.
+     *
+     * @param string $playerName
+     * @return boolean
+     */
+    public function adminRemovePlayerFromSquad(string $playerName) : bool
+    {
+        return true;
+    }
+
+    /**
+     * AdminRemovePlayerFromSquadById command.
+     * Removes a player from his Squad by providing
+     * the ingame Player id.
+     *
+     * @param integer $playerId
+     * @return boolean
+     */
+    public function adminRemovePlayerFromSquadById(int $playerId) : bool
+    {
+        return true;
+    }
+
+    /**
+     * AdminWarn command.
+     * Warns a Player by providing his name / steamid
+     * and a message.
+     *
+     * @param string $nameOrSteamId
+     * @param string $warnReason
+     * @return boolean
+     */
+    public function adminWarn(string $nameOrSteamId, string $warnReason) : bool
+    {
+        return true;
+    }
+
+    /**
+     * AdminWarnById command.
+     * Warns a Player by providing his ingame Player id
+     * and a message.
+     *
+     * @param integer $playerId
+     * @param string $warnReason
+     * @return boolean
+     */
+    public function adminWarnById(int $playerId, string $warnReason) : bool
+    {
+        return true;
+    }
+
+    /**
      * Disconnects the runner from any squad server instance.
      *
      * @return void

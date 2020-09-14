@@ -408,4 +408,138 @@ class SquadServer
     {
         return $this->runner->adminSetNextMap($map);
     }
+
+    /**
+     * AdminSlomo command.
+     * Sets the game speed with the AdminSlomo
+     * command. Providing no parameter will set
+     * the speed to default.
+     *
+     * @param float $timeDilation
+     * @return boolean
+     * @throws \DSG\SquadRCON\Exceptions\RConException
+     */
+    public function adminSlomo(float $timeDilation = 1.0) : bool
+    {
+        return $this->runner->adminSlomo($timeDilation);
+    }
+
+    /**
+     * AdminForceTeamChange command.
+     * Forces a player to the opposite team
+     * by providing the name or steamid.
+     *
+     * @param string $nameOrSteamId
+     * @return boolean
+     */
+    public function adminForceTeamChange(string $nameOrSteamId) : bool
+    {
+        return $this->runner->adminForceTeamChange($nameOrSteamId);
+    }
+
+    /**
+     * AdminForceTeamChangeById command.
+     * Forces a player to the opposite team
+     * by providing the ingame Player id.
+     *
+     * @param integer $playerId
+     * @return boolean
+     */
+    public function adminForceTeamChangeById(int $playerId) : bool
+    {
+        return $this->runner->adminForceTeamChangeById($playerId);
+    }
+
+    /**
+     * AdminDemoteCommander command.
+     * Demotes a player from the commander slot
+     * by providing the name or steamid.
+     *
+     * @param string $playerName
+     * @return boolean
+     */
+    public function adminDemoteCommander(string $playerName) : bool
+    {
+        return $this->runner->adminDemoteCommander($playerName);
+    }
+
+    /**
+     * AdminDemoteCommanderById command.
+     * Demotes a player from the commander slot
+     * by providing the ingame Player id.
+     *
+     * @param integer $playerId
+     * @return boolean
+     */
+    public function adminDemoteCommanderById(int $playerId) : bool
+    {
+        return $this->runner->adminDemoteCommanderById($playerId);
+    }
+
+    /**
+     * AdminDisbandSquad command.
+     * Disbands a Squad by providing the Team id  / index & Squad id / index.
+     *
+     * @param integer $teamId
+     * @param integer $squadId
+     * @return boolean
+     */
+    public function adminDisbandSquad(int $teamId, int $squadId) : bool
+    {
+        return $this->runner->adminDisbandSquad($teamId, $squadId);
+    }
+
+    /**
+     * AdminRemovePlayerFromSquad command.
+     * Removes a Player from his Squad by providing
+     * the Player name.
+     *
+     * @param string $playerName
+     * @return boolean
+     */
+    public function adminRemovePlayerFromSquad(string $playerName) : bool
+    {
+        return $this->runner->adminRemovePlayerFromSquad($playerName);
+    }
+
+    /**
+     * AdminRemovePlayerFromSquadById command.
+     * Removes a player from his Squad by providing
+     * the ingame Player id.
+     *
+     * @param integer $playerId
+     * @return boolean
+     */
+    public function adminRemovePlayerFromSquadById(int $playerId) : bool
+    {
+        return $this->runner->adminRemovePlayerFromSquadById($playerId);
+    }
+
+    /**
+     * AdminWarn command.
+     * Warns a Player by providing his name / steamid
+     * and a message.
+     *
+     * @param string $nameOrSteamId
+     * @param string $warnReason
+     * @return boolean
+     */
+    public function adminWarn(string $nameOrSteamId, string $warnReason) : bool
+    {
+        return $this->runner->adminWarn($nameOrSteamId, $warnReason);
+    }
+
+    /**
+     * AdminWarnById command.
+     * Warns a Player by providing his ingame Player id
+     * and a message.
+     *
+     * @param integer $playerId
+     * @param string $warnReason
+     * @return boolean
+     */
+    public function adminWarnById(int $playerId, string $warnReason) : bool
+    {
+        return $this->runner->adminWarnById($playerId, $warnReason);
+    }
 }

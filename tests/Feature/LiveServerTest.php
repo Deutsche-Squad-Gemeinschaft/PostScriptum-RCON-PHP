@@ -179,6 +179,16 @@ class LiveServerTest extends \DSG\SquadRCON\Tests\TestCase {
      * 
      * @return void
      */
+    public function test_squad_server_admin_slomo()
+    {
+        $this->assertTrue($this->squadServer->adminSlomo(2));
+    }
+
+    /**
+     * Verifies the disconnect method works without any exception
+     * 
+     * @return void
+     */
     public function test_squad_server_disconnect()
     {
         $this->assertNull($this->squadServer->disconnect());
