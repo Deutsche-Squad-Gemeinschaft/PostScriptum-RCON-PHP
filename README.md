@@ -60,85 +60,163 @@ The code will then be available under the `DSG\SquadRCON` namespace.
 ## USAGE
 
 ### Create an instance
+Instanciate the SquadServer RCON connection. This will connect to the server or throw an exception if it could not do so.
 ```php
 $server = new SquadServer(new ServerConnectionInfo('127.0.0.1', 21114, 'YourRconPassword'));
 ```
 
 ### Get current server population (Teams, Squads, Players)
+Get the current population. This does use ListPlayers & ListSquads
+to get the Teams, Squads and Players properly ordered.
 ```php
 $players = $server->serverPopulation();
 ```
 
-### Get currently active players
+### ListPlayers
+Get the current Player list using the ListPlayers command.
+This does not include disconnected players.
 ```php
 $players = $server->listPlayers();
 ```
 
-### Get disconnected players
+### Get disconnected Players
+Get disconnected players using the ListPlayers command.
 ```php
 $players = $server->listDisconnectedPlayers();
 ```
 
-### Get currently active squads (and teams)
+### ListSquads
+Get currently active squads (and teams)
 ```php
 $players = $server->listSquads();
 ```
 
-### Kick a player
+### AdminKick
+Kick a player by name, SteamId or ingame id.
 ```php
-$success = $server->kick('76561197960287930', '1h', 'Reason');
-$success = $server->kickById($player->getId()', '1h', 'Reason');
+$success = $server->adminKick('76561197960287930', 'Reason');
+$success = $server->adminKickById($player->getId(), 'Reason');
 ```
 
-### Ban a player
+### AdminBan
+Ban a player by name, SteamId or ingame id.
 ```php
-$success = $server->ban('76561197960287930', '1h', 'Reason');
-$success = $server->banById($player->getId()', '1h', 'Reason');
+$success = $server->adminBan('76561197960287930', '1h', 'Reason');
+$success = $server->adminBanById($player->getId(), '1h', 'Reason');
 ```
 
 ### Get the current map
+Get the current map using the ShowNextMap command
 ```php
 $map = $server->currentMap();
 ```
 
 ### Get the next map
+Get the next map using the ShowNextMap command
 ```php
 $map = $server->nextMap();
 ```
 
-### Restart the current match
+### AdminRestartMatch
+Restart the current match
 ```php
-$success = $server->restartMatch();
+$success = $server->adminRestartMatch();
 ```
 
-### End the current match
+### AdminEndMatch
+End the current match
 ```php
-$success = $server->endMatch();
+$success = $server->adminEndMatch();
 ```
 
-### Broadcast message to all players on the server
+### AdminBroadcast
+Broadcast message to all players on the server
 ```php
 $success = $server->adminBroadcast('Hello from the other side');
 ```
 
-### Change map (end current game)
+### AdminChangeMap
+Set the next map and end the current game immediately.
 ```php
 $success = $server->adminChangeMap('Sumari AAS v1');
 ```
 
-### Set next map
+### AdminSetNextMap
+Sets next map
 ```php
 $success = $server->adminSetNextMap('Sumari AAS v1');
 ```
 
-### Set the maximum amount of players / slots
+### AdminSetMaxNumPlayers
+Set the maximum amount of players / slots
 ```php
-$success = $server->setSlots(80);
+$success = $server->adminSetMaxNumPlayers(80);
 ```
 
-### Set the server password
+### AdminSetServerPassword
+Set the server password
 ```php
-$success = $server->setPassword('secret');
+$success = $server->adminSetServerPassword('secret');
+```
+
+### AdminSlomo
+Sets the game speed with the AdminSlomo
+```php
+$success = $server->adminSlomo(float $timeDilation = 1.0);
+```
+
+### AdminForceTeamChange
+Forces a player to the opposite team by providing the name or steamid.
+```php
+$success = $server->adminForceTeamChange(string $nameOrSteamId);
+```
+
+### AdminForceTeamChangeById
+Forces a player to the opposite team by providing the ingame Player id.
+```php
+$success = $server->adminForceTeamChangeById(int $playerId);
+```
+
+### AdminDemoteCommander
+Demotes a player from the commander slot by providing the name or steamid.
+```php
+$success = $server->adminDemoteCommander(string $playerName);
+```
+
+### AdminDemoteCommanderById command.
+Demotes a player from the commander slot by providing the ingame Player id.
+```php
+$success = $server->adminDemoteCommanderById(int $playerId);
+```
+
+### AdminDisbandSquad command.
+Disbands a Squad by providing the Team id  / index & Squad id / index.
+```php
+$success = $server->adminDisbandSquad(int $teamId, int $squadId);
+```
+
+### AdminRemovePlayerFromSquad
+Removes a Player from his Squad by providing the Player name.
+```php
+$success = $server->adminRemovePlayerFromSquad(string $playerName);
+```
+
+### AdminRemovePlayerFromSquadById
+Removes a player from his Squad by providing the ingame Player id.
+```php
+$success = $server->adminRemovePlayerFromSquadById(int $playerId);
+```
+
+### AdminWarn
+Warns a Player by providing his name / steamid and a message.
+```php
+$success = $server->adminWarn(string $nameOrSteamId, string $warnReason);
+```
+
+### AdminWarnById
+Warns a Player by id.
+```php
+$success = $server->adminWarnById($player->getId(), 'Warn Reason');
 ```
 
 ## Important Note

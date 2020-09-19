@@ -223,7 +223,7 @@ class SquadServer
      * @return bool
      * @throws \DSG\SquadRCON\Exceptions\RConException
      */
-    public function kick(string $nameOrSteamId, string $reason = '') : bool
+    public function adminKick(string $nameOrSteamId, string $reason = '') : bool
     {
         return $this->runner->adminKick($nameOrSteamId, $reason);
     }
@@ -237,7 +237,7 @@ class SquadServer
      * @return bool
      * @throws \DSG\SquadRCON\Exceptions\RConException
      */
-    public function kickById(int $id, string $reason = '') : bool
+    public function adminKickById(int $id, string $reason = '') : bool
     {
         return $this->runner->adminKickById($id, $reason);
     }
@@ -251,7 +251,7 @@ class SquadServer
      * @return bool
      * @throws \DSG\SquadRCON\Exceptions\RConException
      */
-    public function ban(string $nameOrSteamId, string $duration = '1d', string $reason = '') : bool
+    public function adminBan(string $nameOrSteamId, string $duration = '1d', string $reason = '') : bool
     {
         return $this->runner->adminBan($nameOrSteamId, $duration, $reason);
     }
@@ -265,7 +265,7 @@ class SquadServer
      * @return bool
      * @throws \DSG\SquadRCON\Exceptions\RConException
      */
-    public function banById(int $id, string $duration = '1d', string $reason = '') : bool
+    public function adminBanById(int $id, string $duration = '1d', string $reason = '') : bool
     {
         return $this->runner->adminBanById($id, $duration, $reason);
     }
@@ -308,7 +308,7 @@ class SquadServer
         ];
 
         /* Run the ShowNextMap Command and get response */
-        $response = $this->runner->showNextMap("ShowNextMap");
+        $response = $this->runner->showNextMap();
 
         /* Parse response */
         $arr = explode(', Next map is ', $response);
@@ -336,12 +336,12 @@ class SquadServer
     }
 
     /**
-     * ChatToAdmin command.
+     * AdminRestartMatch command.
      * Restarts the current match.
      *
      * @return boolean
      */
-    public function restartMatch() : bool
+    public function adminRestartMatch() : bool
     {
         return $this->runner->adminRestartMatch();
     }
@@ -352,7 +352,7 @@ class SquadServer
      *
      * @return boolean
      */
-    public function endMatch() : bool
+    public function adminEndMatch() : bool
     {
         return $this->runner->adminEndMatch();
     }
@@ -365,7 +365,7 @@ class SquadServer
      * @return boolean
      * @throws \DSG\SquadRCON\Exceptions\RConException
      */
-    public function setSlots(int $slots = 78) : bool
+    public function adminSetMaxNumPlayers(int $slots = 78) : bool
     {
         return $this->runner->adminSetMaxNumPlayers($slots);
     }
@@ -378,7 +378,7 @@ class SquadServer
      * @return boolean
      * @throws \DSG\SquadRCON\Exceptions\RConException
      */
-    public function setPassword(string $password) : bool
+    public function adminSetServerPassword(string $password) : bool
     {
         return $this->runner->adminSetServerPassword($password);
     }

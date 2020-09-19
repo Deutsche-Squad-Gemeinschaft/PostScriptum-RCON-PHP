@@ -273,7 +273,8 @@ class SquadRconRunner implements ServerCommandRunner {
      */
     public function adminDemoteCommander(string $playerName) : bool
     {
-        return true;
+        // TODO
+        return $this->_consoleCommand('AdminDemoteCommander', $playerName, 'Forced team change for player ');
     }
 
     /**
@@ -286,7 +287,8 @@ class SquadRconRunner implements ServerCommandRunner {
      */
     public function adminDemoteCommanderById(int $playerId) : bool
     {
-        return true;
+        // TODO
+        return $this->_consoleCommand('AdminDemoteCommanderById', $playerId, 'Forced team change for player ');
     }
 
     /**

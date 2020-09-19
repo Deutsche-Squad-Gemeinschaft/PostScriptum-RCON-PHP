@@ -137,7 +137,7 @@ class LiveServerTest extends \DSG\SquadRCON\Tests\TestCase {
      */
     public function test_admin_restart_match()
     {
-        $this->assertTrue($this->squadServer->restartMatch());
+        $this->assertTrue($this->squadServer->adminRestartMatch());
 
         sleep(30);
     }
@@ -149,7 +149,7 @@ class LiveServerTest extends \DSG\SquadRCON\Tests\TestCase {
      */
     public function test_admin_end_match()
     {
-        $this->assertTrue($this->squadServer->endMatch());
+        $this->assertTrue($this->squadServer->adminEndMatch());
 
         sleep(30);
     }
@@ -161,7 +161,7 @@ class LiveServerTest extends \DSG\SquadRCON\Tests\TestCase {
      */
     public function test_admin_set_max_num_players()
     {
-        $this->assertTrue($this->squadServer->setSlots(78));
+        $this->assertTrue($this->squadServer->adminSetMaxNumPlayers(78));
     }
 
     /**
@@ -171,7 +171,7 @@ class LiveServerTest extends \DSG\SquadRCON\Tests\TestCase {
      */
     public function test_admin_set_password()
     {
-        $this->assertTrue($this->squadServer->setPassword('secret'));
+        $this->assertTrue($this->squadServer->adminSetServerPassword('secret'));
     }
 
     /**

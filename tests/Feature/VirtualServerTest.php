@@ -212,7 +212,7 @@ class VirtualServerTest extends \DSG\SquadRCON\Tests\TestCase {
      */
     public function test_admin_restart_match()
     {
-        $this->assertTrue($this->squadServer->restartMatch());
+        $this->assertTrue($this->squadServer->adminRestartMatch());
     }
 
     /**
@@ -222,7 +222,7 @@ class VirtualServerTest extends \DSG\SquadRCON\Tests\TestCase {
      */
     public function test_admin_end_match()
     {
-        $this->assertTrue($this->squadServer->endMatch());
+        $this->assertTrue($this->squadServer->adminEndMatch());
     }
 
     /**
@@ -232,7 +232,7 @@ class VirtualServerTest extends \DSG\SquadRCON\Tests\TestCase {
      */
     public function test_admin_set_max_num_players()
     {
-        $this->assertTrue($this->squadServer->setSlots(78));
+        $this->assertTrue($this->squadServer->adminSetMaxNumPlayers(78));
     }
 
     /**
@@ -242,7 +242,7 @@ class VirtualServerTest extends \DSG\SquadRCON\Tests\TestCase {
      */
     public function test_admin_set_password()
     {
-        $this->assertTrue($this->squadServer->setPassword('secret'));
+        $this->assertTrue($this->squadServer->adminSetServerPassword('secret'));
     }
 
     /**
@@ -252,7 +252,7 @@ class VirtualServerTest extends \DSG\SquadRCON\Tests\TestCase {
      */
     public function test_admin_kick()
     {
-        $this->assertTrue($this->squadServer->kick('Marcel', 'Test'));
+        $this->assertTrue($this->squadServer->adminKick('Marcel', 'Test'));
     }
 
     /**
@@ -262,7 +262,7 @@ class VirtualServerTest extends \DSG\SquadRCON\Tests\TestCase {
      */
     public function test_admin_kick_by_id()
     {
-        $this->assertTrue($this->squadServer->kickById(1, 'Test'));
+        $this->assertTrue($this->squadServer->adminKickById(1, 'Test'));
     }
 
     /**
@@ -272,7 +272,7 @@ class VirtualServerTest extends \DSG\SquadRCON\Tests\TestCase {
      */
     public function test_admin_ban()
     {
-        $this->assertTrue($this->squadServer->ban('Marcel', '1h', 'Test'));
+        $this->assertTrue($this->squadServer->adminBan('Marcel', '1h', 'Test'));
     }
 
     /**
@@ -282,7 +282,7 @@ class VirtualServerTest extends \DSG\SquadRCON\Tests\TestCase {
      */
     public function test_admin_ban_by_id()
     {
-        $this->assertTrue($this->squadServer->banById(1, '1h', 'Test'));
+        $this->assertTrue($this->squadServer->adminBanById(1, '1h', 'Test'));
     }
 
     /**
