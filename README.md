@@ -7,9 +7,6 @@
         <b>RCON PHP wrapper for Squad server management</b>
     </p>
     <hr>
-    <a href="https://dsg-gaming.de">
-        <img alt="Deutsche Squad Gemeinschaft" src="https://raw.githubusercontent.com/Deutsche-Squad-Gemeinschaft/battlemetrics-php/master/dsg-badge.svg">
-    </a>
     <a href="https://github.com/Deutsche-Squad-Gemeinschaft/squad-rcon-php/actions">
         <img alt="Deutsche Squad Gemeinschaft" src="https://github.com/Deutsche-Squad-Gemeinschaft/squad-rcon-php/workflows/CI/badge.svg">
     </a>
@@ -27,6 +24,13 @@
     </a>
     <a href="https://packagist.org/packages/dsg/squad-rcon-php">
         <img alt="License" src="https://poser.pugx.org/dsg/squad-rcon-php/license">
+    </a>
+    <br>
+    <a href="https://dsg-gaming.de">
+        <img alt="Deutsche Squad Gemeinschaft" src="https://raw.githubusercontent.com/Deutsche-Squad-Gemeinschaft/battlemetrics-php/master/dsg-badge.svg">
+    </a>
+    <a href="https://discord.gg/9F2Ng5C">
+        <img alt="Discord" src="https://img.shields.io/discord/266210223406972928.svg?style=flat-square&logo=discord">
     </a>
 </div>
 
