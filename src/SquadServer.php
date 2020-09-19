@@ -455,12 +455,12 @@ class SquadServer
      * Demotes a player from the commander slot
      * by providing the name or steamid.
      *
-     * @param string $playerName
+     * @param string $nameOrSteamId
      * @return boolean
      */
-    public function adminDemoteCommander(string $playerName) : bool
+    public function adminDemoteCommander(string $nameOrSteamId) : bool
     {
-        return $this->runner->adminDemoteCommander($playerName);
+        return $this->runner->adminDemoteCommander($nameOrSteamId);
     }
 
     /**

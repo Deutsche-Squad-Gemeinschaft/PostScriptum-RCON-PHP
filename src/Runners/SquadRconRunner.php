@@ -271,10 +271,10 @@ class SquadRconRunner implements ServerCommandRunner {
      * @param string $playerName
      * @return boolean
      */
-    public function adminDemoteCommander(string $playerName) : bool
+    public function adminDemoteCommander(string $nameOrSteamId) : bool
     {
         // TODO
-        return $this->_consoleCommand('AdminDemoteCommander', $playerName, 'Forced team change for player ');
+        return $this->_consoleCommand('AdminDemoteCommander', $nameOrSteamId, 'Forced team change for player ');
     }
 
     /**

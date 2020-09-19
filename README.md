@@ -60,6 +60,16 @@ The code will then be available under the `DSG\SquadRCON` namespace.
 * [x] AdminSetNextMap \<MapName\>
 * [x] AdminSetMaxNumPlayers \<NumPlayers\>
 * [x] AdminSetServerPassword \<Password\>
+* [x] AdminSlomo \<TimeDilation\>
+* [x] AdminForceTeamChange \<NameOrSteamId\>
+* [x] AdminForceTeamChangeById \<PlayerId\> 
+* [x] AdminDemoteCommander \<PlayerName\>
+* [x] AdminDemoteCommanderById \<PlayerId\>
+* [x] AdminDisbandSquad \<TeamId\> \<SquadId\>
+* [x] AdminRemovePlayerFromSquad \<PlayerName\>
+* [x] AdminRemovePlayerFromSquadById \<PlayerId\> 
+* [x] AdminWarn \<NameOrSteamId\> \<WarnReason\> 
+* [x] AdminWarnById \<PlayerId\> \<WarnReason\> 
 
 ## USAGE
 
@@ -164,57 +174,57 @@ $success = $server->adminSetServerPassword('secret');
 ```
 
 ### AdminSlomo
-Sets the game speed with the AdminSlomo
+Sets the game speed with the AdminSlomo. Default 1.0
 ```php
-$success = $server->adminSlomo(float $timeDilation = 1.0);
+$success = $server->adminSlomo(1.5);
 ```
 
 ### AdminForceTeamChange
 Forces a player to the opposite team by providing the name or steamid.
 ```php
-$success = $server->adminForceTeamChange(string $nameOrSteamId);
+$success = $server->adminForceTeamChange('Name or SteamId');
 ```
 
 ### AdminForceTeamChangeById
 Forces a player to the opposite team by providing the ingame Player id.
 ```php
-$success = $server->adminForceTeamChangeById(int $playerId);
+$success = $server->adminForceTeamChangeById($player->getId());
 ```
 
 ### AdminDemoteCommander
 Demotes a player from the commander slot by providing the name or steamid.
 ```php
-$success = $server->adminDemoteCommander(string $playerName);
+$success = $server->adminDemoteCommander('Name or SteamId');
 ```
 
 ### AdminDemoteCommanderById command.
 Demotes a player from the commander slot by providing the ingame Player id.
 ```php
-$success = $server->adminDemoteCommanderById(int $playerId);
+$success = $server->adminDemoteCommanderById($player->getId());
 ```
 
 ### AdminDisbandSquad command.
 Disbands a Squad by providing the Team id  / index & Squad id / index.
 ```php
-$success = $server->adminDisbandSquad(int $teamId, int $squadId);
+$success = $server->adminDisbandSquad($team->getId(), $squad->getId());
 ```
 
 ### AdminRemovePlayerFromSquad
 Removes a Player from his Squad by providing the Player name.
 ```php
-$success = $server->adminRemovePlayerFromSquad(string $playerName);
+$success = $server->adminRemovePlayerFromSquad('Name');
 ```
 
 ### AdminRemovePlayerFromSquadById
 Removes a player from his Squad by providing the ingame Player id.
 ```php
-$success = $server->adminRemovePlayerFromSquadById(int $playerId);
+$success = $server->adminRemovePlayerFromSquadById($player->getId());
 ```
 
 ### AdminWarn
 Warns a Player by providing his name / steamid and a message.
 ```php
-$success = $server->adminWarn(string $nameOrSteamId, string $warnReason);
+$success = $server->adminWarn('Name or SteamId', 'Warn Reason');
 ```
 
 ### AdminWarnById
