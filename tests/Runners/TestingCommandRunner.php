@@ -252,10 +252,10 @@ class TestingCommandRunner implements ServerCommandRunner {
      * @param string $nameOrSteamId
      * @return boolean
      */
-    public function adminDemoteCommander(string $nameOrSteamId) : bool
-    {
-        return true;
-    }
+    //public function adminDemoteCommander(string $nameOrSteamId) : bool
+    //{
+    //    return true;
+    //}
 
     /**
      * AdminDemoteCommanderById command.
@@ -265,10 +265,10 @@ class TestingCommandRunner implements ServerCommandRunner {
      * @param integer $playerId
      * @return boolean
      */
-    public function adminDemoteCommanderById(int $playerId) : bool
-    {
-        return true;
-    }
+    //public function adminDemoteCommanderById(int $playerId) : bool
+    //{
+    //    return true;
+    //}
 
     /**
      * AdminDisbandSquad command.

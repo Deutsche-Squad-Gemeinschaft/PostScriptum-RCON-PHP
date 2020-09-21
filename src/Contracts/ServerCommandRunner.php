@@ -194,7 +194,7 @@ interface ServerCommandRunner {
      * @param string $nameOrSteamId
      * @return boolean
      */
-    public function adminDemoteCommander(string $nameOrSteamId) : bool;
+    //public function adminDemoteCommander(string $nameOrSteamId) : bool;
 
     /**
      * AdminDemoteCommanderById command.
@@ -204,7 +204,7 @@ interface ServerCommandRunner {
      * @param integer $playerId
      * @return boolean
      */
-    public function adminDemoteCommanderById(int $playerId) : bool;
+    //public function adminDemoteCommanderById(int $playerId) : bool;
 
     /**
      * AdminDisbandSquad command.

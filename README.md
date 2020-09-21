@@ -63,8 +63,8 @@ The code will then be available under the `DSG\SquadRCON` namespace.
 * [x] AdminSlomo \<TimeDilation\>
 * [x] AdminForceTeamChange \<NameOrSteamId\>
 * [x] AdminForceTeamChangeById \<PlayerId\> 
-* [x] AdminDemoteCommander \<PlayerName\>
-* [x] AdminDemoteCommanderById \<PlayerId\>
+* [ ] AdminDemoteCommander \<PlayerName\>
+* [ ] AdminDemoteCommanderById \<PlayerId\>
 * [x] AdminDisbandSquad \<TeamId\> \<SquadId\>
 * [x] AdminRemovePlayerFromSquad \<PlayerName\>
 * [x] AdminRemovePlayerFromSquadById \<PlayerId\> 
@@ -189,18 +189,6 @@ $success = $server->adminForceTeamChange('Name or SteamId');
 Forces a player to the opposite team by providing the ingame Player id.
 ```php
 $success = $server->adminForceTeamChangeById($player->getId());
-```
-
-### AdminDemoteCommander
-Demotes a player from the commander slot by providing the name or steamid.
-```php
-$success = $server->adminDemoteCommander('Name or SteamId');
-```
-
-### AdminDemoteCommanderById command.
-Demotes a player from the commander slot by providing the ingame Player id.
-```php
-$success = $server->adminDemoteCommanderById($player->getId());
 ```
 
 ### AdminDisbandSquad command.

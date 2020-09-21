@@ -271,11 +271,10 @@ class SquadRconRunner implements ServerCommandRunner {
      * @param string $playerName
      * @return boolean
      */
-    public function adminDemoteCommander(string $nameOrSteamId) : bool
-    {
-        // TODO
-        return $this->_consoleCommand('AdminDemoteCommander', $nameOrSteamId, 'Forced team change for player ');
-    }
+    //public function adminDemoteCommander(string $nameOrSteamId) : bool
+    //{
+    //    return $this->_consoleCommand('AdminDemoteCommander', $nameOrSteamId, 'Forced team change for player ');
+    //}
 
     /**
      * AdminDemoteCommanderById command.
@@ -285,11 +284,10 @@ class SquadRconRunner implements ServerCommandRunner {
      * @param integer $playerId
      * @return boolean
      */
-    public function adminDemoteCommanderById(int $playerId) : bool
-    {
-        // TODO
-        return $this->_consoleCommand('AdminDemoteCommanderById', $playerId, 'Forced team change for player ');
-    }
+    //public function adminDemoteCommanderById(int $playerId) : bool
+    //{
+    //    return $this->_consoleCommand('AdminDemoteCommanderById', $playerId, 'Forced team change for player ');
+    //}
 
     /**
      * AdminDisbandSquad command.

@@ -458,10 +458,10 @@ class SquadServer
      * @param string $nameOrSteamId
      * @return boolean
      */
-    public function adminDemoteCommander(string $nameOrSteamId) : bool
-    {
-        return $this->runner->adminDemoteCommander($nameOrSteamId);
-    }
+    //public function adminDemoteCommander(string $nameOrSteamId) : bool
+    //{
+    //    return $this->runner->adminDemoteCommander($nameOrSteamId);
+    //}
 
     /**
      * AdminDemoteCommanderById command.
@@ -471,10 +471,10 @@ class SquadServer
      * @param integer $playerId
      * @return boolean
      */
-    public function adminDemoteCommanderById(int $playerId) : bool
-    {
-        return $this->runner->adminDemoteCommanderById($playerId);
-    }
+    //public function adminDemoteCommanderById(int $playerId) : bool
+    //{
+    //    return $this->runner->adminDemoteCommanderById($playerId);
+    //}
 
     /**
      * AdminDisbandSquad command.
