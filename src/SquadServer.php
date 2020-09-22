@@ -120,22 +120,6 @@ class SquadServer
      * @param array $teams
      * @return Player[]
      * @throws \DSG\SquadRCON\Exceptions\RConException
-     * @deprecated 0.1.3 Use listPlayers instead
-     */
-    public function currentPlayers(Population &$population = null) : array
-    {
-        return $this->listPlayers($population);
-    }
-
-    /**
-     * ListPlayers command, returns an array
-     * of Player instances. The output of
-     * ListSquads can be piped into it to
-     * assign the Players to their Team/Squad.
-     *
-     * @param array $teams
-     * @return Player[]
-     * @throws \DSG\SquadRCON\Exceptions\RConException
      */
     public function listPlayers(Population &$population = null) : array
     {
@@ -230,14 +214,6 @@ class SquadServer
     }
 
     /**
-     * @deprecated Please use adminKick. This method will be removed with the next major version.
-     */
-    public function kick(string $nameOrSteamId, string $reason = '') : bool
-    {
-        return $this->adminKick($nameOrSteamId, $reason);
-    }
-
-    /**
      * AdminKickById command.
      * Broadcasts the given message on the server.
      * 
@@ -249,14 +225,6 @@ class SquadServer
     public function adminKickById(int $id, string $reason = '') : bool
     {
         return $this->runner->adminKickById($id, $reason);
-    }
-
-    /**
-     * @deprecated Please use adminKickById. This method will be removed with the next major version.
-     */
-    public function kickById(int $id, string $reason = '') : bool
-    {
-        return $this->adminKickById($id, $reason);
     }
 
     /**
@@ -274,14 +242,6 @@ class SquadServer
     }
 
     /**
-     * @deprecated Please use adminBan. This method will be removed with the next major version.
-     */
-    public function ban(string $nameOrSteamId, string $duration = '1d', string $reason = '') : bool
-    {
-        return $this->adminBan($nameOrSteamId, $duration, $reason);
-    }
-
-    /**
      * AdminBanById command.
      * Bans the given Player from the Server.
      * 
@@ -293,14 +253,6 @@ class SquadServer
     public function adminBanById(int $id, string $duration = '1d', string $reason = '') : bool
     {
         return $this->runner->adminBanById($id, $duration, $reason);
-    }
-
-    /**
-     * @deprecated Please use adminBanById. This method will be removed with the next major version.
-     */
-    public function banById(int $id, string $duration = '1d', string $reason = '') : bool
-    {
-        return $this->adminBanById($id, $duration, $reason);
     }
 
     /**
@@ -380,14 +332,6 @@ class SquadServer
     }
 
     /**
-     * @deprecated Please use adminRestartMatch. This method will be removed with the next major version.
-     */
-    public function restartMatch() : bool
-    {
-        return $this->adminRestartMatch();
-    }
-
-    /**
      * AdminEndMatch command.
      * Ends the current Match.
      *
@@ -396,14 +340,6 @@ class SquadServer
     public function adminEndMatch() : bool
     {
         return $this->runner->adminEndMatch();
-    }
-
-    /**
-     * @deprecated Please use adminEndMatch. This method will be removed with the next major version.
-     */
-    public function endMatch() : bool
-    {
-        return $this->adminEndMatch();
     }
 
     /**
@@ -420,14 +356,6 @@ class SquadServer
     }
 
     /**
-     * @deprecated Please use adminSetMaxNumPlayers. This method will be removed with the next major version.
-     */
-    public function setSlots(int $slots = 78) : bool
-    {
-        return $this->adminSetMaxNumPlayers($slots);
-    }
-
-    /**
      * AdminSetServerPassword command.
      * Sets the password of the server.
      *
@@ -438,14 +366,6 @@ class SquadServer
     public function adminSetServerPassword(string $password) : bool
     {
         return $this->runner->adminSetServerPassword($password);
-    }
-
-    /**
-     * @deprecated Please use adminSetServerPassword. This method will be removed with the next major version.
-     */
-    public function setPassword(string $password) : bool
-    {
-        return $this->adminSetServerPassword($password);
     }
 
     /**
