@@ -126,11 +126,17 @@ class VirtualServerTest extends \DSG\SquadRCON\Tests\TestCase {
      */
     public function test_server_population()
     {
-        $teams = $this->squadServer->serverPopulation();
+        $population = $this->squadServer->serverPopulation();
+
+        $this->assertTrue($population->hasTeams());
+
+        $t = $population->getTeam(1);
+        $this->assertNotNull($t);
+        $this->assertSame('United States Army', $t->getName());
 
         $squadCount = 0;
         $playerCount = 0;
-        foreach ($teams as $team) {
+        foreach ($population->getTeams() as $team) {
             $squadCount += count($team->getSquads());
             $teamPlayerCount = count($team->getPlayers());
             foreach ($team->getSquads() as $squad) {
@@ -173,6 +179,11 @@ class VirtualServerTest extends \DSG\SquadRCON\Tests\TestCase {
         
         $this->assertSame(18, $squadCount);
         $this->assertSame(77, $playerCount);
+
+        $player = $population->getPlayerBySteamId('76561198202943394');
+        $this->assertNotNull($player);
+        $this->assertSame(53, $player->getId());
+        $this->assertSame('[1JGKP]Bud-Muecke (YT)', $player->getName());
     }
 
     /**

@@ -3,7 +3,7 @@
 namespace DSG\SquadRCON\Data;
 
 class ServerConnectionInfo {
-    const SQUAD_SOCKET_TIMEOUT_SECONDS = 3;
+    const DEFAULT_SOCKET_TIMEOUT_SECONDS = 3;
 
     /**
      * Host of the Server.
@@ -33,7 +33,7 @@ class ServerConnectionInfo {
      */
     public int $timeout;
 
-    function __construct(string $host, int $port, string $password, int $timeout = self::SQUAD_SOCKET_TIMEOUT_SECONDS)
+    function __construct(string $host, int $port, string $password, int $timeout = self::DEFAULT_SOCKET_TIMEOUT_SECONDS)
     {
         $this->host     = $host;
         $this->port     = $port;

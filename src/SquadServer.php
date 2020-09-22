@@ -6,6 +6,7 @@ use DSG\SquadRCON\Contracts\ServerCommandRunner;
 use DSG\SquadRCON\Data\Team;
 use DSG\SquadRCON\Data\Squad;
 use DSG\SquadRCON\Data\Player;
+use DSG\SquadRCON\Data\Population;
 use DSG\SquadRCON\Data\ServerConnectionInfo;
 use DSG\SquadRCON\Runners\SquadRconRunner;
 
@@ -48,15 +49,15 @@ class SquadServer
      * @return Team[]
      * @throws \DSG\SquadRCON\Exceptions\RConException
      */
-    public function serverPopulation() : array
+    public function serverPopulation() : Population
     {
         /* Get the current Teams and their Squads */
-        $teams = $this->listSquads();
+        $population = new Population($this->listSquads());
 
         /* Get the currently connected players, feed listSquads output to reference Teams/Squads */
-        $this->currentPlayers($teams);
+        $this->listPlayers($population);
 
-        return $teams;
+        return $population;
     }
 
     /**
@@ -121,9 +122,9 @@ class SquadServer
      * @throws \DSG\SquadRCON\Exceptions\RConException
      * @deprecated 0.1.3 Use listPlayers instead
      */
-    public function currentPlayers(array &$teams = null) : array
+    public function currentPlayers(Population &$population = null) : array
     {
-        return $this->listPlayers($teams);
+        return $this->listPlayers($population);
     }
 
     /**
@@ -136,7 +137,7 @@ class SquadServer
      * @return Player[]
      * @throws \DSG\SquadRCON\Exceptions\RConException
      */
-    public function listPlayers(array &$teams = null) : array
+    public function listPlayers(Population &$population = null) : array
     {
         /* Initialize an empty output array */
         $players = [];
@@ -153,9 +154,9 @@ class SquadServer
                 $player = new Player(intval($matches[1]), $matches[2], $matches[3]);
 
                 /* Set Team and Squad references if ListSquads output is provided */
-                if ($teams && count($teams) && $matches[4] !== 'N/A' && array_key_exists($matches[4], $teams)) {
+                if ($population && $population->hasTeams() && $matches[4] !== 'N/A' && $population->getTeam($matches[4])) {
                     /* Get the Team */
-                    $player->setTeam($teams[$matches[4]]);
+                    $player->setTeam($population->getTeam($matches[4]));
 
                     if (count($player->getTeam()->getSquads()) && $matches[5] !== 'N/A' && array_key_exists($matches[5], $player->getTeam()->getSquads())) {
                         /* Get the Squad */
