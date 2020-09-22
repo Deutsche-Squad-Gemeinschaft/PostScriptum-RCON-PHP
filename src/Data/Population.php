@@ -61,7 +61,7 @@ class Population
                 $players = array_merge($players, $squad->getPlayers());
             }
 
-            $players = array_merge($players, $squad->getPlayers());
+            $players = array_merge($players, $team->getPlayers());
         }
 
         return $players;

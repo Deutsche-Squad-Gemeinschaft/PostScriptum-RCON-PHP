@@ -134,6 +134,10 @@ class VirtualServerTest extends \DSG\SquadRCON\Tests\TestCase {
         $this->assertNotNull($t);
         $this->assertSame('United States Army', $t->getName());
 
+        $this->assertNull($population->getTeam(3));
+
+        $this->assertSame(77, count($population->getPlayers()));
+
         $squadCount = 0;
         $playerCount = 0;
         foreach ($population->getTeams() as $team) {
@@ -184,6 +188,8 @@ class VirtualServerTest extends \DSG\SquadRCON\Tests\TestCase {
         $this->assertNotNull($player);
         $this->assertSame(53, $player->getId());
         $this->assertSame('[1JGKP]Bud-Muecke (YT)', $player->getName());
+
+        $this->assertNull($population->getPlayerBySteamId('DoesCertainlyNotExist'));
     }
 
     /**
