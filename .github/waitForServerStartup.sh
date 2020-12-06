@@ -3,5 +3,6 @@ timeout --signal=SIGINT 600 docker logs -f squad-server 2>&1 | grep -qe "LogOnli
 
 if [ $? == 1 ]; then
     echo "Server startup did timeout."
+    docker logs squad-server
     exit 1
 fi
