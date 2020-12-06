@@ -11,7 +11,7 @@ jobs:
     - name: Remove old Container
       run: docker stop squad-server || true  && docker rm squad-server || true
     - name: Run the Squad Server
-      run: docker run -d --network=actions-runner_default --volume=tests/ServerFolder:/home/steam/squad-dedicated -e PORT=7787 -e QUERYPORT=27165 -e RCONPORT=21114 --name=squad-server cm2network/squad
+      run: docker run -d --network=actions-runner_default --volume=$PWD/tests/ServerFolder:/home/steam/squad-dedicated -e PORT=7787 -e QUERYPORT=27165 -e RCONPORT=21114 --name=squad-server cm2network/squad
     - name: Wait for Squad Server to start up
       run: chmod +x .github/waitForServerStartup.sh && ./.github/waitForServerStartup.sh
     - name: Wait for Squad Server to fully boot
