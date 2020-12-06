@@ -15,7 +15,7 @@ class LiveServerTest extends \DSG\SquadRCON\Tests\TestCase {
     {
         parent::setUp();
 
-        $this->squadServer = new SquadServer(new ServerConnectionInfo('squad-server', 21114, 'secret'));
+        $this->squadServer = new SquadServer(new ServerConnectionInfo('172.17.0.2', 21114, 'secret'));
     }
 
     /**
