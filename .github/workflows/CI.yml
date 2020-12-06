@@ -6,12 +6,16 @@ jobs:
     steps:
     - name: Pull repository
       uses: actions/checkout@v1
-    - name: Run Composer install
+    - name: Run composer install
       run: composer install -q --no-ansi --no-interaction --no-scripts --no-suggest --no-progress --prefer-dist
-    - name: Remove old Container
+    - name: Run and install the Squad server
+      run: docker run -d --net=bridge -e PORT=7787 -e QUERYPORT=27165 -e RCONPORT=21114 --name=squad-server cm2network/squad
+    - name: Wait for Squad Server to start up
+      run: chmod +x .github/waitForServerStartup.sh && ./.github/waitForServerStartup.sh
+    - name: Stop the Server
       run: docker stop squad-server || true  && docker rm squad-server || true
-    - name: Run the Squad Server
-      run: docker run -d --network=host --volume=$PWD/tests/ServerFolder:/home/steam/squad-dedicated -e PORT=7787 -e QUERYPORT=27165 -e RCONPORT=21114 --name=squad-server cm2network/squad
+    - name: Start the Server again with Rcon config
+      run: docker run -d --net=bridge --volume=$PWD/tests/ServerFolder:/home/steam/squad-dedicated -e PORT=7787 -e QUERYPORT=27165 -e RCONPORT=21114 --name=squad-server cm2network/squad
     - name: Wait for Squad Server to start up
       run: chmod +x .github/waitForServerStartup.sh && ./.github/waitForServerStartup.sh
     - name: Wait for Squad Server to fully boot
