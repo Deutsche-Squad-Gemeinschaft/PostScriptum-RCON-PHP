@@ -19,7 +19,7 @@ jobs:
     - name: Log Squad Server
       run: docker logs squad-server
     - name: Run PHPUnit
-      run: rm -f coverage.xml && XDEBUG_MODE=coverage vendor/bin/phpunit --coverage-clover=coverage.xml
+      run: rm -f coverage.xml && vendor/bin/phpunit --coverage-clover=coverage.xml
     - name: Upload coverage to Codecov
       run: bash <(curl -s https://codecov.io/bash) -t $SquadRconPHPCodecovToken
     - name: Stop the Squad Server
