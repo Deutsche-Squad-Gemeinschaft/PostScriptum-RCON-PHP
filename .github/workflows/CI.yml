@@ -11,7 +11,7 @@ jobs:
     - name: Stop the Post Scriptum
       run: docker stop ps-server || true  && docker rm ps-server || true
     - name: Install & start Post Scriptum server
-      run: docker run -d --net=bridge --volume=$PWD/tests/ServerFolder:/home/steam/squad-dedicated -e PORT=7787 -e QUERYPORT=27165 -e RCONPORT=21114 --name=ps-server avilcreeggan/post-scriptum
+      run: docker run -d --net=bridge --volume=$PWD/tests/ServerFolder:/home/steam/post-scriptum-dedicated -e PORT=7787 -e QUERYPORT=27165 -e RCONPORT=21114 --name=ps-server avilcreeggan/post-scriptum
     - name: Wait for Post Scriptum Server to start up
       run: chmod +x .github/waitForServerStartup.sh && ./.github/waitForServerStartup.sh
     - name: Wait for Post Scriptum Server to fully boot
