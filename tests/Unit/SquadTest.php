@@ -1,8 +1,8 @@
 <?php
 
-namespace DSG\SquadRCON\Tests\Unit;
+namespace DSG\PostScriptumRCON\Tests\Unit;
 
-class SquadTest extends \DSG\SquadRCON\Tests\TestCase {
+class SquadTest extends \DSG\PostScriptumRCON\Tests\TestCase {
     /**
      * Placeholder
      * 

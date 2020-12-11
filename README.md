@@ -1,29 +1,29 @@
 <p align="center">
-    <img align="center" alt="Squad RCON PHP Logo" src="https://raw.githubusercontent.com/Deutsche-Squad-Gemeinschaft/squad-rcon-php/master/logo.svg">
+    <img align="center" alt="Squad RCON PHP Logo" src="https://raw.githubusercontent.com/Deutsche-Squad-Gemeinschaft/PostScriptum-RCON-PHP/master/logo.svg">
 </p>
 <div align="center">
-    <h1 align="center">Squad RCON PHP</h1>
+    <h1 align="center">Post Scriptum RCON PHP</h1>
     <p align="center">
-        <b>RCON PHP wrapper for Squad server management</b>
+        <b>RCON PHP wrapper for Post Scriptum server management</b>
     </p>
     <hr>
-    <a href="https://github.com/Deutsche-Squad-Gemeinschaft/squad-rcon-php/actions">
-        <img alt="Deutsche Squad Gemeinschaft" src="https://github.com/Deutsche-Squad-Gemeinschaft/squad-rcon-php/workflows/CI/badge.svg">
+    <a href="https://github.com/Deutsche-Squad-Gemeinschaft/PostScriptum-RCON-PHP/actions">
+        <img alt="Deutsche Squad Gemeinschaft" src="https://github.com/Deutsche-Squad-Gemeinschaft/PostScriptum-RCON-PHP/workflows/CI/badge.svg">
     </a>
-    <a href="https://codecov.io/gh/Deutsche-Squad-Gemeinschaft/squad-rcon-php">
-        <img alt="Deutsche Squad Gemeinschaft" src="https://codecov.io/gh/Deutsche-Squad-Gemeinschaft/squad-rcon-php/branch/master/graph/badge.svg">
+    <a href="https://codecov.io/gh/Deutsche-Squad-Gemeinschaft/PostScriptum-RCON-PHP">
+        <img alt="Deutsche Squad Gemeinschaft" src="https://codecov.io/gh/Deutsche-Squad-Gemeinschaft/PostScriptum-RCON-PHP/branch/master/graph/badge.svg">
     </a>
-    <a href="https://packagist.org/packages/dsg/squad-rcon-php">
-        <img alt="Total Downloads" src="https://poser.pugx.org/dsg/squad-rcon-php/downloads.png">
+    <a href="https://packagist.org/packages/dsg/postscriptum-rcon-php">
+        <img alt="Total Downloads" src="https://poser.pugx.org/dsg/postscriptum-rcon-php/downloads.png">
     </a>
-    <a href="https://packagist.org/packages/dsg/squad-rcon-php">
-        <img alt="Latest Stable Version" src="https://poser.pugx.org/dsg/squad-rcon-php/v/stable">
+    <a href="https://packagist.org/packages/dsg/postscriptum-rcon-php">
+        <img alt="Latest Stable Version" src="https://poser.pugx.org/dsg/postscriptum-rcon-php/v/stable">
     </a>
-    <a href="https://packagist.org/packages/dsg/squad-rcon-php">
-        <img alt="Latest Unstable Version" src="https://poser.pugx.org/dsg/squad-rcon-php/v/unstable">
+    <a href="https://packagist.org/packages/dsg/postscriptum-rcon-php">
+        <img alt="Latest Unstable Version" src="https://poser.pugx.org/dsg/postscriptum-rcon-php/v/unstable">
     </a>
-    <a href="https://packagist.org/packages/dsg/squad-rcon-php">
-        <img alt="License" src="https://poser.pugx.org/dsg/squad-rcon-php/license">
+    <a href="https://packagist.org/packages/dsg/postscriptum-rcon-php">
+        <img alt="License" src="https://poser.pugx.org/dsg/postscriptum-rcon-php/license">
     </a>
     <br>
     <a href="https://dsg-gaming.de">
@@ -38,10 +38,10 @@
 
 You can install this package by using composer and the following command:
 ```
-composer require dsg/squad-rcon-php
+composer require dsg/postscriptum-rcon-php
 ```
 
-The code will then be available under the `DSG\SquadRCON` namespace.
+The code will then be available under the `DSG\PostScriptumRCON` namespace.
 
 ## Commands
 

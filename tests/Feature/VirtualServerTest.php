@@ -1,13 +1,13 @@
 <?php
 
-namespace DSG\SquadRCON\Tests\Feature;
+namespace DSG\PostScriptumRCON\Tests\Feature;
 
-use DSG\SquadRCON\Data\ServerConnectionInfo;
-use DSG\SquadRCON\SquadServer;
-use DSG\SquadRCON\Tests\Runners\TestingCommandRunner;
+use DSG\PostScriptumRCON\Data\ServerConnectionInfo;
+use DSG\PostScriptumRCON\PostScriptumServer;
+use DSG\PostScriptumRCON\Tests\Runners\TestingCommandRunner;
 
-class VirtualServerTest extends \DSG\SquadRCON\Tests\TestCase {
-    private SquadServer $squadServer;
+class VirtualServerTest extends \DSG\PostScriptumRCON\Tests\TestCase {
+    private PostScriptumServer $postScriptumServer;
 
     /**
      * This method is called before each test.
@@ -16,7 +16,7 @@ class VirtualServerTest extends \DSG\SquadRCON\Tests\TestCase {
     {
         parent::setUp();
 
-        $this->squadServer = new SquadServer(new ServerConnectionInfo('', 0, ''), new TestingCommandRunner());
+        $this->postScriptumServer = new PostScriptumServer(new ServerConnectionInfo('', 0, ''), new TestingCommandRunner());
     }
 
     /**
@@ -26,7 +26,7 @@ class VirtualServerTest extends \DSG\SquadRCON\Tests\TestCase {
      */
     public function test_current_map()
     {
-        $this->assertSame('Al Basrah AAS v1', $this->squadServer->currentMap());
+        $this->assertSame('Al Basrah AAS v1', $this->postScriptumServer->currentMap());
     }
 
     /**
@@ -36,7 +36,7 @@ class VirtualServerTest extends \DSG\SquadRCON\Tests\TestCase {
      */
     public function test_next_map()
     {
-        $this->assertSame('Belaya AAS v1', $this->squadServer->nextMap());
+        $this->assertSame('Belaya AAS v1', $this->postScriptumServer->nextMap());
     }
 
     /**
@@ -46,7 +46,7 @@ class VirtualServerTest extends \DSG\SquadRCON\Tests\TestCase {
      */
     public function test_list_players()
     {
-        $players = $this->squadServer->listPlayers();
+        $players = $this->postScriptumServer->listPlayers();
 
         $this->assertCount(77, $players);
     }
@@ -58,7 +58,7 @@ class VirtualServerTest extends \DSG\SquadRCON\Tests\TestCase {
      */
     public function test_list_disconnected_players()
     {
-        $playerList = $this->squadServer->listDisconnectedPlayers();
+        $playerList = $this->postScriptumServer->listDisconnectedPlayers();
 
         $this->assertCount(3, $playerList);
 
@@ -80,7 +80,7 @@ class VirtualServerTest extends \DSG\SquadRCON\Tests\TestCase {
      */
     public function test_list_squads()
     {
-        $teams = $this->squadServer->listSquads();
+        $teams = $this->postScriptumServer->listSquads();
 
         $squadCount = 0;
 
@@ -126,7 +126,7 @@ class VirtualServerTest extends \DSG\SquadRCON\Tests\TestCase {
      */
     public function test_server_population()
     {
-        $population = $this->squadServer->serverPopulation();
+        $population = $this->postScriptumServer->serverPopulation();
 
         $this->assertTrue($population->hasTeams());
 
@@ -161,7 +161,7 @@ class VirtualServerTest extends \DSG\SquadRCON\Tests\TestCase {
                         $this->assertSame($team->getId(), $squad->getTeam()->getId());
 
                         $p = null;
-                        /** @var \DSG\SquadRCON\Data\Player $player */
+                        /** @var \DSG\PostScriptumRCON\Data\Player $player */
                         foreach ($squad->getPlayers() as $player) {
                             if ($player->getId() === 53) {
                                 $this->assertSame('76561198202943394', $player->getSteamId());
@@ -199,7 +199,7 @@ class VirtualServerTest extends \DSG\SquadRCON\Tests\TestCase {
      */
     public function test_admin_Broadcast()
     {
-        $this->assertTrue($this->squadServer->adminBroadcast('Hello World!'));
+        $this->assertTrue($this->postScriptumServer->adminBroadcast('Hello World!'));
     }
 
     /**
@@ -209,7 +209,7 @@ class VirtualServerTest extends \DSG\SquadRCON\Tests\TestCase {
      */
     public function test_admin_change_map()
     {
-        $this->assertTrue($this->squadServer->adminChangeMap('Al Basrah AAS v1'));
+        $this->assertTrue($this->postScriptumServer->adminChangeMap('Al Basrah AAS v1'));
     }
 
     /**
@@ -219,7 +219,7 @@ class VirtualServerTest extends \DSG\SquadRCON\Tests\TestCase {
      */
     public function test_admin_set_next_map()
     {
-        $this->assertTrue($this->squadServer->adminSetNextMap('Al Basrah AAS v1'));
+        $this->assertTrue($this->postScriptumServer->adminSetNextMap('Al Basrah AAS v1'));
     }
 
     /**
@@ -229,7 +229,7 @@ class VirtualServerTest extends \DSG\SquadRCON\Tests\TestCase {
      */
     public function test_admin_restart_match()
     {
-        $this->assertTrue($this->squadServer->adminRestartMatch());
+        $this->assertTrue($this->postScriptumServer->adminRestartMatch());
     }
 
     /**
@@ -239,7 +239,7 @@ class VirtualServerTest extends \DSG\SquadRCON\Tests\TestCase {
      */
     public function test_admin_end_match()
     {
-        $this->assertTrue($this->squadServer->adminEndMatch());
+        $this->assertTrue($this->postScriptumServer->adminEndMatch());
     }
 
     /**
@@ -249,7 +249,7 @@ class VirtualServerTest extends \DSG\SquadRCON\Tests\TestCase {
      */
     public function test_admin_set_max_num_players()
     {
-        $this->assertTrue($this->squadServer->adminSetMaxNumPlayers(78));
+        $this->assertTrue($this->postScriptumServer->adminSetMaxNumPlayers(78));
     }
 
     /**
@@ -259,7 +259,7 @@ class VirtualServerTest extends \DSG\SquadRCON\Tests\TestCase {
      */
     public function test_admin_set_password()
     {
-        $this->assertTrue($this->squadServer->adminSetServerPassword('secret'));
+        $this->assertTrue($this->postScriptumServer->adminSetServerPassword('secret'));
     }
 
     /**
@@ -269,7 +269,7 @@ class VirtualServerTest extends \DSG\SquadRCON\Tests\TestCase {
      */
     public function test_admin_kick()
     {
-        $this->assertTrue($this->squadServer->adminKick('Marcel', 'Test'));
+        $this->assertTrue($this->postScriptumServer->adminKick('Marcel', 'Test'));
     }
 
     /**
@@ -279,7 +279,7 @@ class VirtualServerTest extends \DSG\SquadRCON\Tests\TestCase {
      */
     public function test_admin_kick_by_id()
     {
-        $this->assertTrue($this->squadServer->adminKickById(1, 'Test'));
+        $this->assertTrue($this->postScriptumServer->adminKickById(1, 'Test'));
     }
 
     /**
@@ -289,7 +289,7 @@ class VirtualServerTest extends \DSG\SquadRCON\Tests\TestCase {
      */
     public function test_admin_ban()
     {
-        $this->assertTrue($this->squadServer->adminBan('Marcel', '1h', 'Test'));
+        $this->assertTrue($this->postScriptumServer->adminBan('Marcel', '1h', 'Test'));
     }
 
     /**
@@ -299,7 +299,7 @@ class VirtualServerTest extends \DSG\SquadRCON\Tests\TestCase {
      */
     public function test_admin_ban_by_id()
     {
-        $this->assertTrue($this->squadServer->adminBanById(1, '1h', 'Test'));
+        $this->assertTrue($this->postScriptumServer->adminBanById(1, '1h', 'Test'));
     }
 
     /**
@@ -309,7 +309,7 @@ class VirtualServerTest extends \DSG\SquadRCON\Tests\TestCase {
      */
     public function test_squad_server_admin_slomo()
     {
-        $this->assertTrue($this->squadServer->adminSlomo(2));
+        $this->assertTrue($this->postScriptumServer->adminSlomo(2));
     }
 
     /**
@@ -319,7 +319,7 @@ class VirtualServerTest extends \DSG\SquadRCON\Tests\TestCase {
      */
     public function test_squad_server_admin_force_team_change()
     {
-        $this->assertTrue($this->squadServer->adminForceTeamChange('Test'));
+        $this->assertTrue($this->postScriptumServer->adminForceTeamChange('Test'));
     }
 
     /**
@@ -329,7 +329,7 @@ class VirtualServerTest extends \DSG\SquadRCON\Tests\TestCase {
      */
     public function test_squad_server_admin_force_team_change_by_id()
     {
-        $this->assertTrue($this->squadServer->adminForceTeamChange(0));
+        $this->assertTrue($this->postScriptumServer->adminForceTeamChange(0));
     }
 
     /**
@@ -339,7 +339,7 @@ class VirtualServerTest extends \DSG\SquadRCON\Tests\TestCase {
      */
     public function test_squad_server_admin_disband_squad()
     {
-        $this->assertTrue($this->squadServer->adminForceTeamChange(1, 1));
+        $this->assertTrue($this->postScriptumServer->adminForceTeamChange(1, 1));
     }
 
     /**
@@ -349,7 +349,7 @@ class VirtualServerTest extends \DSG\SquadRCON\Tests\TestCase {
      */
     public function test_squad_server_admin_remove_player_from_squad()
     {
-        $this->assertTrue($this->squadServer->adminRemovePlayerFromSquad('Test'));
+        $this->assertTrue($this->postScriptumServer->adminRemovePlayerFromSquad('Test'));
     }
 
     /**
@@ -359,7 +359,7 @@ class VirtualServerTest extends \DSG\SquadRCON\Tests\TestCase {
      */
     public function test_squad_server_admin_remove_player_from_squad_by_id()
     {
-        $this->assertTrue($this->squadServer->adminRemovePlayerFromSquadById(0));
+        $this->assertTrue($this->postScriptumServer->adminRemovePlayerFromSquadById(0));
     }
 
     /**
@@ -369,7 +369,7 @@ class VirtualServerTest extends \DSG\SquadRCON\Tests\TestCase {
      */
     public function test_squad_server_admin_warn()
     {
-        $this->assertTrue($this->squadServer->adminWarn('Test', 'Hello World!'));
+        $this->assertTrue($this->postScriptumServer->adminWarn('Test', 'Hello World!'));
     }
 
     /**
@@ -379,7 +379,7 @@ class VirtualServerTest extends \DSG\SquadRCON\Tests\TestCase {
      */
     public function test_squad_server_admin_warn_by_id()
     {
-        $this->assertTrue($this->squadServer->adminWarnById(0, 'Hello World!'));
+        $this->assertTrue($this->postScriptumServer->adminWarnById(0, 'Hello World!'));
     }
 
     /**
@@ -389,6 +389,6 @@ class VirtualServerTest extends \DSG\SquadRCON\Tests\TestCase {
      */
     public function test_squad_server_disconnect()
     {
-        $this->assertNull($this->squadServer->disconnect());
+        $this->assertNull($this->postScriptumServer->disconnect());
     }
 }

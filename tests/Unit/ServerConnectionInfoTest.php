@@ -1,10 +1,10 @@
 <?php
 
-namespace DSG\SquadRCON\Tests\Unit;
+namespace DSG\PostScriptumRCON\Tests\Unit;
 
-use DSG\SquadRCON\Data\ServerConnectionInfo;
+use DSG\PostScriptumRCON\Data\ServerConnectionInfo;
 
-class ServerConnectionInfoTest extends \DSG\SquadRCON\Tests\TestCase {
+class ServerConnectionInfoTest extends \DSG\PostScriptumRCON\Tests\TestCase {
     /**
      * Validates the ServerConnectionInfo can be initialized
      * 

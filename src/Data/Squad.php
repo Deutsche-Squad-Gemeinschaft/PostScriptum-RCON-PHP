@@ -1,6 +1,6 @@
 <?php
 
-namespace DSG\SquadRCON\Data;
+namespace DSG\PostScriptumRCON\Data;
 
 class Squad
 {

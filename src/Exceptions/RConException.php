@@ -1,6 +1,6 @@
 <?php
 
-namespace DSG\SquadRCON\Exceptions;
+namespace DSG\PostScriptumRCON\Exceptions;
 
 class RConException extends \Exception
 {

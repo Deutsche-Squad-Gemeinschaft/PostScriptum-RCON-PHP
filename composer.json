@@ -1,6 +1,6 @@
 {
-    "name": "dsg/squad-rcon-php",
-    "description": "Squad Server RCon library",
+    "name": "dsg/postscriptum-rcon-php",
+    "description": "Post Scriptum Server RCON library",
     "type": "library",
     "license": "MIT",
     "require": {
@@ -12,12 +12,12 @@
     },
     "autoload": {
         "psr-4": {
-            "DSG\\SquadRCON\\" : "src/"
+            "DSG\\PostScriptumRCON\\" : "src/"
         }
     },
     "autoload-dev": {
         "psr-4": {
-            "DSG\\SquadRCON\\Tests\\": "tests/"
+            "DSG\\PostScriptumRCON\\Tests\\": "tests/"
         }
     }
 }

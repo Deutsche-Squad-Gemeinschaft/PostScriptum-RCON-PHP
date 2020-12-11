@@ -1,16 +1,16 @@
 <?php
 
-namespace DSG\SquadRCON;
+namespace DSG\PostScriptumRCON;
 
-use DSG\SquadRCON\Contracts\ServerCommandRunner;
-use DSG\SquadRCON\Data\Team;
-use DSG\SquadRCON\Data\Squad;
-use DSG\SquadRCON\Data\Player;
-use DSG\SquadRCON\Data\Population;
-use DSG\SquadRCON\Data\ServerConnectionInfo;
-use DSG\SquadRCON\Runners\SquadRconRunner;
+use DSG\PostScriptumRCON\Contracts\ServerCommandRunner;
+use DSG\PostScriptumRCON\Data\Team;
+use DSG\PostScriptumRCON\Data\Squad;
+use DSG\PostScriptumRCON\Data\Player;
+use DSG\PostScriptumRCON\Data\Population;
+use DSG\PostScriptumRCON\Data\ServerConnectionInfo;
+use DSG\PostScriptumRCON\Runners\PostScriptumRconRunner;
 
-class SquadServer
+class PostScriptumServer
 {
     const SQUAD_SOCKET_TIMEOUT_SECONDS = 0.5;
 
@@ -23,13 +23,13 @@ class SquadServer
      * @param $port
      * @param $password
      * @param float $timeout
-     * @throws \DSG\SquadRCON\Exceptions\RConException
+     * @throws \DSG\PostScriptumRCON\Exceptions\RConException
      */
     public function __construct(ServerConnectionInfo $serverConnectionInfo, ServerCommandRunner $runner = null)
     {
         /* Initialize the default Runner if none is specified */
         if (!$runner) {
-            $runner = new SquadRconRunner($serverConnectionInfo);
+            $runner = new PostScriptumRconRunner($serverConnectionInfo);
         }
 
         $this->runner = $runner;
@@ -47,7 +47,7 @@ class SquadServer
 
     /**
      * @return Team[]
-     * @throws \DSG\SquadRCON\Exceptions\RConException
+     * @throws \DSG\PostScriptumRCON\Exceptions\RConException
      */
     public function serverPopulation() : Population
     {
@@ -67,7 +67,7 @@ class SquadServer
      * to add and reference the Player instances.
      *
      * @return Team[]
-     * @throws \DSG\SquadRCON\Exceptions\RConException
+     * @throws \DSG\PostScriptumRCON\Exceptions\RConException
      */
     public function listSquads() : array
     {
@@ -119,7 +119,7 @@ class SquadServer
      *
      * @param array $teams
      * @return Player[]
-     * @throws \DSG\SquadRCON\Exceptions\RConException
+     * @throws \DSG\PostScriptumRCON\Exceptions\RConException
      */
     public function listPlayers(Population &$population = null) : array
     {
@@ -170,7 +170,7 @@ class SquadServer
      * of disconnected Player instances.
      *
      * @return Player[]
-     * @throws \DSG\SquadRCON\Exceptions\RConException
+     * @throws \DSG\PostScriptumRCON\Exceptions\RConException
      */
     public function listDisconnectedPlayers() : array
     {
@@ -206,7 +206,7 @@ class SquadServer
      * @param string $msg
      * @param string $reason
      * @return bool
-     * @throws \DSG\SquadRCON\Exceptions\RConException
+     * @throws \DSG\PostScriptumRCON\Exceptions\RConException
      */
     public function adminKick(string $nameOrSteamId, string $reason = '') : bool
     {
@@ -220,7 +220,7 @@ class SquadServer
      * @param int $id
      * @param string $reason
      * @return bool
-     * @throws \DSG\SquadRCON\Exceptions\RConException
+     * @throws \DSG\PostScriptumRCON\Exceptions\RConException
      */
     public function adminKickById(int $id, string $reason = '') : bool
     {
@@ -234,7 +234,7 @@ class SquadServer
      * @param string $msg
      * @param string $reason
      * @return bool
-     * @throws \DSG\SquadRCON\Exceptions\RConException
+     * @throws \DSG\PostScriptumRCON\Exceptions\RConException
      */
     public function adminBan(string $nameOrSteamId, string $duration = '1d', string $reason = '') : bool
     {
@@ -248,7 +248,7 @@ class SquadServer
      * @param int $id
      * @param string $reason
      * @return bool
-     * @throws \DSG\SquadRCON\Exceptions\RConException
+     * @throws \DSG\PostScriptumRCON\Exceptions\RConException
      */
     public function adminBanById(int $id, string $duration = '1d', string $reason = '') : bool
     {
@@ -259,7 +259,7 @@ class SquadServer
      * Gets the current map using the ShowNextMap command.
      * 
      * @return string
-     * @throws \DSG\SquadRCON\Exceptions\RConException
+     * @throws \DSG\PostScriptumRCON\Exceptions\RConException
      */
     public function currentMap() : string
     {
@@ -270,7 +270,7 @@ class SquadServer
      * Gets the current next map using the ShowNextMap command.
      * 
      * @return string
-     * @throws \DSG\SquadRCON\Exceptions\RConException
+     * @throws \DSG\PostScriptumRCON\Exceptions\RConException
      */
     public function nextMap() : string
     {
@@ -282,7 +282,7 @@ class SquadServer
      * Gets the current and next map.
      * 
      * @return array
-     * @throws \DSG\SquadRCON\Exceptions\RConException
+     * @throws \DSG\PostScriptumRCON\Exceptions\RConException
      */
     private function currentMaps() : array
     {
@@ -313,7 +313,7 @@ class SquadServer
      * 
      * @param string $msg
      * @return bool
-     * @throws \DSG\SquadRCON\Exceptions\RConException
+     * @throws \DSG\PostScriptumRCON\Exceptions\RConException
      */
     public function adminBroadcast(string $msg) : bool
     {
@@ -348,7 +348,7 @@ class SquadServer
      *
      * @param int $slots How many public slots ther should be.
      * @return boolean
-     * @throws \DSG\SquadRCON\Exceptions\RConException
+     * @throws \DSG\PostScriptumRCON\Exceptions\RConException
      */
     public function adminSetMaxNumPlayers(int $slots = 78) : bool
     {
@@ -361,7 +361,7 @@ class SquadServer
      *
      * @param string $password
      * @return boolean
-     * @throws \DSG\SquadRCON\Exceptions\RConException
+     * @throws \DSG\PostScriptumRCON\Exceptions\RConException
      */
     public function adminSetServerPassword(string $password) : bool
     {
@@ -373,7 +373,7 @@ class SquadServer
      * Immediately changes the current map to the given map.
      * @param string $map
      * @return bool
-     * @throws \DSG\SquadRCON\Exceptions\RConException
+     * @throws \DSG\PostScriptumRCON\Exceptions\RConException
      */
     public function adminChangeMap(string $map) : bool
     {
@@ -387,7 +387,7 @@ class SquadServer
      * 
      * @param string $map
      * @return bool
-     * @throws \DSG\SquadRCON\Exceptions\RConException
+     * @throws \DSG\PostScriptumRCON\Exceptions\RConException
      */
     public function adminSetNextMap(string $map) : bool
     {
@@ -402,7 +402,7 @@ class SquadServer
      *
      * @param float $timeDilation
      * @return boolean
-     * @throws \DSG\SquadRCON\Exceptions\RConException
+     * @throws \DSG\PostScriptumRCON\Exceptions\RConException
      */
     public function adminSlomo(float $timeDilation = 1.0) : bool
     {

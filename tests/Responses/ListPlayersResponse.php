@@ -1,6 +1,6 @@
 <?php
 
-namespace DSG\SquadRCON\Tests\Runners\Responses;
+namespace DSG\PostScriptumRCON\Tests\Runners\Responses;
 
 class ListPlayersResponse {
     public static function get() {

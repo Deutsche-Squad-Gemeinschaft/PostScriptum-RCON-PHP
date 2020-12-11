@@ -1,6 +1,6 @@
 <?php
 
-namespace DSG\SquadRCON\Tests;
+namespace DSG\PostScriptumRCON\Tests;
 
 use PHPUnit\Framework\TestCase as BaseTestCase;
 

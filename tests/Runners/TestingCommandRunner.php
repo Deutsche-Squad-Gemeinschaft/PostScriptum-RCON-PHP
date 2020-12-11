@@ -1,11 +1,11 @@
 <?php
 
-namespace DSG\SquadRCON\Tests\Runners;
+namespace DSG\PostScriptumRCON\Tests\Runners;
 
-use DSG\SquadRCON\Contracts\ServerCommandRunner;
-use DSG\SquadRCON\Tests\Runners\Responses\ListPlayersResponse;
-use DSG\SquadRCON\Tests\Runners\Responses\ListSquadsResponse;
-use DSG\SquadRCON\Tests\Runners\Responses\ShowNextMapResponse;
+use DSG\PostScriptumRCON\Contracts\ServerCommandRunner;
+use DSG\PostScriptumRCON\Tests\Runners\Responses\ListPlayersResponse;
+use DSG\PostScriptumRCON\Tests\Runners\Responses\ListSquadsResponse;
+use DSG\PostScriptumRCON\Tests\Runners\Responses\ShowNextMapResponse;
 
 class TestingCommandRunner implements ServerCommandRunner {
     /**
@@ -15,7 +15,7 @@ class TestingCommandRunner implements ServerCommandRunner {
      * to add and reference the Player instances.
      *
      * @return string
-     * @throws \DSG\SquadRCON\Exceptions\RConException
+     * @throws \DSG\PostScriptumRCON\Exceptions\RConException
      */
     public function listSquads() : string
     {
@@ -29,7 +29,7 @@ class TestingCommandRunner implements ServerCommandRunner {
      * assign the Players to their Team/Squad.
      *
      * @return string
-     * @throws \DSG\SquadRCON\Exceptions\RConException
+     * @throws \DSG\PostScriptumRCON\Exceptions\RConException
      */
     public function listPlayers() : string
     {
@@ -41,7 +41,7 @@ class TestingCommandRunner implements ServerCommandRunner {
      * of disconnected Player instances.
      *
      * @return string
-     * @throws \DSG\SquadRCON\Exceptions\RConException
+     * @throws \DSG\PostScriptumRCON\Exceptions\RConException
      */
     public function listDisconnectedPlayers() : string
     {
@@ -55,7 +55,7 @@ class TestingCommandRunner implements ServerCommandRunner {
      * @param string $nameOrSteamId
      * @param string $reason
      * @return bool
-     * @throws \DSG\SquadRCON\Exceptions\RConException
+     * @throws \DSG\PostScriptumRCON\Exceptions\RConException
      */
     function adminKick(string $nameOrSteamId, string $reason = '') : bool
     {
@@ -69,7 +69,7 @@ class TestingCommandRunner implements ServerCommandRunner {
      * @param int $id
      * @param string $reason
      * @return bool
-     * @throws \DSG\SquadRCON\Exceptions\RConException
+     * @throws \DSG\PostScriptumRCON\Exceptions\RConException
      */
     public function adminKickById(int $id, string $reason = '') : bool
     {
@@ -83,7 +83,7 @@ class TestingCommandRunner implements ServerCommandRunner {
      * @param string $msg
      * @param string $reason
      * @return bool
-     * @throws \DSG\SquadRCON\Exceptions\RConException
+     * @throws \DSG\PostScriptumRCON\Exceptions\RConException
      */
     public function adminBan(string $nameOrSteamId, string $duration = '1d', string $reason = '') : bool
     {
@@ -97,7 +97,7 @@ class TestingCommandRunner implements ServerCommandRunner {
      * @param int $id
      * @param string $reason
      * @return bool
-     * @throws \DSG\SquadRCON\Exceptions\RConException
+     * @throws \DSG\PostScriptumRCON\Exceptions\RConException
      */
     public function adminBanById(int $id, string $duration = '1d', string $reason = '') : bool
     {
@@ -109,7 +109,7 @@ class TestingCommandRunner implements ServerCommandRunner {
      * Gets the current and next map.
      * 
      * @return string
-     * @throws \DSG\SquadRCON\Exceptions\RConException
+     * @throws \DSG\PostScriptumRCON\Exceptions\RConException
      */
     public function showNextMap() : string
     {
@@ -122,7 +122,7 @@ class TestingCommandRunner implements ServerCommandRunner {
      * 
      * @param string $msg
      * @return bool
-     * @throws \DSG\SquadRCON\Exceptions\RConException
+     * @throws \DSG\PostScriptumRCON\Exceptions\RConException
      */
     public function adminBroadcast(string $msg) : bool
     {
@@ -157,7 +157,7 @@ class TestingCommandRunner implements ServerCommandRunner {
      *
      * @param int $slots How many public slots ther should be.
      * @return boolean
-     * @throws \DSG\SquadRCON\Exceptions\RConException
+     * @throws \DSG\PostScriptumRCON\Exceptions\RConException
      */
     function adminSetMaxNumPlayers(int $slots) : bool
     {
@@ -170,7 +170,7 @@ class TestingCommandRunner implements ServerCommandRunner {
      *
      * @param string $password
      * @return boolean
-     * @throws \DSG\SquadRCON\Exceptions\RConException
+     * @throws \DSG\PostScriptumRCON\Exceptions\RConException
      */
     function adminSetServerPassword(string $password) : bool
     {
@@ -182,7 +182,7 @@ class TestingCommandRunner implements ServerCommandRunner {
      * Immediately changes the current map to the given map.
      * @param string $map
      * @return bool
-     * @throws \DSG\SquadRCON\Exceptions\RConException
+     * @throws \DSG\PostScriptumRCON\Exceptions\RConException
      */
     public function adminChangeMap(string $map) : bool
     {
@@ -196,7 +196,7 @@ class TestingCommandRunner implements ServerCommandRunner {
      * 
      * @param string $map
      * @return bool
-     * @throws \DSG\SquadRCON\Exceptions\RConException
+     * @throws \DSG\PostScriptumRCON\Exceptions\RConException
      */
     public function adminSetNextMap(string $map) : bool
     {
@@ -211,7 +211,7 @@ class TestingCommandRunner implements ServerCommandRunner {
      *
      * @param float $timeDilation
      * @return boolean
-     * @throws \DSG\SquadRCON\Exceptions\RConException
+     * @throws \DSG\PostScriptumRCON\Exceptions\RConException
      */
     public function adminSlomo(float $timeDilation = 1.0) : bool
     {

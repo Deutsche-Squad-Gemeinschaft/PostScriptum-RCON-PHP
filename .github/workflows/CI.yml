@@ -8,19 +8,19 @@ jobs:
       uses: actions/checkout@v1
     - name: Run composer install
       run: composer install -q --no-ansi --no-interaction --no-scripts --no-suggest --no-progress --prefer-dist
-    - name: Stop the Server
-      run: docker stop squad-server || true  && docker rm squad-server || true
-    - name: Install & start Squad server
-      run: docker run -d --net=bridge --volume=$PWD/tests/ServerFolder:/home/steam/squad-dedicated -e PORT=7787 -e QUERYPORT=27165 -e RCONPORT=21114 --name=squad-server cm2network/squad
-    - name: Wait for Squad Server to start up
+    - name: Stop the Post Scriptum
+      run: docker stop ps-server || true  && docker rm ps-server || true
+    - name: Install & start Post Scriptum server
+      run: docker run -d --net=bridge --volume=$PWD/tests/ServerFolder:/home/steam/squad-dedicated -e PORT=7787 -e QUERYPORT=27165 -e RCONPORT=21114 --name=ps-server avilcreeggan/post-scriptum
+    - name: Wait for Post Scriptum Server to start up
       run: chmod +x .github/waitForServerStartup.sh && ./.github/waitForServerStartup.sh
-    - name: Wait for Squad Server to fully boot
+    - name: Wait for Post Scriptum Server to fully boot
       run: sleep 30
-    - name: Log Squad Server
-      run: docker logs squad-server
+    - name: Log PostScriptum Server
+      run: docker logs ps-server
     - name: Run PHPUnit
       run: rm -f coverage.xml && vendor/bin/phpunit --coverage-clover=coverage.xml
     - name: Upload coverage to Codecov
-      run: bash <(curl -s https://codecov.io/bash) -t $SquadRconPHPCodecovToken
-    - name: Stop the Squad Server
-      run: docker stop squad-server || true
+      run: bash <(curl -s https://codecov.io/bash) -t $PostScriptumRconPHPCodecovToken
+    - name: Stop the Post Scriptum Server
+      run: docker stop ps-server || true
