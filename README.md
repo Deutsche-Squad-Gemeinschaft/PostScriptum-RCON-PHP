@@ -60,7 +60,6 @@ The code will then be available under the `DSG\PostScriptumRCON` namespace.
 * [x] AdminSetNextMap \<MapName\>
 * [x] AdminSetMaxNumPlayers \<NumPlayers\>
 * [x] AdminSetServerPassword \<Password\>
-* [x] AdminSlomo \<TimeDilation\>
 * [x] AdminForceTeamChange \<NameOrSteamId\>
 * [x] AdminForceTeamChangeById \<PlayerId\> 
 * [ ] AdminDemoteCommander \<PlayerName\>
@@ -208,13 +207,6 @@ Set the server password
 ```php
 /** @var bool */
 $success = $server->adminSetServerPassword('secret');
-```
-
-### AdminSlomo
-Sets the game speed with the AdminSlomo. Default 1.0
-```php
-/** @var bool */
-$success = $server->adminSlomo(1.5);
 ```
 
 ### AdminForceTeamChange

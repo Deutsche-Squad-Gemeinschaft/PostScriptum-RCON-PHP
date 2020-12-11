@@ -204,21 +204,6 @@ class TestingCommandRunner implements ServerCommandRunner {
     }
 
     /**
-     * AdminSlomo command.
-     * Sets the game speed with the AdminSlomo
-     * command. Providing no parameter will set
-     * the speed to default.
-     *
-     * @param float $timeDilation
-     * @return boolean
-     * @throws \DSG\PostScriptumRCON\Exceptions\RConException
-     */
-    public function adminSlomo(float $timeDilation = 1.0) : bool
-    {
-        return true;
-    }
-
-    /**
      * AdminForceTeamChange command.
      * Forces a player to the opposite team
      * by providing the name or steamid.

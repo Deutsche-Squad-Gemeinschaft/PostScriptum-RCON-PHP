@@ -307,16 +307,6 @@ class VirtualServerTest extends \DSG\PostScriptumRCON\Tests\TestCase {
      * 
      * @return void
      */
-    public function test_squad_server_admin_slomo()
-    {
-        $this->assertTrue($this->postScriptumServer->adminSlomo(2));
-    }
-
-    /**
-     * Verifies the disconnect method works without any exception
-     * 
-     * @return void
-     */
     public function test_squad_server_admin_force_team_change()
     {
         $this->assertTrue($this->postScriptumServer->adminForceTeamChange('Test'));

@@ -179,16 +179,6 @@ class LiveServerTest extends \DSG\PostScriptumRCON\Tests\TestCase {
      * 
      * @return void
      */
-    public function test_squad_server_admin_slomo()
-    {
-        $this->assertTrue($this->postScriptumServer->adminSlomo(2));
-    }
-
-    /**
-     * Verifies the disconnect method works without any exception
-     * 
-     * @return void
-     */
     public function test_squad_server_disconnect()
     {
         $this->assertNull($this->postScriptumServer->disconnect());
