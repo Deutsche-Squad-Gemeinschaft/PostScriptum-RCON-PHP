@@ -25,7 +25,7 @@ class LiveServerTest extends \DSG\PostScriptumRCON\Tests\TestCase {
      */
     public function test_current_map()
     {
-        $this->assertSame('Al Basrah AAS v1', $this->postScriptumServer->currentMap());
+        $this->assertSame('Heelsum Single 01', $this->postScriptumServer->currentMap());
     }
 
     /**
@@ -35,7 +35,7 @@ class LiveServerTest extends \DSG\PostScriptumRCON\Tests\TestCase {
      */
     public function test_admin_set_next_map()
     {
-        $this->assertTrue($this->postScriptumServer->adminSetNextMap('Al Basrah Insurgency v1'));
+        $this->assertTrue($this->postScriptumServer->adminSetNextMap('Oosterbeek Single 01'));
     }
 
     /**
@@ -45,7 +45,7 @@ class LiveServerTest extends \DSG\PostScriptumRCON\Tests\TestCase {
      */
     public function test_next_map()
     {
-        $this->assertSame('Al Basrah Insurgency v1', $this->postScriptumServer->nextMap());
+        $this->assertSame('Oosterbeek Single 01', $this->postScriptumServer->nextMap());
     }
 
     /**
@@ -127,7 +127,7 @@ class LiveServerTest extends \DSG\PostScriptumRCON\Tests\TestCase {
      */
     public function test_admin_change_map()
     {
-        $this->assertTrue($this->postScriptumServer->adminChangeMap('Al Basrah AAS v1'));
+        $this->assertTrue($this->postScriptumServer->adminChangeMap('Driel Single 02'));
     }
 
     /**
@@ -139,7 +139,7 @@ class LiveServerTest extends \DSG\PostScriptumRCON\Tests\TestCase {
     {
         $this->assertTrue($this->postScriptumServer->adminRestartMatch());
 
-        sleep(30);
+        sleep(60);
     }
 
     /**
@@ -151,7 +151,7 @@ class LiveServerTest extends \DSG\PostScriptumRCON\Tests\TestCase {
     {
         $this->assertTrue($this->postScriptumServer->adminEndMatch());
 
-        sleep(30);
+        sleep(60);
     }
 
     /**

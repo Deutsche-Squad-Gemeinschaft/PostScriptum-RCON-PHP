@@ -1,5 +1,5 @@
 #!/bin/bash
-timeout --signal=SIGINT 900 docker logs -f ps-server 2>&1 | grep -qe "LogInit:Display: Starting Game."
+timeout --signal=SIGINT 1200 docker logs -f ps-server 2>&1 | grep -qe "LogGameState: Match State Changed from EnteringMap to WaitingToStart"
 
 if [ $? == 1 ]; then
     echo "Server startup did timeout."
