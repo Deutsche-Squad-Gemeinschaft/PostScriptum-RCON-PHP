@@ -63,6 +63,7 @@ The code will then be available under the `DSG\PostScriptumRCON` namespace.
 * [x] AdminForceTeamChangeById \<PlayerId\> 
 * [ ] AdminDemoteCommander \<PlayerName\>
 * [ ] AdminDemoteCommanderById \<PlayerId\>
+* [x] AdminDisbandSquad \<TeamId\> \<SquadId\>
 * [x] AdminRemovePlayerFromSquad \<PlayerName\>
 * [x] AdminRemovePlayerFromSquadById \<PlayerId\> 
 * [x] AdminWarn \<NameOrSteamId\> \<WarnReason\> 
