@@ -46,82 +46,15 @@ class PostScriptumServer
     }
 
     /**
-     * @return Team[]
-     * @throws \DSG\PostScriptumRCON\Exceptions\RConException
-     */
-    public function serverPopulation() : Population
-    {
-        /* Get the current Teams and their Squads */
-        $population = new Population($this->listSquads());
-
-        /* Get the currently connected players, feed listSquads output to reference Teams/Squads */
-        $this->listPlayers($population);
-
-        return $population;
-    }
-
-    /**
-     * ListSquads command. Returns an array
-     * of Teams containing Squads. The output
-     * can be given to the listPlayers method
-     * to add and reference the Player instances.
-     *
-     * @return Team[]
-     * @throws \DSG\PostScriptumRCON\Exceptions\RConException
-     */
-    public function listSquads() : array
-    {
-        /** @var Team[] $teams */
-        $teams = [];
-
-        /** @var Squad[] $squads */
-        $squads = [];
-
-        /* Get the SquadList from the Server */
-        $response = $this->runner->listSquads();
-
-        /** @var Team The current team */
-        $currentTeam = null;
-        foreach (explode("\n", $response) as $lineSquad) {
-            $matches = [];
-            if (preg_match('/^Team ID: ([1|2]) \((.*)\)/', $lineSquad, $matches) > 0) {
-                /* Initialize a new Team */
-                $team = new Team(intval($matches[1]), $matches[2]);
-
-                /* Add to the lookup */
-                $teams[$team->getId()] = $team;
-                
-                /* Initialize squad lookup array */
-                $squads[$team->getId()] = [];
-
-                /* Set as current team */
-                $currentTeam = $team;
-            } else if (preg_match('/^ID: (\d{1,}) \| Name: (.*?) \| Size: (\d) \| Locked: (True|False)/', $lineSquad, $matches) > 0) {
-                /* Initialize a new Squad */
-                $squad = new Squad(intval($matches[1]), $matches[2], intval($matches[3]), $matches[4] === 'True', $currentTeam);
-                
-                /* Reference Team */
-                $currentTeam->addSquad($squad);
-
-                /* Add to the squads lookup */
-                $squads[$currentTeam->getId()][$squad->getId()] = $squad;
-            }
-        }
-
-        return $teams;
-    }
-
-    /**
      * ListPlayers command, returns an array
      * of Player instances. The output of
      * ListSquads can be piped into it to
      * assign the Players to their Team/Squad.
      *
-     * @param array $teams
      * @return Player[]
      * @throws \DSG\PostScriptumRCON\Exceptions\RConException
      */
-    public function listPlayers(Population &$population = null) : array
+    public function listPlayers() : array
     {
         /* Initialize an empty output array */
         $players = [];
@@ -133,26 +66,9 @@ class PostScriptumServer
         foreach (explode("\n", $response) as $line) {
             /* Initialize an empty array and try to get info form line */
             $matches = [];
-            if (preg_match('/^ID: (\d{1,}) \| SteamID: (\d{17}) \| Name: (.*?) \| Team ID: (1|2|N\/A) \| Squad ID: (\d{1,}|N\/A)/', $line, $matches)) {
+            if (preg_match('/^ID: (\d{1,}) \| SteamID: (\d{17}) \| Name: (.*?)/', $line, $matches)) {
                 /* Initialize new Player instance */
                 $player = new Player(intval($matches[1]), $matches[2], $matches[3]);
-
-                /* Set Team and Squad references if ListSquads output is provided */
-                if ($population && $population->hasTeams() && $matches[4] !== 'N/A' && $population->getTeam($matches[4])) {
-                    /* Get the Team */
-                    $player->setTeam($population->getTeam($matches[4]));
-
-                    if (count($player->getTeam()->getSquads()) && $matches[5] !== 'N/A' && array_key_exists($matches[5], $player->getTeam()->getSquads())) {
-                        /* Get the Squad */
-                        $squad = $player->getTeam()->getSquads()[$matches[5]];
-
-                        /* Add the Player to the Squad */
-                        $squad->addPlayer($player);
-                    } else {
-                        /* Add as unassigned Player to the Team instance */
-                        $player->getTeam()->addPlayer($player);
-                    }
-                }
 
                 /* Add to the output */
                 $players[] = $player;

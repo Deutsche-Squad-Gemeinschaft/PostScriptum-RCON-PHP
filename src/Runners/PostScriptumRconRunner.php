@@ -20,24 +20,10 @@ class PostScriptumRconRunner implements ServerCommandRunner {
         $this->sourceQuery = new SourceQuery();
 
         /* Connect to the server */
-        $this->sourceQuery->Connect($info->host, $info->port, $info->timeout, SourceQuery::SQUAD);
+        $this->sourceQuery->Connect($info->host, $info->port, $info->timeout, SourceQuery::SOURCE);
 
         /* Authenticated with rcon password */
         $this->sourceQuery->SetRconPassword($info->password);
-    }
-    
-    /**
-     * ListSquads command. Returns an array
-     * of Teams containing Squads. The output
-     * can be given to the listPlayers method
-     * to add and reference the Player instances.
-     *
-     * @return Team[]
-     * @throws \DSG\PostScriptumRCON\Exceptions\RConException
-     */
-    public function listSquads() : string
-    {
-        return $this->sourceQuery->Rcon('ListSquads');
     }
 
     /**

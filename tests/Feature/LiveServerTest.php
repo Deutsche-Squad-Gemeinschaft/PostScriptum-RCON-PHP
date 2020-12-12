@@ -73,44 +73,6 @@ class LiveServerTest extends \DSG\PostScriptumRCON\Tests\TestCase {
     }
 
     /**
-     * Verifies the team/squad list can properly be retrieved.
-     *
-     * @return void
-     */
-    public function test_list_squads()
-    {
-        $teams = $this->postScriptumServer->listSquads();
-
-        foreach ($teams as $team) {
-            $this->assertSame(0, count($team->getSquads()));
-        }
-    }
-
-    /**
-     * Verifies the server population can properly be retrieved.
-     *
-     * @return void
-     */
-    public function test_server_population()
-    {
-        $teams = $this->postScriptumServer->serverPopulation();
-
-        $squadCount = 0;
-        $playerCount = 0;
-        foreach ($teams as $team) {
-            $squadCount += count($team->getSquads());
-            $teamPlayerCount = count($team->getPlayers());
-            foreach ($team->getSquads() as $squad) {
-                $teamPlayerCount += count($squad->getPlayers());
-            }
-            $playerCount += $teamPlayerCount;
-        }
-        
-        $this->assertSame(0, $squadCount);
-        $this->assertSame(0, $playerCount);
-    }
-
-    /**
      * Verifies the broadcast command does work properly
      * 
      * @return void

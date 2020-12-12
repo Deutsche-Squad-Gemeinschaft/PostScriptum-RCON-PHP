@@ -2,6 +2,9 @@
 
 namespace DSG\PostScriptumRCON\Data;
 
+/**
+ * @deprecated Currently not supported by Post Scriptum :(
+ */
 class Population
 {
     /**

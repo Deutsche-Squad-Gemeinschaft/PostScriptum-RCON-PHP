@@ -26,7 +26,7 @@ class VirtualServerTest extends \DSG\PostScriptumRCON\Tests\TestCase {
      */
     public function test_current_map()
     {
-        $this->assertSame('Al Basrah AAS v1', $this->postScriptumServer->currentMap());
+        $this->assertSame('Heelsum Single 01', $this->postScriptumServer->currentMap());
     }
 
     /**
@@ -36,7 +36,7 @@ class VirtualServerTest extends \DSG\PostScriptumRCON\Tests\TestCase {
      */
     public function test_next_map()
     {
-        $this->assertSame('Belaya AAS v1', $this->postScriptumServer->nextMap());
+        $this->assertSame('Driel Single 01', $this->postScriptumServer->nextMap());
     }
 
     /**
@@ -74,125 +74,6 @@ class VirtualServerTest extends \DSG\PostScriptumRCON\Tests\TestCase {
     }
 
     /**
-     * Verifies the team/squad list can properly be retrieved.
-     *
-     * @return void
-     */
-    public function test_list_squads()
-    {
-        $teams = $this->postScriptumServer->listSquads();
-
-        $squadCount = 0;
-
-        foreach ($teams as $team) {
-            if ($team->getId() === 1) {
-                $this->assertSame('United States Army', $team->getName());
-                $this->assertCount(8, $team->getSquads());
-
-                foreach ($team->getSquads() as $squad) {
-                    if ($squad->getId() === 1) {
-                        $this->assertSame('HELI', $squad->getName());
-                    } else if ($squad->getId() === 2) {
-                        $this->assertSame('HELI', $squad->getName());
-                    } else if ($squad->getId() === 3) {
-                        $this->assertSame('CMD Squad', $squad->getName());
-                    } else if ($squad->getId() === 4) {
-                        $this->assertSame('MBT', $squad->getName());
-                    } else if ($squad->getId() === 5) {
-                        $this->assertSame('BRADLEY', $squad->getName());
-                    } else if ($squad->getId() === 6) {
-                        $this->assertSame('STRYKER', $squad->getName());
-                    } else if ($squad->getId() === 7) {
-                        $this->assertSame('BOS SACHEN MACHEN', $squad->getName());
-                    } else if ($squad->getId() === 8) {
-                        $this->assertSame('RUNNING SQUAD', $squad->getName());
-                    }
-                }
-            } else {
-                $this->assertSame('Russian Ground Forces', $team->getName());
-                $this->assertCount(10, $team->getSquads());
-            }
-
-            $squadCount += count($team->getSquads());
-        }
-        
-        $this->assertSame(18, $squadCount);
-    }
-
-    /**
-     * Verifies the server population can properly be retrieved.
-     *
-     * @return void
-     */
-    public function test_server_population()
-    {
-        $population = $this->postScriptumServer->serverPopulation();
-
-        $this->assertTrue($population->hasTeams());
-
-        $t = $population->getTeam(1);
-        $this->assertNotNull($t);
-        $this->assertSame('United States Army', $t->getName());
-
-        $this->assertNull($population->getTeam(3));
-
-        $this->assertSame(77, count($population->getPlayers()));
-
-        $squadCount = 0;
-        $playerCount = 0;
-        foreach ($population->getTeams() as $team) {
-            $squadCount += count($team->getSquads());
-            $teamPlayerCount = count($team->getPlayers());
-            foreach ($team->getSquads() as $squad) {
-                $teamPlayerCount += count($squad->getPlayers());
-            }
-            $playerCount += $teamPlayerCount;
-
-            if ($team->getId() === 1) {
-                $this->assertSame('United States Army', $team->getName());
-                $this->assertCount(8, $team->getSquads());
-                $this->assertSame(38, $teamPlayerCount);
-
-                foreach ($team->getSquads() as $squad) {
-                    if ($squad->getId() === 3) {
-                        $this->assertSame('CMD Squad', $squad->getName());
-                        $this->assertSame(9, $squad->getSize());
-                        $this->assertFalse(false, $squad->isLocked());
-                        $this->assertSame($team->getId(), $squad->getTeam()->getId());
-
-                        $p = null;
-                        /** @var \DSG\PostScriptumRCON\Data\Player $player */
-                        foreach ($squad->getPlayers() as $player) {
-                            if ($player->getId() === 53) {
-                                $this->assertSame('76561198202943394', $player->getSteamId());
-                                $this->assertSame('[1JGKP]Bud-Muecke (YT)', $player->getName());
-                                $this->assertSame($squad->getId(), $player->getSquad()->getId());
-                                $p = $player;
-                            }
-                        }
-
-                        $this->assertNotNull($p);
-                    }
-                }
-            } else {
-                $this->assertSame('Russian Ground Forces', $team->getName());
-                $this->assertCount(10, $team->getSquads());
-                $this->assertSame(39, $teamPlayerCount);
-            }
-        }
-        
-        $this->assertSame(18, $squadCount);
-        $this->assertSame(77, $playerCount);
-
-        $player = $population->getPlayerBySteamId('76561198202943394');
-        $this->assertNotNull($player);
-        $this->assertSame(53, $player->getId());
-        $this->assertSame('[1JGKP]Bud-Muecke (YT)', $player->getName());
-
-        $this->assertNull($population->getPlayerBySteamId('DoesCertainlyNotExist'));
-    }
-
-    /**
      * Verifies the broadcast command does work properly
      * 
      * @return void
@@ -209,7 +90,7 @@ class VirtualServerTest extends \DSG\PostScriptumRCON\Tests\TestCase {
      */
     public function test_admin_change_map()
     {
-        $this->assertTrue($this->postScriptumServer->adminChangeMap('Al Basrah AAS v1'));
+        $this->assertTrue($this->postScriptumServer->adminChangeMap('Heelsum Single 01'));
     }
 
     /**
@@ -219,7 +100,7 @@ class VirtualServerTest extends \DSG\PostScriptumRCON\Tests\TestCase {
      */
     public function test_admin_set_next_map()
     {
-        $this->assertTrue($this->postScriptumServer->adminSetNextMap('Al Basrah AAS v1'));
+        $this->assertTrue($this->postScriptumServer->adminSetNextMap('Heelsum Single 01'));
     }
 
     /**

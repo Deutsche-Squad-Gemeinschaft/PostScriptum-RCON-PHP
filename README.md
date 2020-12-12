@@ -46,7 +46,6 @@ The code will then be available under the `DSG\PostScriptumRCON` namespace.
 ## Commands
 
 * [x] ListPlayers
-* [x] ListSquads
 * [x] AdminListDisconnectedPlayers
 * [x] ShowNextMap
 * [x] AdminKick "\<NameOrSteamId\>" \<KickReason\>
@@ -64,7 +63,6 @@ The code will then be available under the `DSG\PostScriptumRCON` namespace.
 * [x] AdminForceTeamChangeById \<PlayerId\> 
 * [ ] AdminDemoteCommander \<PlayerName\>
 * [ ] AdminDemoteCommanderById \<PlayerId\>
-* [x] AdminDisbandSquad \<TeamId\> \<SquadId\>
 * [x] AdminRemovePlayerFromSquad \<PlayerName\>
 * [x] AdminRemovePlayerFromSquadById \<PlayerId\> 
 * [x] AdminWarn \<NameOrSteamId\> \<WarnReason\> 
@@ -78,28 +76,6 @@ Instanciate the SquadServer RCON connection. This will connect to the server or 
 /** @var SquadServer */
 $server = new SquadServer(new ServerConnectionInfo('127.0.0.1', 21114, 'YourRconPassword'));
 ```
-
-### Get current server population (Teams, Squads, Players)
-Get the current population. This does use ListPlayers & ListSquads
-to get the Teams, Squads and Players properly ordered.
-```php
-/** @var Population */
-$population = $server->serverPopulation();
-
-/** @var Team[] */
-$teams = $population->getTeams();
-
-// or
-
-/** @var Player[] */
-$players = $population->getPlayers();
-
-// or
-
-/** @var Player|null */
-$player = $population->getPlayerBySteamId('76561197960287930');
-```
-
 ### ListPlayers
 Get the current Player list using the ListPlayers command.
 This does not include disconnected players.
@@ -113,13 +89,6 @@ Get disconnected players using the ListPlayers command.
 ```php
 /** @var Player[] */
 $players = $server->listDisconnectedPlayers();
-```
-
-### ListSquads
-Get currently active squads (and teams)
-```php
-/** @var Team[] */
-$teams = $server->listSquads();
 ```
 
 ### AdminKick

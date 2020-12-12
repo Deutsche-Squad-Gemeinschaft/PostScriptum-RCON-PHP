@@ -4,17 +4,6 @@ namespace DSG\PostScriptumRCON\Contracts;
 
 interface ServerCommandRunner {
     /**
-     * ListSquads command. Returns an array
-     * of Teams containing Squads. The output
-     * can be given to the listPlayers method
-     * to add and reference the Player instances.
-     *
-     * @return Team[]
-     * @throws \DSG\PostScriptumRCON\Exceptions\RConException
-     */
-    public function listSquads() : string;
-
-    /**
      * ListPlayers command, returns an array
      * of Player instances. The output of
      * ListSquads can be piped into it to

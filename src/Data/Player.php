@@ -75,6 +75,7 @@ class Player
      * Get the Team this player instance is assigned to.
      * 
      * @return Team|null
+     * @deprecated Currently not supported by Post Scriptum :(
      */
     public function getTeam() : ?Team
     {
@@ -86,6 +87,7 @@ class Player
      *
      * @param Team $team
      * @return void
+     * @deprecated Currently not supported by Post Scriptum :(
      */
     public function setTeam(Team $team) : void
     {
@@ -96,6 +98,7 @@ class Player
      * Get the Squad this Player instance is assigned to.
      * 
      * @return Squad|null
+     * @deprecated Currently not supported by Post Scriptum :(
      */
     public function getSquad() : ?Squad
     {
@@ -107,6 +110,7 @@ class Player
      *
      * @param Squad $squad
      * @return void
+     * @deprecated Currently not supported by Post Scriptum :(
      */
     public function setSquad(Squad $squad) : void
     {
