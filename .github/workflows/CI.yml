@@ -17,7 +17,7 @@ jobs:
     - name: Stop the container
       run: docker stop ps-server
     - name: Add the correct Rcon.cfg
-      run: docker cp $PWD/tests/ServerFolder/PostScriptum/ServerConfig/Rcon.cfg ps-server:/home/steam/post-scriptum-dedicate/PostScriptum/ServerConfig/Rcon.cfg
+      run: docker cp $PWD/tests/ServerFolder/PostScriptum/ServerConfig/Rcon.cfg ps-server:/home/steam/post-scriptum-dedicated/PostScriptum/ServerConfig/Rcon.cfg
     - name: Re-start the ps-server container
       run: docker start ps-server
     - name: Wait for Post Scriptum Server to start up
