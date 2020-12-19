@@ -4,7 +4,7 @@
 <div align="center">
     <h1 align="center">Post Scriptum RCON PHP</h1>
     <p align="center">
-        <b>RCON PHP wrapper for Post Scriptum server management</b>
+        <b>PHP Wrapper for Post Scriptum RCON Commands</b>
     </p>
     <hr>
     <a href="https://github.com/Deutsche-Squad-Gemeinschaft/PostScriptum-RCON-PHP/actions">
@@ -33,6 +33,9 @@
         <img alt="Discord" src="https://img.shields.io/discord/266210223406972928.svg?style=flat-square&logo=discord">
     </a>
 </div>
+
+## Join the Squad RCON Community
+If you have any questions or need help with getting started with RCON in OWI games you should make sure to join the [Squad RCON Community on Discord](https://discord.gg/9F2Ng5C).
 
 ## Installation
 
@@ -72,10 +75,15 @@ The code will then be available under the `DSG\PostScriptumRCON` namespace.
 ## USAGE
 
 ### Create an instance
-Instanciate the SquadServer RCON connection. This will connect to the server or throw an exception if it could not do so.
+Instanciate the PostScriptumServer class to open a new RCON connection. This will throw an Exception if no connection can be made.
+
 ```php
-/** @var SquadServer */
-$server = new SquadServer(new ServerConnectionInfo('127.0.0.1', 21114, 'YourRconPassword'));
+use DSG\PostScriptumRCON\PostScriptumServer;
+
+...
+
+/** @var PostScriptumServer */
+$server = new PostScriptumServer(new ServerConnectionInfo('127.0.0.1', 21114, 'YourRconPassword'));
 ```
 ### ListPlayers
 Get the current Player list using the ListPlayers command.
@@ -235,6 +243,7 @@ $server->disconnect();
 // Or
 unset($server);
 ```
+
 
 ## Special Thanks
 * [SquadSlovenia](https://github.com/SquadSlovenia) (Intial creators)
