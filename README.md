@@ -1,5 +1,5 @@
 <p align="center">
-    <img align="center" alt="Squad RCON PHP Logo" src="https://raw.githubusercontent.com/Deutsche-Squad-Gemeinschaft/PostScriptum-RCON-PHP/master/logo.svg">
+    <img align="center" alt="Post Scriptum RCON PHP Logo" src="https://raw.githubusercontent.com/Deutsche-Squad-Gemeinschaft/PostScriptum-RCON-PHP/master/logo.svg">
 </p>
 <div align="center">
     <h1 align="center">Post Scriptum RCON PHP</h1>
