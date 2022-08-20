@@ -29,6 +29,8 @@ jobs:
     - name: Run PHPUnit
       run: rm -f coverage.xml && vendor/bin/phpunit --coverage-clover=coverage.xml
     - name: Upload coverage to Codecov
-      run: bash <(curl -s https://codecov.io/bash) -t $PostScriptumRconPHPCodecovToken
+      env:
+        CODECOV_TOKEN: ${{ secrets.CODECOV_TOKEN }}
+      run: bash <(curl -s https://codecov.io/bash) -t $CODECOV_TOKEN
     - name: Stop the Post Scriptum Server
       run: docker stop ps-server || true
