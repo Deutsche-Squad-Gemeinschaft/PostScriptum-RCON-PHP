@@ -5,7 +5,7 @@ jobs:
     runs-on: [self-hosted, linux, x64, ec2]
     steps:
     - name: Pull repository
-      uses: actions/checkout@v3
+      uses: actions/checkout@v4
     - name: Run composer install
       run: composer install -q --no-ansi --no-interaction --no-scripts --no-suggest --no-progress --prefer-dist
     - name: Stop the Post Scriptum
